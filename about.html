@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Shawn Ferrao | Stackly</title>
+  <meta name="description" content="Shawn Ferrao — Web Developer, Digital Marketer and Graphic Designer based in Sydney. Simplifying tech for small businesses through strategy, automation and AI." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --midnight:   #0E1117;
+      --midnight-2: #161C27;
+      --midnight-3: #1E2636;
+      --amber:      #F5A623;
+      --amber-light:#FDD27A;
+      --amber-dark: #C7851A;
+      --cream:      #FDF6EC;
+      --cream-2:    #F5ECD8;
+      --white:      #FFFFFF;
+      --text-main:  #0E1117;
+      --text-muted: #6B7280;
+      --text-light: #9CA3AF;
+      --border:     #E5E7EB;
+      --border-dark:#2A3347;
+      --radius-sm:  6px;
+      --radius-md:  12px;
+      --radius-lg:  20px;
+      --radius-xl:  32px;
+      --shadow-sm:  0 1px 3px rgba(0,0,0,.08);
+      --shadow-md:  0 4px 16px rgba(0,0,0,.10);
+      --shadow-lg:  0 12px 40px rgba(0,0,0,.14);
+      --max-w:      1280px;
+      --gutter:     clamp(1.25rem, 5vw, 2.5rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text-main);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font: inherit; }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--amber-dark);
+    }
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 1.5rem;
+      height: 2px;
+      background: var(--amber);
+      border-radius: 1px;
+    }
+
+    /* ---- BUTTONS ---- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .75rem 1.5rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: .9375rem;
+      transition: all .2s ease;
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--amber); color: var(--midnight); }
+    .btn-primary:hover { background: var(--amber-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(245,166,35,.35); }
+    .btn-outline { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,.3); }
+    .btn-outline:hover { border-color: var(--amber); color: var(--amber); }
+    .btn-outline-dark { background: transparent; color: var(--midnight); border: 1.5px solid var(--border); }
+    .btn-outline-dark:hover { border-color: var(--amber); color: var(--amber-dark); }
+    .btn-lg { padding: .9375rem 2rem; font-size: 1rem; }
+
+    /* ---- NAV ---- */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(14,17,23,.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; height: 4rem; }
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: .625rem;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--white);
+      letter-spacing: -.02em;
+    }
+    .nav__logo-mark {
+      width: 2rem;
+      height: 2rem;
+      background: var(--amber);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .875rem;
+      font-weight: 900;
+      color: var(--midnight);
+    }
+    .nav__links { display: flex; align-items: center; gap: 2rem; }
+    .nav__links a { font-size: .875rem; font-weight: 500; color: rgba(255,255,255,.7); transition: color .15s; }
+    .nav__links a:hover { color: var(--white); }
+    .nav__links a.active { color: var(--amber); }
+    .nav__cta { display: flex; align-items: center; gap: .75rem; }
+    .nav__hamburger { display: none; flex-direction: column; gap: 5px; padding: .5rem; color: var(--white); }
+    .nav__hamburger span { display: block; width: 22px; height: 2px; background: currentColor; border-radius: 1px; transition: all .3s; }
+    .nav__mobile { display: none; flex-direction: column; border-top: 1px solid var(--border-dark); padding: 1rem 0; }
+    .nav__mobile.open { display: flex; }
+    .nav__mobile a { display: block; padding: .75rem var(--gutter); font-size: .9375rem; font-weight: 500; color: rgba(255,255,255,.8); border-bottom: 1px solid var(--border-dark); }
+    .nav__mobile a:last-child { border-bottom: none; }
+    .nav__mobile-cta { padding: 1rem var(--gutter); display: flex; flex-direction: column; gap: .75rem; }
+    .nav__mobile-cta .btn { justify-content: center; }
+
+    /* ---- HERO ---- */
+    .hero {
+      background: var(--midnight);
+      color: var(--white);
+      padding-block: clamp(4rem, 10vw, 7rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero__bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(245,166,35,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,166,35,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero__glow {
+      position: absolute;
+      top: -20%;
+      right: -5%;
+      width: 55%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(245,166,35,.11) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .hero__inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .hero__eyebrow { color: var(--amber); font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; display: flex; align-items: center; gap: .5rem; margin-bottom: 1.25rem; }
+    .hero__eyebrow::before { content: ''; width: 1.5rem; height: 2px; background: var(--amber); border-radius: 1px; }
+    .hero__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(2.5rem, 5vw, 3.75rem);
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      margin-bottom: .75rem;
+    }
+    .hero__sub-headline {
+      font-size: clamp(1rem, 2vw, 1.1875rem);
+      color: var(--amber-light);
+      font-weight: 500;
+      margin-bottom: 1.25rem;
+    }
+    .hero__copy {
+      font-size: 1.0625rem;
+      color: rgba(255,255,255,.6);
+      line-height: 1.75;
+      max-width: 50ch;
+      margin-bottom: 2rem;
+    }
+    .hero__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      margin-bottom: 2.5rem;
+    }
+    .hero__meta-item {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .875rem;
+      color: rgba(255,255,255,.5);
+    }
+    .hero__meta-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--amber); flex-shrink: 0; }
+    .hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .hero__portrait-wrap { display: flex; justify-content: center; }
+    .hero__portrait {
+      width: min(320px, 100%);
+      aspect-ratio: 3/4;
+      background: var(--midnight-3);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero__portrait-glow {
+      position: absolute;
+      bottom: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 60%;
+      background: radial-gradient(ellipse, rgba(245,166,35,.15) 0%, transparent 70%);
+    }
+    .hero__initials {
+      width: 7rem;
+      height: 7rem;
+      border-radius: 50%;
+      background: var(--amber);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.25rem;
+      font-weight: 900;
+      color: var(--midnight);
+      position: relative;
+    }
+    .hero__portrait-name {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.5rem;
+      color: var(--white);
+      position: relative;
+    }
+    .hero__portrait-title { font-size: .875rem; color: rgba(255,255,255,.5); position: relative; text-align: center; padding-inline: 1.5rem; line-height: 1.5; }
+    .hero__cert {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(245,166,35,.12);
+      border: 1px solid rgba(245,166,35,.25);
+      border-radius: 100px;
+      padding: .375rem .875rem;
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--amber-light);
+      position: relative;
+    }
+
+    /* ---- STATS ---- */
+    .stats {
+      background: var(--amber);
+      padding-block: 1.5rem;
+    }
+    .stats__inner {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      text-align: center;
+    }
+    .stat__num {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.5rem);
+      font-weight: 700;
+      color: var(--midnight);
+      line-height: 1;
+      margin-bottom: .25rem;
+    }
+    .stat__label { font-size: .8125rem; font-weight: 600; color: rgba(14,17,23,.65); }
+
+    /* ---- ABOUT SECTION ---- */
+    .about {
+      padding-block: clamp(4rem, 8vw, 6rem);
+      background: var(--white);
+    }
+    .about__inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .about__text .eyebrow { margin-bottom: 1rem; }
+    .about__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.5rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      margin-bottom: 1.25rem;
+    }
+    .about__copy {
+      font-size: 1.0625rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+    .about__copy:last-of-type { margin-bottom: 2rem; }
+    .about__skills-title { font-size: .875rem; font-weight: 700; color: var(--text-main); margin-bottom: .875rem; }
+    .about__skills { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .about__skill {
+      background: var(--cream);
+      border: 1px solid var(--cream-2);
+      border-radius: 100px;
+      padding: .375rem .875rem;
+      font-size: .8125rem;
+      font-weight: 600;
+      color: var(--midnight);
+    }
+    .about__cards { display: flex; flex-direction: column; gap: 1.25rem; }
+    .about__card {
+      background: var(--midnight);
+      color: var(--white);
+      border-radius: var(--radius-xl);
+      padding: 1.75rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .about__card-glow {
+      position: absolute;
+      bottom: -30%;
+      right: -10%;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(ellipse, rgba(245,166,35,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .about__card-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+    .about__card-title { font-weight: 700; font-size: 1rem; margin-bottom: .5rem; }
+    .about__card-copy { font-size: .875rem; color: rgba(255,255,255,.55); line-height: 1.65; }
+
+    /* ---- EXPERIENCE ---- */
+    .experience {
+      padding-block: clamp(4rem, 8vw, 6rem);
+      background: var(--cream);
+    }
+    .experience__header {
+      max-width: 44rem;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+    .experience__header .eyebrow { margin-bottom: 1rem; }
+    .experience__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.5rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+    }
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .timeline-item {
+      display: flex;
+      gap: 1.5rem;
+      padding-bottom: 2.5rem;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item__left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 2.5rem; }
+    .timeline-item__dot {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: var(--white);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+    .timeline-item--current .timeline-item__dot { border-color: var(--amber); background: var(--amber); }
+    .timeline-item__line {
+      width: 2px;
+      flex: 1;
+      background: var(--border);
+      margin-top: .375rem;
+      min-height: 1.5rem;
+    }
+    .timeline-item:last-child .timeline-item__line { display: none; }
+    .timeline-item__content {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      flex: 1;
+      transition: box-shadow .2s;
+    }
+    .timeline-item--current .timeline-item__content { border-color: rgba(245,166,35,.4); }
+    .timeline-item__content:hover { box-shadow: var(--shadow-md); }
+    .timeline-item__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: .75rem; }
+    .timeline-item__role { font-weight: 700; font-size: 1rem; color: var(--text-main); margin-bottom: .25rem; }
+    .timeline-item__company { font-size: .9375rem; color: var(--amber-dark); font-weight: 600; }
+    .timeline-item__date { font-size: .8125rem; color: var(--text-light); white-space: nowrap; background: var(--cream); border: 1px solid var(--cream-2); border-radius: 100px; padding: .25rem .75rem; }
+    .timeline-item--current .timeline-item__date { background: rgba(245,166,35,.12); border-color: rgba(245,166,35,.25); color: var(--amber-dark); }
+    .timeline-item__desc {
+      font-size: .875rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    .timeline-item__tags { display: flex; flex-wrap: wrap; gap: .375rem; }
+    .timeline-item__tag {
+      background: var(--cream);
+      border: 1px solid var(--cream-2);
+      border-radius: 100px;
+      padding: .2rem .625rem;
+      font-size: .75rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    /* ---- AWARDS ---- */
+    .awards {
+      padding-block: clamp(4rem, 8vw, 6rem);
+      background: var(--midnight);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .awards__glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%;
+      height: 70%;
+      background: radial-gradient(ellipse, rgba(245,166,35,.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .awards__header { text-align: center; max-width: 44rem; margin-inline: auto; margin-bottom: clamp(2.5rem, 5vw, 4rem); position: relative; }
+    .awards__eyebrow { display: inline-flex; align-items: center; gap: .5rem; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); margin-bottom: 1rem; }
+    .awards__eyebrow::before { content: ''; width: 1.5rem; height: 2px; background: var(--amber); border-radius: 1px; }
+    .awards__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.5rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      margin-bottom: 1rem;
+    }
+    .awards__sub { font-size: 1.0625rem; color: rgba(255,255,255,.55); line-height: 1.7; }
+    .awards__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      position: relative;
+    }
+    .award-card {
+      background: var(--midnight-2);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-xl);
+      padding: 1.75rem;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .award-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.3); transform: translateY(-2px); }
+    .award-card__trophy {
+      width: 3rem;
+      height: 3rem;
+      border-radius: var(--radius-md);
+      background: rgba(245,166,35,.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.375rem;
+      flex-shrink: 0;
+    }
+    .award-card__year { font-size: .75rem; font-weight: 700; color: var(--amber); letter-spacing: .08em; margin-bottom: .375rem; }
+    .award-card__name { font-weight: 700; font-size: 1rem; color: var(--white); margin-bottom: .25rem; }
+    .award-card__event { font-size: .875rem; color: rgba(255,255,255,.5); margin-bottom: .5rem; }
+    .award-card__company {
+      display: inline-flex;
+      align-items: center;
+      gap: .375rem;
+      font-size: .8125rem;
+      color: rgba(255,255,255,.35);
+    }
+
+    /* ---- EDUCATION ---- */
+    .education {
+      padding-block: clamp(4rem, 8vw, 6rem);
+      background: var(--cream);
+    }
+    .education__header { max-width: 44rem; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+    .education__header .eyebrow { margin-bottom: 1rem; }
+    .education__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.5rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+    }
+    .edu-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+    .edu-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      transition: box-shadow .2s;
+    }
+    .edu-card:hover { box-shadow: var(--shadow-md); }
+    .edu-card--cert { border-color: rgba(245,166,35,.4); }
+    .edu-card__icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: var(--radius-md);
+      background: var(--cream);
+      border: 1px solid var(--cream-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+    .edu-card--cert .edu-card__icon { background: rgba(245,166,35,.12); border-color: rgba(245,166,35,.25); }
+    .edu-card__type { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-light); margin-bottom: .375rem; }
+    .edu-card--cert .edu-card__type { color: var(--amber-dark); }
+    .edu-card__name { font-weight: 700; font-size: 1rem; color: var(--text-main); margin-bottom: .25rem; }
+    .edu-card__institution { font-size: .875rem; color: var(--amber-dark); font-weight: 600; margin-bottom: .25rem; }
+    .edu-card__date { font-size: .8125rem; color: var(--text-light); }
+
+    /* ---- CTA BAND ---- */
+    .cta-band {
+      background: var(--amber);
+      padding-block: clamp(3.5rem, 7vw, 5rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(14,17,23,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(14,17,23,.06) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .cta-band__inner { position: relative; text-align: center; }
+    .cta-band__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      color: var(--midnight);
+      margin-bottom: 1rem;
+    }
+    .cta-band__sub { font-size: 1.0625rem; color: rgba(14,17,23,.65); line-height: 1.6; max-width: 42ch; margin-inline: auto; margin-bottom: 2.5rem; }
+    .cta-band__actions { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+    .btn-dark { background: var(--midnight); color: var(--white); }
+    .btn-dark:hover { background: var(--midnight-2); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(14,17,23,.35); }
+    .btn-ghost-dark { background: transparent; color: var(--midnight); border: 1.5px solid rgba(14,17,23,.3); }
+    .btn-ghost-dark:hover { background: rgba(14,17,23,.08); }
+
+    /* ---- FOOTER ---- */
+    .footer { background: var(--midnight); color: rgba(255,255,255,.6); padding-block: 3rem 2rem; }
+    .footer__top { display: grid; grid-template-columns: 1fr; gap: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border-dark); margin-bottom: 2rem; }
+    .footer__brand .nav__logo { margin-bottom: 1rem; color: var(--white); }
+    .footer__tagline { font-size: .9375rem; line-height: 1.6; max-width: 30ch; }
+    .footer__col-title { font-size: .8125rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 1rem; }
+    .footer__links { display: flex; flex-direction: column; gap: .625rem; }
+    .footer__links a { font-size: .9375rem; color: rgba(255,255,255,.55); transition: color .15s; }
+    .footer__links a:hover { color: var(--white); }
+    .footer__bottom { display: flex; flex-direction: column; gap: .75rem; align-items: center; text-align: center; }
+    .footer__copy { font-size: .875rem; }
+    .footer__made { font-size: .8125rem; color: rgba(255,255,255,.35); }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 639px) {
+      .nav__links { display: none; }
+      .nav__cta { display: none; }
+      .nav__hamburger { display: flex; }
+    }
+    @media (min-width: 640px) {
+      .hero__inner { grid-template-columns: 1fr 1fr; }
+      .stats__inner { grid-template-columns: repeat(4, 1fr); }
+      .about__inner { grid-template-columns: 1fr 1fr; }
+      .awards__grid { grid-template-columns: 1fr 1fr; }
+      .edu-grid { grid-template-columns: 1fr 1fr; }
+      .footer__top { grid-template-columns: 2fr 1fr 1fr; }
+      .footer__bottom { flex-direction: row; justify-content: space-between; text-align: left; }
+    }
+    @media (min-width: 1024px) {
+      .nav__hamburger { display: none; }
+      .nav__mobile { display: none !important; }
+      .awards__grid { grid-template-columns: repeat(3, 1fr); }
+      .edu-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer__top { grid-template-columns: 2.5fr 1fr 1fr 1fr; }
+    }
+    @media (min-width: 1440px) {
+      :root { --max-w: 1440px; --gutter: 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav" role="banner">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo" aria-label="Stackly home">
+          <div class="nav__logo-mark" aria-hidden="true">S</div>
+          Stackly
+        </a>
+        <nav class="nav__links" aria-label="Primary navigation">
+          <a href="index.html#services">Services</a>
+          <a href="https://shawnferrao.com/web-development/">Web Dev</a>
+          <a href="https://shawnferrao.com/plugins">Plugins</a>
+          <a href="about.html" class="active" aria-current="page">About</a>
+        </nav>
+        <div class="nav__cta">
+          <a href="index.html#services" class="btn btn-outline">View Pricing</a>
+          <a href="index.html#contact" class="btn btn-primary">Get Started</a>
+        </div>
+        <button class="nav__hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav" id="hamburger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav__mobile" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+      <a href="index.html#services">Services</a>
+      <a href="https://shawnferrao.com/web-development/">Web Dev</a>
+      <a href="https://shawnferrao.com/plugins">Plugins</a>
+      <a href="about.html">About</a>
+      <div class="nav__mobile-cta">
+        <a href="index.html#services" class="btn btn-outline-dark">View Pricing</a>
+        <a href="index.html#contact" class="btn btn-primary">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-headline">
+      <div class="hero__bg-grid" aria-hidden="true"></div>
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="hero__inner">
+
+          <div>
+            <p class="hero__eyebrow" aria-hidden="true">About</p>
+            <h1 class="hero__headline" id="hero-headline">Shawn Ferrao</h1>
+            <p class="hero__sub-headline">Simplifying Tech for Small Business · Strategy · Automation · AI</p>
+            <p class="hero__copy">
+              I'm a web developer, digital marketer and graphic designer based in Sydney, Australia. For over 7 years I've been building digital experiences — from event tech platforms for international conferences to lean, automated websites for small business owners.
+            </p>
+            <div class="hero__meta" aria-label="Key details">
+              <span class="hero__meta-item"><span class="hero__meta-dot" aria-hidden="true"></span> Sydney, NSW · Australia</span>
+              <span class="hero__meta-item"><span class="hero__meta-dot" aria-hidden="true"></span> 7+ Years Experience</span>
+              <span class="hero__meta-item"><span class="hero__meta-dot" aria-hidden="true"></span> ACS Certified Web Developer</span>
+            </div>
+            <div class="hero__actions">
+              <a href="index.html#contact" class="btn btn-primary btn-lg">Work With Me</a>
+              <a href="#experience" class="btn btn-outline btn-lg">View Experience</a>
+            </div>
+          </div>
+
+          <div class="hero__portrait-wrap">
+            <div class="hero__portrait" aria-label="Shawn Ferrao">
+              <div class="hero__portrait-glow" aria-hidden="true"></div>
+              <div class="hero__initials" aria-hidden="true">SF</div>
+              <p class="hero__portrait-name">Shawn Ferrao</p>
+              <p class="hero__portrait-title">Web Developer · Digital Marketer<br />Graphic Designer</p>
+              <span class="hero__cert">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6l2.5 2.5 5.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                ACS Certified Web Professional
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="stats" role="complementary" aria-label="Key stats">
+      <div class="container">
+        <dl class="stats__inner">
+          <div>
+            <dt class="stat__label">Years Experience</dt>
+            <dd class="stat__num">7+</dd>
+          </div>
+          <div>
+            <dt class="stat__label">Industries Worked In</dt>
+            <dd class="stat__num">5+</dd>
+          </div>
+          <div>
+            <dt class="stat__label">Award-Winning Teams</dt>
+            <dd class="stat__num">3×</dd>
+          </div>
+          <div>
+            <dt class="stat__label">Tools Mastered</dt>
+            <dd class="stat__num">20+</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section class="about" aria-labelledby="about-headline">
+      <div class="container">
+        <div class="about__inner">
+
+          <div class="about__text">
+            <span class="eyebrow">The Story</span>
+            <h2 class="about__headline" id="about-headline">
+              Design, dev and marketing — all in one person.
+            </h2>
+            <p class="about__copy">
+              Most people specialise in one thing. I never could. I started in event technology — building registration platforms, apps and websites for large-scale conferences and corporate events across Australia and internationally. That meant working fast, to brief, and always with a clear business outcome in mind.
+            </p>
+            <p class="about__copy">
+              At Jomablue, I worked as Digital Marketing Coordinator, managing their WordPress website, running campaigns across LinkedIn and Google Ads, and maintaining Salesforce CRM and Mailchimp — while contributing to award-winning work recognised at the Event Technology Awards in London.
+            </p>
+            <p class="about__copy">
+              Now I'm channelling all of that into Stackly — a platform that makes professional web infrastructure, automation and marketing systems accessible to small businesses who've been priced out by agencies.
+            </p>
+            <p class="about__skills-title">Core Skills</p>
+            <ul class="about__skills" aria-label="Skills">
+              <li class="about__skill">WordPress</li>
+              <li class="about__skill">Elementor Pro</li>
+              <li class="about__skill">Zapier / Make</li>
+              <li class="about__skill">Digital Marketing</li>
+              <li class="about__skill">SEO / GEO</li>
+              <li class="about__skill">Salesforce CRM</li>
+              <li class="about__skill">Mailchimp</li>
+              <li class="about__skill">Google Ads</li>
+              <li class="about__skill">Google Analytics</li>
+              <li class="about__skill">Adobe Illustrator</li>
+              <li class="about__skill">Adobe XD</li>
+              <li class="about__skill">Graphic Design</li>
+              <li class="about__skill">SemRush</li>
+              <li class="about__skill">Wrike</li>
+            </ul>
+          </div>
+
+          <div class="about__cards">
+            <div class="about__card">
+              <div class="about__card-glow" aria-hidden="true"></div>
+              <div class="about__card-icon" aria-hidden="true">🎯</div>
+              <h3 class="about__card-title">Strategy first, tools second</h3>
+              <p class="about__card-copy">I start with your business goal, then figure out the simplest tech stack to achieve it. No bloat, no unnecessary complexity.</p>
+            </div>
+            <div class="about__card">
+              <div class="about__card-glow" aria-hidden="true"></div>
+              <div class="about__card-icon" aria-hidden="true">⚡</div>
+              <h3 class="about__card-title">Automation is baked in</h3>
+              <p class="about__card-copy">Every website I build is connected. Forms talk to CRMs. Bookings trigger emails. Leads get followed up automatically.</p>
+            </div>
+            <div class="about__card">
+              <div class="about__card-glow" aria-hidden="true"></div>
+              <div class="about__card-icon" aria-hidden="true">🤝</div>
+              <h3 class="about__card-title">You work directly with me</h3>
+              <p class="about__card-copy">No account managers, no offshore teams, no briefing three people to get one thing done. It's just me — and I take that seriously.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="experience" id="experience" aria-labelledby="exp-headline">
+      <div class="container">
+        <header class="experience__header">
+          <span class="eyebrow">Experience</span>
+          <h2 class="experience__headline" id="exp-headline">7+ years across events, marketing and web development</h2>
+        </header>
+
+        <ol class="timeline" aria-label="Work history">
+
+          <li class="timeline-item timeline-item--current">
+            <div class="timeline-item__left" aria-hidden="true">
+              <div class="timeline-item__dot">⚡</div>
+              <div class="timeline-item__line"></div>
+            </div>
+            <div class="timeline-item__content">
+              <div class="timeline-item__top">
+                <div>
+                  <p class="timeline-item__role">Freelance Web Developer</p>
+                  <p class="timeline-item__company">Self-employed · Stackly</p>
+                </div>
+                <span class="timeline-item__date">Jan 2022 — Present</span>
+              </div>
+              <p class="timeline-item__desc">Building custom websites, automation systems and digital marketing for small businesses across Australia. Clients include Bricksworks, Porsche and others. Specialising in WordPress, Elementor Pro, Zapier and Google Ads campaigns.</p>
+              <ul class="timeline-item__tags" aria-label="Skills used">
+                <li class="timeline-item__tag">WordPress</li>
+                <li class="timeline-item__tag">Elementor Pro</li>
+                <li class="timeline-item__tag">Zapier</li>
+                <li class="timeline-item__tag">Google Ads</li>
+                <li class="timeline-item__tag">SEO</li>
+                <li class="timeline-item__tag">Graphic Design</li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="timeline-item">
+            <div class="timeline-item__left" aria-hidden="true">
+              <div class="timeline-item__dot">🎯</div>
+              <div class="timeline-item__line"></div>
+            </div>
+            <div class="timeline-item__content">
+              <div class="timeline-item__top">
+                <div>
+                  <p class="timeline-item__role">Digital Marketing Coordinator</p>
+                  <p class="timeline-item__company">Jomablue</p>
+                </div>
+                <span class="timeline-item__date">Mar 2024 — Apr 2026</span>
+              </div>
+              <p class="timeline-item__desc">Led digital marketing at an award-winning event technology platform. Managed the WordPress website, Salesforce CRM, Mailchimp, and cross-channel campaigns across LinkedIn and Google Ads. Contributed to winning Best Event Management Platform at the Event Technology Awards 2025 in London.</p>
+              <ul class="timeline-item__tags" aria-label="Skills used">
+                <li class="timeline-item__tag">WordPress</li>
+                <li class="timeline-item__tag">Salesforce</li>
+                <li class="timeline-item__tag">Mailchimp</li>
+                <li class="timeline-item__tag">SEO / GEO</li>
+                <li class="timeline-item__tag">Google Analytics</li>
+                <li class="timeline-item__tag">SemRush</li>
+                <li class="timeline-item__tag">LinkedIn Ads</li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="timeline-item">
+            <div class="timeline-item__left" aria-hidden="true">
+              <div class="timeline-item__dot">🖥️</div>
+              <div class="timeline-item__line"></div>
+            </div>
+            <div class="timeline-item__content">
+              <div class="timeline-item__top">
+                <div>
+                  <p class="timeline-item__role">Digital & Innovation Coordinator</p>
+                  <p class="timeline-item__company">MCI Australia</p>
+                </div>
+                <span class="timeline-item__date">Feb 2022 — Feb 2024</span>
+              </div>
+              <p class="timeline-item__desc">Developed event apps and responsive web platforms for large-scale corporate events. Led the design and implementation of digital experiences including live polling, Q&A sessions, and analytics dashboards. Collaborated with designers and cross-functional teams to exceed client expectations.</p>
+              <ul class="timeline-item__tags" aria-label="Skills used">
+                <li class="timeline-item__tag">Event Tech</li>
+                <li class="timeline-item__tag">Web Development</li>
+                <li class="timeline-item__tag">UX Design</li>
+                <li class="timeline-item__tag">Data Analytics</li>
+                <li class="timeline-item__tag">Adobe Premiere Pro</li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="timeline-item">
+            <div class="timeline-item__left" aria-hidden="true">
+              <div class="timeline-item__dot">📱</div>
+              <div class="timeline-item__line"></div>
+            </div>
+            <div class="timeline-item__content">
+              <div class="timeline-item__top">
+                <div>
+                  <p class="timeline-item__role">Digital & Innovation Assistant</p>
+                  <p class="timeline-item__company">MCI Australia</p>
+                </div>
+                <span class="timeline-item__date">Mar 2019 — Feb 2022</span>
+              </div>
+              <p class="timeline-item__desc">Managed event registration platforms using EventsAIR, coordinated email marketing campaigns, and oversaw virtual event platforms during the shift to digital events. Built and maintained websites for corporate events across Australia.</p>
+              <ul class="timeline-item__tags" aria-label="Skills used">
+                <li class="timeline-item__tag">EventsAIR</li>
+                <li class="timeline-item__tag">WordPress</li>
+                <li class="timeline-item__tag">Elementor</li>
+                <li class="timeline-item__tag">Mailchimp</li>
+                <li class="timeline-item__tag">Virtual Events</li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="timeline-item">
+            <div class="timeline-item__left" aria-hidden="true">
+              <div class="timeline-item__dot">🌐</div>
+              <div class="timeline-item__line"></div>
+            </div>
+            <div class="timeline-item__content">
+              <div class="timeline-item__top">
+                <div>
+                  <p class="timeline-item__role">Event Assistant & Web Developer</p>
+                  <p class="timeline-item__company">MCI Australia</p>
+                </div>
+                <span class="timeline-item__date">Nov 2017 — Mar 2019</span>
+              </div>
+              <p class="timeline-item__desc">Designed and built event websites with responsive design and intuitive navigation. Managed attendee registration and ticketing via EventsAIR, and ran email campaigns to promote events and engage attendees.</p>
+              <ul class="timeline-item__tags" aria-label="Skills used">
+                <li class="timeline-item__tag">Web Development</li>
+                <li class="timeline-item__tag">EventsAIR</li>
+                <li class="timeline-item__tag">Email Marketing</li>
+              </ul>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    <!-- AWARDS -->
+    <section class="awards" aria-labelledby="awards-headline">
+      <div class="awards__glow" aria-hidden="true"></div>
+      <div class="container">
+        <header class="awards__header">
+          <p class="awards__eyebrow" aria-hidden="true">Recognition</p>
+          <h2 class="awards__headline" id="awards-headline">Part of award-winning teams</h2>
+          <p class="awards__sub">Work I've contributed to that was recognised on the global stage in event technology.</p>
+        </header>
+        <div class="awards__grid" role="list">
+
+          <article class="award-card" role="listitem">
+            <div class="award-card__trophy" aria-hidden="true">🏆</div>
+            <div>
+              <p class="award-card__year">2025 · London</p>
+              <h3 class="award-card__name">Best Event Management Platform</h3>
+              <p class="award-card__event">Event Technology Awards — ETL London 2025</p>
+              <p class="award-card__company">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.25"/><path d="M4 6l1.5 1.5 3-3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Jomablue
+              </p>
+            </div>
+          </article>
+
+          <article class="award-card" role="listitem">
+            <div class="award-card__trophy" aria-hidden="true">🥇</div>
+            <div>
+              <p class="award-card__year">2024 · London</p>
+              <h3 class="award-card__name">Best Visitor Registration Technology</h3>
+              <p class="award-card__event">Event Tech Live — ETL London 2024</p>
+              <p class="award-card__company">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.25"/><path d="M4 6l1.5 1.5 3-3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Jomablue
+              </p>
+            </div>
+          </article>
+
+          <article class="award-card" role="listitem">
+            <div class="award-card__trophy" aria-hidden="true">⭐</div>
+            <div>
+              <p class="award-card__year">2025</p>
+              <h3 class="award-card__name">Great Place to Work Certified™</h3>
+              <p class="award-card__event">100% of employees rated it a great place to work</p>
+              <p class="award-card__company">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.25"/><path d="M4 6l1.5 1.5 3-3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Jomablue
+              </p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="education" aria-labelledby="edu-headline">
+      <div class="container">
+        <header class="education__header">
+          <span class="eyebrow">Education & Certifications</span>
+          <h2 class="education__headline" id="edu-headline">Formally trained in design, certified in web development</h2>
+        </header>
+        <div class="edu-grid" role="list">
+
+          <article class="edu-card edu-card--cert" role="listitem">
+            <div class="edu-card__icon" aria-hidden="true">🏅</div>
+            <div>
+              <p class="edu-card__type">Certification</p>
+              <h3 class="edu-card__name">Certified Web Professional — Web Developer (CWP)</h3>
+              <p class="edu-card__institution">ACS — Australian Computer Society</p>
+              <p class="edu-card__date">Issued Jan 2025 · Expires Feb 2028</p>
+            </div>
+          </article>
+
+          <article class="edu-card" role="listitem">
+            <div class="edu-card__icon" aria-hidden="true">🎨</div>
+            <div>
+              <p class="edu-card__type">Qualification</p>
+              <h3 class="edu-card__name">Advanced Diploma of Graphic Design</h3>
+              <p class="edu-card__institution">Australian College of Business Intelligence</p>
+              <p class="edu-card__date">May 2023 — Feb 2024</p>
+            </div>
+          </article>
+
+          <article class="edu-card" role="listitem">
+            <div class="edu-card__icon" aria-hidden="true">✏️</div>
+            <div>
+              <p class="edu-card__type">Qualification</p>
+              <h3 class="edu-card__name">Diploma of Creative Design</h3>
+              <p class="edu-card__institution">Australian College of Business Intelligence</p>
+              <p class="edu-card__date">Jan 2022 — May 2023</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-band" aria-labelledby="cta-headline">
+      <div class="container">
+        <div class="cta-band__inner">
+          <h2 class="cta-band__headline" id="cta-headline">
+            Let's build something together.
+          </h2>
+          <p class="cta-band__sub">
+            Whether you need a new website, an automation setup, or just a clear plan — I'd love to hear about your business.
+          </p>
+          <div class="cta-band__actions">
+            <a href="mailto:hello@stackly.com.au" class="btn btn-dark btn-lg">
+              Book a Discovery Call
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="index.html#services" class="btn btn-ghost-dark btn-lg">View Pricing</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="index.html" class="nav__logo" aria-label="Stackly home">
+            <div class="nav__logo-mark" aria-hidden="true">S</div>
+            Stackly
+          </a>
+          <p class="footer__tagline">Tech that works for your business. Built for small business — not enterprise.</p>
+        </div>
+        <div>
+          <p class="footer__col-title">Services</p>
+          <ul class="footer__links">
+            <li><a href="index.html#services">Tech Stack Audit</a></li>
+            <li><a href="index.html#services">Foundation Build</a></li>
+            <li><a href="index.html#services">Full Build</a></li>
+            <li><a href="index.html#services">Monthly Retainer</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__col-title">Products</p>
+          <ul class="footer__links">
+            <li><a href="https://shawnferrao.com/plugins">Plugins</a></li>
+            <li><a href="courses.html">Courses</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__col-title">Company</p>
+          <ul class="footer__links">
+            <li><a href="about.html">About Shawn</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="index.html#contact">Book a Call</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; 2026 Stackly. ABN pending. Sydney, Australia.</p>
+        <p class="footer__made">Built by Shawn Ferrao</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+    });
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+
+</body>
+</html>
