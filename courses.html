@@ -3,15 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Courses &amp; Education — Stackly</title>
-  <meta name="description" content="Practical courses for small business owners. Learn WordPress, Zapier, Elementor and more — taught by Shawn Ferrao, Sydney-based tech instructor." />
+  <title>Courses — Coming Soon | Stackly</title>
+  <meta name="description" content="Stackly courses are coming soon. Join the waitlist to get early access and a founding member discount." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
   <style>
-    /* =============================================
-       TOKENS
-    ============================================= */
     :root {
       --midnight:   #0E1117;
       --midnight-2: #161C27;
@@ -24,26 +21,17 @@
       --white:      #FFFFFF;
       --text-main:  #0E1117;
       --text-muted: #6B7280;
-      --text-light: #9CA3AF;
       --border:     #E5E7EB;
       --border-dark:#2A3347;
-
       --radius-sm:  6px;
       --radius-md:  12px;
       --radius-lg:  20px;
       --radius-xl:  32px;
-
-      --shadow-sm:  0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
-      --shadow-md:  0 4px 16px rgba(0,0,0,.10);
       --shadow-lg:  0 12px 40px rgba(0,0,0,.14);
-
       --max-w:      1280px;
       --gutter:     clamp(1.25rem, 5vw, 2.5rem);
     }
 
-    /* =============================================
-       RESET & BASE
-    ============================================= */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
@@ -51,7 +39,7 @@
       font-size: 1rem;
       line-height: 1.6;
       color: var(--text-main);
-      background: var(--white);
+      background: var(--midnight);
       -webkit-font-smoothing: antialiased;
     }
     img, svg { display: block; max-width: 100%; }
@@ -59,42 +47,14 @@
     ul { list-style: none; }
     button { cursor: pointer; border: none; background: none; font: inherit; }
 
-    /* =============================================
-       UTILITIES
-    ============================================= */
     .container {
       width: 100%;
       max-width: var(--max-w);
       margin-inline: auto;
       padding-inline: var(--gutter);
     }
-    .sr-only {
-      position: absolute; width: 1px; height: 1px;
-      padding: 0; margin: -1px; overflow: hidden;
-      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
-    }
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--amber-dark);
-    }
-    .eyebrow::before {
-      content: '';
-      display: block;
-      width: 1.5rem;
-      height: 2px;
-      background: var(--amber);
-      border-radius: 1px;
-    }
 
-    /* =============================================
-       BUTTONS
-    ============================================= */
+    /* ---- BUTTONS ---- */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -106,58 +66,14 @@
       transition: all .2s ease;
       white-space: nowrap;
     }
-    .btn-primary {
-      background: var(--amber);
-      color: var(--midnight);
-    }
-    .btn-primary:hover {
-      background: var(--amber-dark);
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(245,166,35,.35);
-    }
-    .btn-outline {
-      background: transparent;
-      color: var(--white);
-      border: 1.5px solid rgba(255,255,255,.3);
-    }
-    .btn-outline:hover {
-      border-color: var(--amber);
-      color: var(--amber);
-    }
-    .btn-outline-dark {
-      background: transparent;
-      color: var(--midnight);
-      border: 1.5px solid var(--border);
-    }
-    .btn-outline-dark:hover {
-      border-color: var(--amber);
-      color: var(--amber-dark);
-    }
-    .btn-lg {
-      padding: .9375rem 2rem;
-      font-size: 1rem;
-    }
-    .btn-dark {
-      background: var(--midnight);
-      color: var(--white);
-    }
-    .btn-dark:hover {
-      background: var(--midnight-2);
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(14,17,23,.35);
-    }
-    .btn-ghost-dark {
-      background: transparent;
-      color: var(--midnight);
-      border: 1.5px solid rgba(14,17,23,.3);
-    }
-    .btn-ghost-dark:hover {
-      background: rgba(14,17,23,.08);
-    }
+    .btn-primary { background: var(--amber); color: var(--midnight); }
+    .btn-primary:hover { background: var(--amber-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(245,166,35,.35); }
+    .btn-outline { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,.3); }
+    .btn-outline:hover { border-color: var(--amber); color: var(--amber); }
+    .btn-outline-dark { background: transparent; color: var(--midnight); border: 1.5px solid var(--border); }
+    .btn-outline-dark:hover { border-color: var(--amber); color: var(--amber-dark); }
 
-    /* =============================================
-       NAVIGATION
-    ============================================= */
+    /* ---- NAV ---- */
     .nav {
       position: sticky;
       top: 0;
@@ -226,7 +142,6 @@
     .nav__mobile {
       display: none;
       flex-direction: column;
-      gap: 0;
       border-top: 1px solid var(--border-dark);
       padding: 1rem 0;
     }
@@ -248,17 +163,27 @@
     }
     .nav__mobile-cta .btn { justify-content: center; }
 
-    /* =============================================
-       HERO
-    ============================================= */
-    .hero {
-      background: var(--midnight);
-      color: var(--white);
-      padding-block: clamp(5rem, 12vw, 8rem);
+    @media (max-width: 639px) {
+      .nav__links { display: none; }
+      .nav__cta { display: none; }
+      .nav__hamburger { display: flex; }
+    }
+    @media (min-width: 1024px) {
+      .nav__hamburger { display: none; }
+      .nav__mobile { display: none !important; }
+    }
+
+    /* ---- COMING SOON HERO ---- */
+    .coming-soon {
+      min-height: calc(100vh - 4rem);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-block: clamp(4rem, 10vw, 7rem);
       position: relative;
       overflow: hidden;
     }
-    .hero__bg-grid {
+    .coming-soon__bg-grid {
       position: absolute;
       inset: 0;
       background-image:
@@ -266,834 +191,179 @@
         linear-gradient(90deg, rgba(245,166,35,.04) 1px, transparent 1px);
       background-size: 60px 60px;
     }
-    .hero__bg-glow {
+    .coming-soon__glow-1 {
       position: absolute;
-      top: -20%;
-      right: -10%;
-      width: 60%;
-      height: 80%;
-      background: radial-gradient(ellipse at center, rgba(245,166,35,.12) 0%, transparent 70%);
+      top: -10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 60%;
+      background: radial-gradient(ellipse, rgba(245,166,35,.1) 0%, transparent 65%);
       pointer-events: none;
     }
-    .hero__inner {
-      position: relative;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3rem;
-      align-items: center;
+    .coming-soon__glow-2 {
+      position: absolute;
+      bottom: 0;
+      right: -10%;
+      width: 40%;
+      height: 50%;
+      background: radial-gradient(ellipse, rgba(245,166,35,.06) 0%, transparent 65%);
+      pointer-events: none;
     }
-    .hero__badge {
+    .coming-soon__inner {
+      position: relative;
+      text-align: center;
+      max-width: 680px;
+      margin-inline: auto;
+    }
+    .coming-soon__badge {
       display: inline-flex;
       align-items: center;
-      gap: .5rem;
+      gap: .625rem;
       background: rgba(245,166,35,.12);
-      border: 1px solid rgba(245,166,35,.25);
+      border: 1px solid rgba(245,166,35,.3);
       border-radius: 100px;
-      padding: .375rem 1rem;
+      padding: .5rem 1.25rem;
       font-size: .8125rem;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--amber-light);
-      margin-bottom: 1.5rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
     }
-    .hero__badge-dot {
-      width: 6px;
-      height: 6px;
+    .coming-soon__badge-dot {
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       background: var(--amber);
       animation: pulse 2s infinite;
     }
     @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: .4; }
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .5; transform: scale(.85); }
     }
-    .hero__headline {
+    .coming-soon__headline {
       font-family: 'DM Serif Display', Georgia, serif;
-      font-size: clamp(2.5rem, 6vw, 4.25rem);
+      font-size: clamp(2.5rem, 6vw, 4rem);
       line-height: 1.1;
       letter-spacing: -.02em;
+      color: var(--white);
       margin-bottom: 1.5rem;
     }
-    .hero__headline em {
+    .coming-soon__headline em {
       font-style: italic;
       color: var(--amber);
     }
-    .hero__sub {
-      font-size: clamp(1rem, 2vw, 1.1875rem);
-      color: rgba(255,255,255,.65);
-      max-width: 52ch;
-      line-height: 1.7;
-      margin-bottom: 2.5rem;
-    }
-    .hero__actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
+    .coming-soon__sub {
+      font-size: clamp(1rem, 2vw, 1.125rem);
+      color: rgba(255,255,255,.6);
+      line-height: 1.75;
+      max-width: 50ch;
+      margin-inline: auto;
       margin-bottom: 3rem;
     }
-    .hero__stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
-    .hero__stat {
-      display: flex;
-      flex-direction: column;
-      gap: .25rem;
-    }
-    .hero__stat-number {
-      font-size: 1.75rem;
-      font-weight: 800;
-      color: var(--amber);
-      line-height: 1;
-    }
-    .hero__stat-label {
-      font-size: .8125rem;
-      color: rgba(255,255,255,.5);
-    }
-    .hero__visual {
-      display: none;
-    }
-    .hero__course-preview {
-      background: var(--midnight-2);
+
+    /* email form */
+    .coming-soon__form-wrap {
+      background: rgba(255,255,255,.04);
       border: 1px solid var(--border-dark);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      position: relative;
+      border-radius: var(--radius-xl);
+      padding: clamp(1.75rem, 4vw, 2.5rem);
+      margin-bottom: 2.5rem;
     }
-    .hero__preview-label {
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 1.25rem;
-    }
-    .hero__preview-item {
-      display: flex;
-      align-items: center;
-      gap: .875rem;
-      padding: .875rem 0;
-      border-bottom: 1px solid var(--border-dark);
-    }
-    .hero__preview-item:last-child { border-bottom: none; }
-    .hero__preview-emoji {
-      width: 2.5rem;
-      height: 2.5rem;
-      background: rgba(245,166,35,.12);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.125rem;
-      flex-shrink: 0;
-    }
-    .hero__preview-info { flex: 1; }
-    .hero__preview-title {
+    .coming-soon__form-label {
       font-size: .875rem;
       font-weight: 600;
-      color: var(--white);
-      margin-bottom: .125rem;
+      color: rgba(255,255,255,.5);
+      margin-bottom: 1.25rem;
     }
-    .hero__preview-meta {
-      font-size: .75rem;
-      color: rgba(255,255,255,.45);
-    }
-    .hero__preview-price {
-      font-size: .875rem;
-      font-weight: 700;
-      color: var(--amber);
-      flex-shrink: 0;
-    }
-    .hero__floating-badge {
-      position: absolute;
-      top: -1rem;
-      right: 1.5rem;
-      background: var(--amber);
-      color: var(--midnight);
-      border-radius: var(--radius-md);
-      padding: .625rem 1rem;
-      font-weight: 700;
-      font-size: .8125rem;
-      box-shadow: var(--shadow-lg);
-      white-space: nowrap;
-    }
-    .hero__floating-badge span {
-      display: block;
-      font-size: .6875rem;
-      font-weight: 500;
-      opacity: .7;
-      margin-top: .125rem;
-    }
-
-    /* =============================================
-       COURSE LIBRARY
-    ============================================= */
-    .course-library {
-      padding-block: clamp(4rem, 8vw, 7rem);
-      background: var(--cream);
-    }
-    .course-library__header {
-      text-align: center;
-      max-width: 44rem;
-      margin-inline: auto;
-      margin-bottom: clamp(2.5rem, 5vw, 4rem);
-    }
-    .course-library__header .eyebrow {
-      justify-content: center;
-      margin-bottom: 1rem;
-    }
-    .course-library__headline {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: clamp(1.875rem, 4vw, 2.75rem);
-      line-height: 1.2;
-      letter-spacing: -.02em;
-      margin-bottom: 1rem;
-    }
-    .course-library__sub {
-      font-size: 1.0625rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
-    .course-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-    .course-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
-      padding: clamp(1.5rem, 4vw, 2rem);
+    .coming-soon__form {
       display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      transition: box-shadow .2s, transform .2s;
-      position: relative;
+      gap: .75rem;
+      flex-wrap: wrap;
     }
-    .course-card:hover {
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-3px);
-    }
-    .course-card--featured {
-      border-color: var(--amber);
-      border-width: 2px;
-    }
-    .course-card__featured-label {
-      position: absolute;
-      top: -1px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--amber);
-      color: var(--midnight);
-      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-      padding: .25rem 1rem;
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: .04em;
-      white-space: nowrap;
-    }
-    .course-card__top {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-    .course-card__icon {
-      width: 3rem;
-      height: 3rem;
-      background: rgba(245,166,35,.1);
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.375rem;
-      flex-shrink: 0;
-    }
-    .course-card__meta {
+    .coming-soon__input {
       flex: 1;
+      min-width: 0;
+      padding: .875rem 1.25rem;
+      background: rgba(255,255,255,.06);
+      border: 1.5px solid var(--border-dark);
+      border-radius: var(--radius-sm);
+      color: var(--white);
+      font: inherit;
+      font-size: .9375rem;
+      transition: border-color .2s;
+      outline: none;
     }
-    .course-card__badge {
-      display: inline-block;
-      padding: .2rem .625rem;
-      border-radius: 100px;
-      font-size: .6875rem;
-      font-weight: 700;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      margin-bottom: .5rem;
-    }
-    .course-card__badge--beginner {
-      background: rgba(74,222,128,.12);
-      color: #15803d;
-    }
-    .course-card__badge--intermediate {
-      background: rgba(245,166,35,.12);
-      color: var(--amber-dark);
-    }
-    .course-card__badge--all {
-      background: rgba(99,102,241,.12);
-      color: #4f46e5;
-    }
-    .course-card__title {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 1.1875rem;
-      line-height: 1.25;
-      color: var(--text-main);
-    }
-    .course-card__desc {
-      font-size: .9rem;
-      color: var(--text-muted);
-      line-height: 1.65;
-    }
-    .course-card__details {
-      display: flex;
+    .coming-soon__input::placeholder { color: rgba(255,255,255,.3); }
+    .coming-soon__input:focus { border-color: var(--amber); }
+    .coming-soon__submit {
+      display: inline-flex;
       align-items: center;
-      gap: 1.25rem;
-      flex-wrap: wrap;
-    }
-    .course-card__detail {
-      display: flex;
-      align-items: center;
-      gap: .375rem;
-      font-size: .8125rem;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-    .course-card__detail svg { color: var(--amber-dark); flex-shrink: 0; }
-    .course-card__footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding-top: .75rem;
-      border-top: 1px solid var(--border);
-      margin-top: auto;
-    }
-    .course-card__price {
-      font-size: 1.5rem;
-      font-weight: 800;
+      gap: .5rem;
+      padding: .875rem 1.75rem;
+      background: var(--amber);
       color: var(--midnight);
-      line-height: 1;
-    }
-    .course-card__price-sub {
-      font-size: .75rem;
-      color: var(--text-muted);
-      font-weight: 400;
-      margin-top: .125rem;
-    }
-    .course-card__cta .btn {
+      border-radius: var(--radius-sm);
+      font: inherit;
+      font-weight: 700;
+      font-size: .9375rem;
+      cursor: pointer;
+      border: none;
+      transition: all .2s;
       white-space: nowrap;
     }
+    .coming-soon__submit:hover {
+      background: var(--amber-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(245,166,35,.35);
+    }
+    .coming-soon__form-note {
+      font-size: .8125rem;
+      color: rgba(255,255,255,.3);
+      margin-top: .875rem;
+    }
 
-    /* =============================================
-       COMMUNITY SECTION
-    ============================================= */
-    .community {
-      padding-block: clamp(4rem, 8vw, 7rem);
-      background: var(--midnight);
-      color: var(--white);
-      position: relative;
-      overflow: hidden;
-    }
-    .community__glow {
-      position: absolute;
-      bottom: -20%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 70%;
-      height: 60%;
-      background: radial-gradient(ellipse, rgba(245,166,35,.1) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .community__inner {
-      position: relative;
-    }
-    .community__header {
-      text-align: center;
-      max-width: 44rem;
-      margin-inline: auto;
-      margin-bottom: clamp(2.5rem, 5vw, 4rem);
-    }
-    .community__eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 1rem;
-    }
-    .community__eyebrow::before {
-      content: '';
-      width: 1.5rem;
-      height: 2px;
-      background: var(--amber);
-      border-radius: 1px;
-    }
-    .community__headline {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: clamp(1.875rem, 4vw, 2.75rem);
-      line-height: 1.2;
-      letter-spacing: -.02em;
-      margin-bottom: 1rem;
-    }
-    .community__sub {
-      font-size: 1.0625rem;
-      color: rgba(255,255,255,.6);
-      line-height: 1.7;
-    }
-    .community__card {
-      background: var(--midnight-2);
-      border: 1px solid var(--border-dark);
-      border-radius: var(--radius-xl);
-      padding: clamp(2rem, 5vw, 3rem);
-      max-width: 60rem;
-      margin-inline: auto;
-    }
-    .community__card-top {
+    /* teasers */
+    .coming-soon__teasers {
       display: flex;
-      align-items: center;
-      gap: 1.25rem;
-      margin-bottom: 2rem;
       flex-wrap: wrap;
-    }
-    .community__icon {
-      width: 4rem;
-      height: 4rem;
-      background: rgba(245,166,35,.15);
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
       justify-content: center;
-      font-size: 1.875rem;
-      flex-shrink: 0;
-    }
-    .community__club-name {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 1.75rem;
-      line-height: 1.2;
-      margin-bottom: .25rem;
-    }
-    .community__club-tagline {
-      font-size: .9375rem;
-      color: rgba(255,255,255,.55);
-    }
-    .community__includes-label {
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.4);
-      margin-bottom: 1rem;
-    }
-    .community__includes {
-      display: grid;
-      grid-template-columns: 1fr;
       gap: .75rem;
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
     }
-    .community__include {
+    .coming-soon__teaser {
       display: flex;
       align-items: center;
-      gap: .875rem;
-      font-size: .9375rem;
-      color: rgba(255,255,255,.8);
-    }
-    .community__check {
-      width: 1.5rem;
-      height: 1.5rem;
-      border-radius: 50%;
-      background: rgba(245,166,35,.2);
-      border: 1.5px solid var(--amber);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      color: var(--amber);
-      font-size: .6875rem;
-      font-weight: 800;
-    }
-    .community__pricing {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-    .community__plan {
-      background: var(--midnight-3);
-      border: 1px solid var(--border-dark);
-      border-radius: var(--radius-lg);
-      padding: 1.75rem;
-      display: flex;
-      flex-direction: column;
-      gap: .75rem;
-      position: relative;
-    }
-    .community__plan--annual {
-      border-color: var(--amber);
-    }
-    .community__plan-badge {
-      position: absolute;
-      top: -1px;
-      right: 1.5rem;
-      background: var(--amber);
-      color: var(--midnight);
-      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-      padding: .2rem .75rem;
-      font-size: .6875rem;
-      font-weight: 700;
-      letter-spacing: .04em;
-    }
-    .community__plan-name {
-      font-size: .8125rem;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.5);
-    }
-    .community__plan-price {
-      display: flex;
-      align-items: baseline;
-      gap: .375rem;
-    }
-    .community__plan-amount {
-      font-size: 2.25rem;
-      font-weight: 800;
-      color: var(--white);
-      line-height: 1;
-    }
-    .community__plan-period {
-      font-size: .875rem;
-      color: rgba(255,255,255,.45);
-    }
-    .community__plan-saving {
-      font-size: .8125rem;
-      color: var(--amber-light);
-      font-weight: 600;
-    }
-    .community__plan-cta .btn { width: 100%; justify-content: center; }
-
-    /* =============================================
-       FREE RESOURCES STRIP
-    ============================================= */
-    .free-resources {
-      padding-block: clamp(4rem, 8vw, 7rem);
-      background: var(--cream);
-    }
-    .free-resources__header {
-      text-align: center;
-      max-width: 44rem;
-      margin-inline: auto;
-      margin-bottom: clamp(2.5rem, 5vw, 4rem);
-    }
-    .free-resources__header .eyebrow {
-      justify-content: center;
-      margin-bottom: 1rem;
-    }
-    .free-resources__headline {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: clamp(1.875rem, 4vw, 2.75rem);
-      line-height: 1.2;
-      letter-spacing: -.02em;
-      margin-bottom: 1rem;
-    }
-    .free-resources__sub {
-      font-size: 1.0625rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
-    .resources-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-    .resource-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
-      padding: clamp(1.75rem, 4vw, 2.25rem);
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-      transition: box-shadow .2s, transform .2s;
-    }
-    .resource-card:hover {
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-3px);
-    }
-    .resource-card__icon {
-      width: 3.5rem;
-      height: 3.5rem;
-      background: rgba(245,166,35,.1);
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.625rem;
-    }
-    .resource-card__free-tag {
-      display: inline-block;
-      background: rgba(74,222,128,.12);
-      color: #15803d;
-      border-radius: 100px;
-      padding: .2rem .625rem;
-      font-size: .6875rem;
-      font-weight: 700;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      margin-bottom: .5rem;
-    }
-    .resource-card__title {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 1.25rem;
-      line-height: 1.25;
-      margin-bottom: .5rem;
-    }
-    .resource-card__desc {
-      font-size: .9375rem;
-      color: var(--text-muted);
-      line-height: 1.65;
-    }
-    .resource-card__link {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      font-size: .9375rem;
-      font-weight: 600;
-      color: var(--amber-dark);
-      margin-top: auto;
-      transition: gap .2s;
-    }
-    .resource-card__link:hover { gap: .75rem; }
-    .resource-card__link svg { transition: transform .2s; }
-    .resource-card:hover .resource-card__link svg { transform: translateX(4px); }
-
-    /* =============================================
-       INSTRUCTOR SECTION
-    ============================================= */
-    .instructor {
-      padding-block: clamp(4rem, 8vw, 7rem);
-      background: var(--white);
-    }
-    .instructor__inner {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3.5rem;
-      align-items: center;
-    }
-    .instructor__text .eyebrow { margin-bottom: 1rem; }
-    .instructor__headline {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: clamp(1.875rem, 4vw, 2.75rem);
-      line-height: 1.2;
-      letter-spacing: -.02em;
-      margin-bottom: 1.25rem;
-    }
-    .instructor__copy {
-      font-size: 1.0625rem;
-      color: var(--text-muted);
-      line-height: 1.75;
-      margin-bottom: 1.25rem;
-    }
-    .instructor__skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .5rem;
-      margin-bottom: 2rem;
-    }
-    .instructor__skill {
-      background: var(--cream);
-      border: 1px solid var(--cream-2);
-      border-radius: 100px;
-      padding: .375rem .875rem;
-      font-size: .8125rem;
-      font-weight: 600;
-      color: var(--midnight);
-    }
-    .instructor__clients {
-      background: var(--cream);
-      border: 1px solid var(--cream-2);
-      border-radius: var(--radius-lg);
-      padding: 1.25rem 1.5rem;
-      margin-bottom: 2rem;
-    }
-    .instructor__clients-label {
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: .875rem;
-    }
-    .instructor__clients-list {
-      display: flex;
-      flex-wrap: wrap;
       gap: .625rem;
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      padding: .75rem 1.125rem;
+      font-size: .875rem;
+      color: rgba(255,255,255,.7);
     }
-    .instructor__client-chip {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: .375rem .75rem;
-      font-size: .8125rem;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-    .instructor__portrait {
-      background: var(--midnight);
-      border-radius: var(--radius-xl);
-      overflow: hidden;
-      aspect-ratio: 4/3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-    .instructor__portrait-inner {
-      text-align: center;
-      color: var(--white);
-      padding: 2rem;
-    }
-    .instructor__initials {
-      width: 6rem;
-      height: 6rem;
-      background: var(--amber);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--midnight);
-      margin: 0 auto 1.5rem;
-    }
-    .instructor__name {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 1.5rem;
-      margin-bottom: .375rem;
-    }
-    .instructor__role {
-      font-size: .9375rem;
-      color: rgba(255,255,255,.55);
-      margin-bottom: 1.5rem;
-    }
-    .instructor__loc {
+    .coming-soon__teaser-icon { font-size: 1.125rem; }
+
+    /* back link */
+    .coming-soon__back {
       display: inline-flex;
       align-items: center;
       gap: .5rem;
-      background: rgba(245,166,35,.12);
-      border: 1px solid rgba(245,166,35,.25);
-      border-radius: 100px;
-      padding: .375rem 1rem;
-      font-size: .8125rem;
-      color: var(--amber-light);
+      font-size: .9375rem;
       font-weight: 600;
-      margin-bottom: 1.5rem;
+      color: rgba(255,255,255,.4);
+      transition: color .2s;
     }
-    .instructor__portrait-stats {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border-dark);
-      width: 100%;
-    }
-    .instructor__portrait-stat {
-      text-align: center;
-    }
-    .instructor__portrait-stat-num {
-      font-size: 1.375rem;
-      font-weight: 800;
-      color: var(--amber);
-      display: block;
-    }
-    .instructor__portrait-stat-label {
-      font-size: .75rem;
-      color: rgba(255,255,255,.45);
-    }
+    .coming-soon__back:hover { color: var(--white); }
 
-    /* =============================================
-       FINAL CTA BAND
-    ============================================= */
-    .cta-band {
-      background: var(--amber);
-      padding-block: clamp(3.5rem, 7vw, 5rem);
-      position: relative;
-      overflow: hidden;
-    }
-    .cta-band::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(14,17,23,.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(14,17,23,.06) 1px, transparent 1px);
-      background-size: 40px 40px;
-    }
-    .cta-band__inner {
-      position: relative;
-      text-align: center;
-    }
-    .cta-band__headline {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: clamp(1.875rem, 4vw, 3rem);
-      line-height: 1.15;
-      letter-spacing: -.02em;
-      color: var(--midnight);
-      margin-bottom: 1rem;
-    }
-    .cta-band__sub {
-      font-size: 1.0625rem;
-      color: rgba(14,17,23,.65);
-      line-height: 1.6;
-      max-width: 42ch;
-      margin-inline: auto;
-      margin-bottom: 2.5rem;
-    }
-    .cta-band__actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-    }
-
-    /* =============================================
-       FOOTER
-    ============================================= */
+    /* ---- FOOTER ---- */
     .footer {
       background: var(--midnight);
       color: rgba(255,255,255,.6);
-      padding-block: 3rem 2rem;
+      border-top: 1px solid var(--border-dark);
+      padding-block: 2rem;
     }
-    .footer__top {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-      padding-bottom: 2.5rem;
-      border-bottom: 1px solid var(--border-dark);
-      margin-bottom: 2rem;
-    }
-    .footer__brand .nav__logo { margin-bottom: 1rem; color: var(--white); }
-    .footer__tagline { font-size: .9375rem; line-height: 1.6; max-width: 30ch; }
-    .footer__col-title {
-      font-size: .8125rem;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.4);
-      margin-bottom: 1rem;
-    }
-    .footer__links {
-      display: flex;
-      flex-direction: column;
-      gap: .625rem;
-    }
-    .footer__links a {
-      font-size: .9375rem;
-      color: rgba(255,255,255,.55);
-      transition: color .15s;
-    }
-    .footer__links a:hover { color: var(--white); }
     .footer__bottom {
       display: flex;
       flex-direction: column;
@@ -1104,68 +374,28 @@
     .footer__copy { font-size: .875rem; }
     .footer__made { font-size: .8125rem; color: rgba(255,255,255,.35); }
 
-    /* =============================================
-       RESPONSIVE — TABLET (≥ 640px)
-    ============================================= */
     @media (min-width: 640px) {
-      .hero__visual { display: block; }
-      .course-grid { grid-template-columns: 1fr 1fr; }
-      .resources-grid { grid-template-columns: 1fr 1fr 1fr; }
-      .community__includes { grid-template-columns: 1fr 1fr; }
-      .community__pricing { grid-template-columns: 1fr 1fr; }
-      .instructor__inner { grid-template-columns: 1fr 1fr; }
-      .footer__top { grid-template-columns: 2fr 1fr 1fr; }
       .footer__bottom { flex-direction: row; justify-content: space-between; text-align: left; }
+      .coming-soon__form { flex-wrap: nowrap; }
     }
-
-    /* =============================================
-       RESPONSIVE — DESKTOP (≥ 1024px)
-    ============================================= */
-    @media (min-width: 1024px) {
-      .nav__hamburger { display: none; }
-      .nav__links { display: flex; }
-      .nav__cta { display: flex; }
-      .nav__mobile { display: none !important; }
-      .hero__inner { grid-template-columns: 1fr 1fr; }
-      .course-grid { grid-template-columns: repeat(3, 1fr); }
-      .footer__top { grid-template-columns: 2.5fr 1fr 1fr 1fr; }
-    }
-
-    /* =============================================
-       RESPONSIVE — MOBILE (< 640px) NAV TOGGLE
-    ============================================= */
-    @media (max-width: 639px) {
-      .nav__links { display: none; }
-      .nav__cta { display: none; }
-      .nav__hamburger { display: flex; }
-      .resources-grid { grid-template-columns: 1fr; }
-    }
-
-    /* =============================================
-       WIDE SCREENS (≥ 1440px)
-    ============================================= */
     @media (min-width: 1440px) {
       :root { --max-w: 1440px; --gutter: 4rem; }
-      .hero__headline { font-size: 5rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- =============================================
-       NAVIGATION
-  ============================================= -->
   <header class="nav" role="banner">
     <div class="container">
       <div class="nav__inner">
-        <a href="/" class="nav__logo" aria-label="Stackly home">
+        <a href="index.html" class="nav__logo" aria-label="Stackly home">
           <div class="nav__logo-mark" aria-hidden="true">S</div>
           Stackly
         </a>
 
         <nav class="nav__links" aria-label="Primary navigation">
           <a href="index.html#services">Services</a>
-          <a href="courses.html" class="active" aria-current="page">Education</a>
+          <a href="web-design.html">Web Dev</a>
           <a href="index.html#plugins">Plugins</a>
           <a href="index.html#about">About</a>
         </nav>
@@ -1185,7 +415,7 @@
 
     <div class="nav__mobile" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
       <a href="index.html#services">Services</a>
-      <a href="courses.html">Education</a>
+      <a href="web-design.html">Web Dev</a>
       <a href="index.html#plugins">Plugins</a>
       <a href="index.html#about">About</a>
       <div class="nav__mobile-cta">
@@ -1196,658 +426,85 @@
   </header>
 
   <main>
-
-    <!-- =============================================
-         HERO
-    ============================================= -->
-    <section class="hero" aria-labelledby="hero-headline">
-      <div class="hero__bg-grid" aria-hidden="true"></div>
-      <div class="hero__bg-glow" aria-hidden="true"></div>
+    <section class="coming-soon" aria-labelledby="cs-headline">
+      <div class="coming-soon__bg-grid" aria-hidden="true"></div>
+      <div class="coming-soon__glow-1" aria-hidden="true"></div>
+      <div class="coming-soon__glow-2" aria-hidden="true"></div>
 
       <div class="container">
-        <div class="hero__inner">
+        <div class="coming-soon__inner">
 
-          <div class="hero__content">
-            <div class="hero__badge" aria-label="Sydney-based instructor">
-              <span class="hero__badge-dot" aria-hidden="true"></span>
-              Sydney-based instructor
+          <div class="coming-soon__badge">
+            <span class="coming-soon__badge-dot" aria-hidden="true"></span>
+            Courses — Coming Soon
+          </div>
+
+          <h1 class="coming-soon__headline" id="cs-headline">
+            The Stackly course<br />library is <em>on its way.</em>
+          </h1>
+
+          <p class="coming-soon__sub">
+            Practical, no-fluff courses that teach small business owners how to set up and run their own tech stack. Join the waitlist to get early access and a founding member discount.
+          </p>
+
+          <div class="coming-soon__teasers" aria-label="Upcoming courses">
+            <div class="coming-soon__teaser">
+              <span class="coming-soon__teaser-icon" aria-hidden="true">🌐</span>
+              WordPress in a Weekend
             </div>
+            <div class="coming-soon__teaser">
+              <span class="coming-soon__teaser-icon" aria-hidden="true">⚡</span>
+              Zapier for Small Business
+            </div>
+            <div class="coming-soon__teaser">
+              <span class="coming-soon__teaser-icon" aria-hidden="true">🎨</span>
+              Elementor Pro Masterclass
+            </div>
+            <div class="coming-soon__teaser">
+              <span class="coming-soon__teaser-icon" aria-hidden="true">📅</span>
+              Build a Course Booking System
+            </div>
+            <div class="coming-soon__teaser">
+              <span class="coming-soon__teaser-icon" aria-hidden="true">🗂️</span>
+              Small Business Tech Stack Playbook
+            </div>
+            <div class="coming-soon__teaser">
+              <span class="coming-soon__teaser-icon" aria-hidden="true">🚀</span>
+              Full Business Automation Bootcamp
+            </div>
+          </div>
 
-            <h1 class="hero__headline" id="hero-headline">
-              Learn the tools.<br />
-              Build the <em>business.</em>
-            </h1>
-
-            <p class="hero__sub">
-              Practical, no-fluff courses designed for small business owners — not developers. Go from "no idea where to start" to a working website, automation system and booking flow.
-            </p>
-
-            <div class="hero__actions">
-              <a href="#courses" class="btn btn-primary btn-lg">
-                Browse Courses
+          <div class="coming-soon__form-wrap">
+            <p class="coming-soon__form-label">Get notified when courses go live — plus a founding member discount</p>
+            <form class="coming-soon__form" action="mailto:hello@stackly.com.au" method="GET" aria-label="Waitlist signup">
+              <input
+                class="coming-soon__input"
+                type="email"
+                name="subject"
+                placeholder="your@email.com"
+                required
+                aria-label="Email address"
+              />
+              <button type="submit" class="coming-soon__submit">
+                Join the Waitlist
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
-              <a href="#community" class="btn btn-outline btn-lg">Join the Community</a>
-            </div>
-
-            <div class="hero__stats" aria-label="At a glance">
-              <div class="hero__stat">
-                <span class="hero__stat-number">6</span>
-                <span class="hero__stat-label">Courses available</span>
-              </div>
-              <div class="hero__stat">
-                <span class="hero__stat-number">$67</span>
-                <span class="hero__stat-label">Courses from</span>
-              </div>
-              <div class="hero__stat">
-                <span class="hero__stat-number">$39</span>
-                <span class="hero__stat-label">Community / month</span>
-              </div>
-            </div>
+              </button>
+            </form>
+            <p class="coming-soon__form-note">No spam. Unsubscribe any time.</p>
           </div>
 
-          <div class="hero__visual" aria-hidden="true">
-            <div class="hero__course-preview">
-              <div class="hero__floating-badge">
-                New course<span>Just added</span>
-              </div>
-              <p class="hero__preview-label">Course library preview</p>
-
-              <div class="hero__preview-item">
-                <div class="hero__preview-emoji">🌐</div>
-                <div class="hero__preview-info">
-                  <div class="hero__preview-title">WordPress in a Weekend</div>
-                  <div class="hero__preview-meta">Beginner · 4 hrs</div>
-                </div>
-                <div class="hero__preview-price">$97</div>
-              </div>
-
-              <div class="hero__preview-item">
-                <div class="hero__preview-emoji">⚡</div>
-                <div class="hero__preview-info">
-                  <div class="hero__preview-title">Your First Automation: Zapier</div>
-                  <div class="hero__preview-meta">Beginner · 3 hrs</div>
-                </div>
-                <div class="hero__preview-price">$67</div>
-              </div>
-
-              <div class="hero__preview-item">
-                <div class="hero__preview-emoji">🎨</div>
-                <div class="hero__preview-info">
-                  <div class="hero__preview-title">Elementor Pro Masterclass</div>
-                  <div class="hero__preview-meta">Intermediate · 5 hrs</div>
-                </div>
-                <div class="hero__preview-price">$97</div>
-              </div>
-
-              <div class="hero__preview-item">
-                <div class="hero__preview-emoji">🚀</div>
-                <div class="hero__preview-info">
-                  <div class="hero__preview-title">Full Business Automation Bootcamp</div>
-                  <div class="hero__preview-meta">Advanced · 10 hrs</div>
-                </div>
-                <div class="hero__preview-price">$497</div>
-              </div>
-            </div>
-          </div>
+          <a href="index.html" class="coming-soon__back">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 12l-4-4 4-4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Back to Stackly
+          </a>
 
         </div>
       </div>
     </section>
-
-    <!-- =============================================
-         COURSE LIBRARY GRID
-    ============================================= -->
-    <section class="course-library" aria-labelledby="courses-headline" id="courses">
-      <div class="container">
-
-        <header class="course-library__header">
-          <span class="eyebrow">Course Library</span>
-          <h2 class="course-library__headline" id="courses-headline">
-            Every course. One clear outcome.
-          </h2>
-          <p class="course-library__sub">
-            All courses are self-paced with lifetime access. Built for business owners who are short on time and need results — not theory.
-          </p>
-        </header>
-
-        <div class="course-grid" role="list">
-
-          <!-- Course 1: WordPress in a Weekend -->
-          <article class="course-card" role="listitem" aria-labelledby="course-1-title">
-            <div class="course-card__top">
-              <div class="course-card__icon" aria-hidden="true">🌐</div>
-              <div class="course-card__meta">
-                <span class="course-card__badge course-card__badge--beginner">Beginner</span>
-                <h3 class="course-card__title" id="course-1-title">WordPress in a Weekend</h3>
-              </div>
-            </div>
-            <p class="course-card__desc">
-              Go from zero to a live, professional WordPress website in one weekend. Built specifically for service businesses — no coding required.
-            </p>
-            <div class="course-card__details">
-              <span class="course-card__detail">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.5"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                4 hours
-              </span>
-              <span class="course-card__detail">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1.5l1.6 3.25L12.5 5.3l-2.75 2.68.65 3.79L7 10.02l-3.4 1.79.65-3.79L1.5 5.3l3.9-.55L7 1.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/></svg>
-                For service businesses
-              </span>
-              <span class="course-card__detail">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 5h4M5 7.5h4M5 10h2.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
-                Lifetime access
-              </span>
-            </div>
-            <div class="course-card__footer">
-              <div>
-                <div class="course-card__price">$97</div>
-                <div class="course-card__price-sub">one-time · lifetime access</div>
-              </div>
-              <div class="course-card__cta">
-                <a href="index.html#contact" class="btn btn-primary">Enrol Now</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Course 2: Zapier for Small Business -->
-          <article class="course-card" role="listitem" aria-labelledby="course-2-title">
-            <div class="course-card__top">
-              <div class="course-card__icon" aria-hidden="true">⚡</div>
-              <div class="course-card__meta">
-                <span class="course-card__badge course-card__badge--beginner">Beginner</span>
-                <h3 class="course-card__title" id="course-2-title">Your First Automation: Zapier for Small Business</h3>
-              </div>
-            </div>
-            <p class="course-card__desc">
-              Set up your first real automation in under a day. Covers lead capture, welcome emails, CRM entry and booking confirmations — all without code.
-            </p>
-            <div class="course-card__details">
-              <span class="course-card__detail">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.5"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                3 hours
-              </span>
-              <span class="course-card__detail">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1.5l1.6 3.25L12.5 5.3l-2.75 2.68.65 3.79L7 10.02l-3.4 1.79.65-3.79L1.5 5.3l3.9-.55L7 1.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/></svg>
-                Complete beginners
-              </span>
-              <span class="course-card__detail">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 5h4M5 7.5h4M5 10h2.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
-                Lifetime access
-              </span>
-            </div>
-            <div class="course-card__footer">
-              <div>
-                <div class="course-card__price">$67</div>
-                <div class="course-card__price-sub">one-time · lifetime access</div>
-              </div>
-              <div class="course-card__cta">
-                <a href="index.html#contact" class="btn btn-primary">Enrol Now</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Course 3: Elementor Pro Masterclass -->
-          <article class="course-card" role="listitem" aria-labelledby="course-3-title">
-            <div class="course-card__top">
-              <div class="course-card__icon" aria-hidden="true">🎨</div>
-              <div class="course-card__meta">
-                <span class="course-card__badge course-card__badge--intermediate">Intermediate</span>
-                <h3 class="course-card__title" id="course-3-title">Elementor Pro Masterclass for Non-Developers</h3>
-              </div>
-            </div>
-            <p class="course-card__desc">
-              Master Elementor Pro's advanced features — custom templates, dynamic content, theme builder and popups — without touching a line of code.
-            </p>
-            <div class="course-card__details">
-              <span class="course-card__detail">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.5"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                5 hours
-              </span>
-              <span class="course-card__detail">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1.5l1.6 3.25L12.5 5.3l-2.75 2.68.65 3.79L7 10.02l-3.4 1.79.65-3.79L1.5 5.3l3.9-.55L7 1.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/></svg>
-                Intermediate
-              </span>
-              <span class="course-card__detail">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 5h4M5 7.5h4M5 10h2.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
-                Lifetime access
-              </span>
-            </div>
-            <div class="course-card__footer">
-              <div>
-                <div class="course-card__price">$97</div>
-                <div class="course-card__price-sub">one-time · lifetime access</div>
-              </div>
-              <div class="course-card__cta">
-                <a href="index.html#contact" class="btn btn-primary">Enrol Now</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Course 4: Build a Course Booking System -->
-          <article class="course-card" role="listitem" aria-labelledby="course-4-title">
-            <div class="course-card__top">
-              <div class="course-card__icon" aria-hidden="true">📅</div>
-              <div class="course-card__meta">
-                <span class="course-card__badge course-card__badge--intermediate">Intermediate</span>
-                <h3 class="course-card__title" id="course-4-title">Build a Course Booking System</h3>
-              </div>
-            </div>
-            <p class="course-card__desc">
-              Build a complete booking and payment system for coaches and course creators — intake forms, calendar sync, automated reminders and payment collection.
-            </p>
-            <div class="course-card__details">
-              <span class="course-card__detail">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.5"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                4 hours
-              </span>
-              <span class="course-card__detail">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1.5l1.6 3.25L12.5 5.3l-2.75 2.68.65 3.79L7 10.02l-3.4 1.79.65-3.79L1.5 5.3l3.9-.55L7 1.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/></svg>
-                For coaches
-              </span>
-              <span class="course-card__detail">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 5h4M5 7.5h4M5 10h2.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
-                Lifetime access
-              </span>
-            </div>
-            <div class="course-card__footer">
-              <div>
-                <div class="course-card__price">$127</div>
-                <div class="course-card__price-sub">one-time · lifetime access</div>
-              </div>
-              <div class="course-card__cta">
-                <a href="index.html#contact" class="btn btn-primary">Enrol Now</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Course 5: Small Business Tech Stack Playbook -->
-          <article class="course-card" role="listitem" aria-labelledby="course-5-title">
-            <div class="course-card__top">
-              <div class="course-card__icon" aria-hidden="true">📚</div>
-              <div class="course-card__meta">
-                <span class="course-card__badge course-card__badge--all">All levels</span>
-                <h3 class="course-card__title" id="course-5-title">The Small Business Tech Stack Playbook</h3>
-              </div>
-            </div>
-            <p class="course-card__desc">
-              A complete blueprint for choosing, connecting and running every tool in your business — website, CRM, email, booking, payments and automations.
-            </p>
-            <div class="course-card__details">
-              <span class="course-card__detail">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.5"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                6 hours
-              </span>
-              <span class="course-card__detail">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1.5l1.6 3.25L12.5 5.3l-2.75 2.68.65 3.79L7 10.02l-3.4 1.79.65-3.79L1.5 5.3l3.9-.55L7 1.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/></svg>
-                All SMBs
-              </span>
-              <span class="course-card__detail">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 5h4M5 7.5h4M5 10h2.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
-                Lifetime access
-              </span>
-            </div>
-            <div class="course-card__footer">
-              <div>
-                <div class="course-card__price">$197</div>
-                <div class="course-card__price-sub">one-time · lifetime access</div>
-              </div>
-              <div class="course-card__cta">
-                <a href="index.html#contact" class="btn btn-primary">Enrol Now</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Course 6: Full Business Automation Bootcamp (FEATURED) -->
-          <article class="course-card course-card--featured" role="listitem" aria-labelledby="course-6-title">
-            <div class="course-card__featured-label" aria-label="Featured course">Best Value</div>
-            <div class="course-card__top">
-              <div class="course-card__icon" aria-hidden="true">🚀</div>
-              <div class="course-card__meta">
-                <span class="course-card__badge course-card__badge--intermediate">Advanced</span>
-                <h3 class="course-card__title" id="course-6-title">Full Business Automation Bootcamp</h3>
-              </div>
-            </div>
-            <p class="course-card__desc">
-              The complete end-to-end program. Build a fully automated business — from lead capture to client delivery — using WordPress, Zapier, Make and Elementor Pro together.
-            </p>
-            <div class="course-card__details">
-              <span class="course-card__detail">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.5"/><path d="M7 4v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                10 hours
-              </span>
-              <span class="course-card__detail">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1.5l1.6 3.25L12.5 5.3l-2.75 2.68.65 3.79L7 10.02l-3.4 1.79.65-3.79L1.5 5.3l3.9-.55L7 1.5z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/></svg>
-                Ambitious SMBs
-              </span>
-              <span class="course-card__detail">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="2" y="2" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 5h4M5 7.5h4M5 10h2.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
-                Lifetime access
-              </span>
-            </div>
-            <div class="course-card__footer">
-              <div>
-                <div class="course-card__price">$497</div>
-                <div class="course-card__price-sub">one-time · lifetime access</div>
-              </div>
-              <div class="course-card__cta">
-                <a href="index.html#contact" class="btn btn-primary">Enrol Now</a>
-              </div>
-            </div>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- =============================================
-         COMMUNITY SECTION
-    ============================================= -->
-    <section class="community" aria-labelledby="community-headline" id="community">
-      <div class="community__glow" aria-hidden="true"></div>
-      <div class="container">
-        <div class="community__inner">
-
-          <header class="community__header">
-            <p class="community__eyebrow" aria-hidden="true">Members Only</p>
-            <h2 class="community__headline" id="community-headline">
-              Join The Build Club
-            </h2>
-            <p class="community__sub">
-              A private community for small business owners who are building and automating their own tech stack. Monthly live Q&amp;A, workflow templates and early access to every new course.
-            </p>
-          </header>
-
-          <div class="community__card">
-            <div class="community__card-top">
-              <div class="community__icon" aria-hidden="true">🏗️</div>
-              <div>
-                <h3 class="community__club-name">The Build Club</h3>
-                <p class="community__club-tagline">Where small business owners learn to build together</p>
-              </div>
-            </div>
-
-            <p class="community__includes-label">What's included</p>
-            <ul class="community__includes" aria-label="Community inclusions">
-              <li class="community__include">
-                <span class="community__check" aria-hidden="true">✓</span>
-                Monthly live Q&amp;A with Shawn
-              </li>
-              <li class="community__include">
-                <span class="community__check" aria-hidden="true">✓</span>
-                Zapier &amp; Make workflow templates
-              </li>
-              <li class="community__include">
-                <span class="community__check" aria-hidden="true">✓</span>
-                Plugin updates &amp; early access
-              </li>
-              <li class="community__include">
-                <span class="community__check" aria-hidden="true">✓</span>
-                Private peer support community
-              </li>
-              <li class="community__include">
-                <span class="community__check" aria-hidden="true">✓</span>
-                New course modules each quarter
-              </li>
-              <li class="community__include">
-                <span class="community__check" aria-hidden="true">✓</span>
-                Member-only deals on services
-              </li>
-            </ul>
-
-            <div class="community__pricing" role="list" aria-label="Pricing options">
-
-              <div class="community__plan" role="listitem" aria-labelledby="plan-monthly">
-                <p class="community__plan-name" id="plan-monthly">Monthly</p>
-                <div class="community__plan-price">
-                  <span class="community__plan-amount">$39</span>
-                  <span class="community__plan-period">/ month</span>
-                </div>
-                <p class="community__plan-saving">Cancel anytime</p>
-                <div class="community__plan-cta">
-                  <a href="index.html#contact" class="btn btn-outline">Join Monthly</a>
-                </div>
-              </div>
-
-              <div class="community__plan community__plan--annual" role="listitem" aria-labelledby="plan-annual">
-                <div class="community__plan-badge">Save 25%</div>
-                <p class="community__plan-name" id="plan-annual">Annual</p>
-                <div class="community__plan-price">
-                  <span class="community__plan-amount">$349</span>
-                  <span class="community__plan-period">/ year</span>
-                </div>
-                <p class="community__plan-saving">That's $29.08/month — save $119</p>
-                <div class="community__plan-cta">
-                  <a href="index.html#contact" class="btn btn-primary">Join Annual</a>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- =============================================
-         FREE RESOURCES STRIP
-    ============================================= -->
-    <section class="free-resources" aria-labelledby="resources-headline">
-      <div class="container">
-
-        <header class="free-resources__header">
-          <span class="eyebrow">Free Resources</span>
-          <h2 class="free-resources__headline" id="resources-headline">
-            Start learning. No credit card needed.
-          </h2>
-          <p class="free-resources__sub">
-            Everything you need to get started with your tech stack — completely free, no strings attached.
-          </p>
-        </header>
-
-        <div class="resources-grid" role="list">
-
-          <!-- YouTube Channel -->
-          <article class="resource-card" role="listitem" aria-labelledby="resource-1-title">
-            <div class="resource-card__icon" aria-hidden="true">📹</div>
-            <div>
-              <span class="resource-card__free-tag">Free</span>
-              <h3 class="resource-card__title" id="resource-1-title">YouTube Channel</h3>
-              <p class="resource-card__desc">
-                Step-by-step tutorials covering WordPress, Zapier, Elementor Pro and more. New videos every week — built for small business owners, not developers.
-              </p>
-            </div>
-            <a href="https://youtube.com/@stackly" class="resource-card__link" target="_blank" rel="noopener noreferrer">
-              Watch free tutorials
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </article>
-
-          <!-- Lead Magnet PDF -->
-          <article class="resource-card" role="listitem" aria-labelledby="resource-2-title">
-            <div class="resource-card__icon" aria-hidden="true">📋</div>
-            <div>
-              <span class="resource-card__free-tag">Free PDF</span>
-              <h3 class="resource-card__title" id="resource-2-title">The Small Business Tech Stack Checklist</h3>
-              <p class="resource-card__desc">
-                A printable, practical checklist of every tool category your small business needs — with Shawn's recommended picks at every budget level.
-              </p>
-            </div>
-            <a href="index.html#contact" class="resource-card__link">
-              Download free checklist
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </article>
-
-          <!-- LinkedIn -->
-          <article class="resource-card" role="listitem" aria-labelledby="resource-3-title">
-            <div class="resource-card__icon" aria-hidden="true">💼</div>
-            <div>
-              <span class="resource-card__free-tag">Free</span>
-              <h3 class="resource-card__title" id="resource-3-title">LinkedIn: Weekly Tips</h3>
-              <p class="resource-card__desc">
-                Short, actionable posts on automation, tools and tech strategy for small business owners — published every week on LinkedIn.
-              </p>
-            </div>
-            <a href="https://linkedin.com/in/shawnferrao" class="resource-card__link" target="_blank" rel="noopener noreferrer">
-              Follow on LinkedIn
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- =============================================
-         INSTRUCTOR SECTION
-    ============================================= -->
-    <section class="instructor" aria-labelledby="instructor-headline" id="instructor">
-      <div class="container">
-        <div class="instructor__inner">
-
-          <div class="instructor__text">
-            <span class="eyebrow">Your Instructor</span>
-            <h2 class="instructor__headline" id="instructor-headline">
-              Shawn Ferrao — developer, designer and marketer.
-            </h2>
-            <p class="instructor__copy">
-              Before building Stackly, Shawn worked across web development, brand design and digital marketing — giving him a rare combination of skills that most courses don't offer: he can build the thing, design it well and understand how to market it.
-            </p>
-            <p class="instructor__copy">
-              Based in Sydney, Shawn has worked with real businesses including Bricksworks, Jomablue and Porsche — bringing professional tech infrastructure to organisations of every size, and then turning those real-world lessons into the courses you see here.
-            </p>
-
-            <div class="instructor__skills" aria-label="Skills and tools covered">
-              <span class="instructor__skill">WordPress</span>
-              <span class="instructor__skill">Elementor Pro</span>
-              <span class="instructor__skill">Zapier</span>
-              <span class="instructor__skill">Make (Integromat)</span>
-              <span class="instructor__skill">Graphic Design</span>
-              <span class="instructor__skill">Digital Marketing</span>
-              <span class="instructor__skill">Fluent CRM</span>
-              <span class="instructor__skill">WooCommerce</span>
-            </div>
-
-            <div class="instructor__clients" aria-label="Companies Shawn has worked with">
-              <p class="instructor__clients-label">Real-world experience with</p>
-              <div class="instructor__clients-list">
-                <span class="instructor__client-chip">Bricksworks</span>
-                <span class="instructor__client-chip">Jomablue</span>
-                <span class="instructor__client-chip">Porsche</span>
-                <span class="instructor__client-chip">+ Small Business Clients</span>
-              </div>
-            </div>
-
-            <a href="index.html#contact" class="btn btn-primary btn-lg">
-              Work With Shawn
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-
-          <div class="instructor__portrait" aria-label="Shawn Ferrao — founder of Stackly and lead instructor">
-            <div class="instructor__portrait-inner">
-              <div class="instructor__initials" aria-hidden="true">SF</div>
-              <h3 class="instructor__name">Shawn Ferrao</h3>
-              <p class="instructor__role">Founder, Stackly · Lead Instructor</p>
-              <span class="instructor__loc">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1.5A4.5 4.5 0 017 10.5C5 10.5 2.5 8 2.5 6a4.5 4.5 0 019 0z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7" cy="6" r="1.5" stroke="currentColor" stroke-width="1.5"/></svg>
-                Sydney, NSW — Australia
-              </span>
-              <div class="instructor__portrait-stats">
-                <div class="instructor__portrait-stat">
-                  <span class="instructor__portrait-stat-num">6</span>
-                  <span class="instructor__portrait-stat-label">Courses</span>
-                </div>
-                <div class="instructor__portrait-stat">
-                  <span class="instructor__portrait-stat-num">3</span>
-                  <span class="instructor__portrait-stat-label">Disciplines</span>
-                </div>
-                <div class="instructor__portrait-stat">
-                  <span class="instructor__portrait-stat-num">SYD</span>
-                  <span class="instructor__portrait-stat-label">Based</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- =============================================
-         FINAL CTA BAND
-    ============================================= -->
-    <section class="cta-band" aria-labelledby="cta-headline" id="enrol">
-      <div class="container">
-        <div class="cta-band__inner">
-          <h2 class="cta-band__headline" id="cta-headline">
-            Start learning today.<br />Free resources, no credit card needed.
-          </h2>
-          <p class="cta-band__sub">
-            Grab the free Tech Stack Checklist, explore the YouTube channel, or dive straight into a course. Everything you need is right here.
-          </p>
-          <div class="cta-band__actions">
-            <a href="index.html#contact" class="btn btn-dark btn-lg">
-              Download Free Checklist
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-            <a href="#courses" class="btn btn-ghost-dark btn-lg">Browse All Courses</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
   </main>
 
-  <!-- =============================================
-       FOOTER
-  ============================================= -->
   <footer class="footer" role="contentinfo">
     <div class="container">
-      <div class="footer__top">
-
-        <div class="footer__brand">
-          <a href="/" class="nav__logo" aria-label="Stackly home">
-            <div class="nav__logo-mark" aria-hidden="true">S</div>
-            Stackly
-          </a>
-          <p class="footer__tagline">
-            Tech that works for your business. Built for small business — not enterprise.
-          </p>
-        </div>
-
-        <div>
-          <p class="footer__col-title">Services</p>
-          <ul class="footer__links">
-            <li><a href="index.html#services">Tech Stack Audit</a></li>
-            <li><a href="index.html#services">Foundation Build</a></li>
-            <li><a href="index.html#services">Full Build</a></li>
-            <li><a href="index.html#services">Monthly Retainer</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <p class="footer__col-title">Learn</p>
-          <ul class="footer__links">
-            <li><a href="#courses">All Courses</a></li>
-            <li><a href="#community">The Build Club</a></li>
-            <li><a href="#resources">Free Resources</a></li>
-            <li><a href="index.html#plugins">Plugins</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <p class="footer__col-title">Company</p>
-          <ul class="footer__links">
-            <li><a href="index.html#about">About Shawn</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-            <li><a href="index.html#contact">Book a Call</a></li>
-          </ul>
-        </div>
-
-      </div>
-
       <div class="footer__bottom">
         <p class="footer__copy">&copy; 2026 Stackly. ABN pending. Sydney, Australia.</p>
         <p class="footer__made">Built by Shawn Ferrao</p>
@@ -1856,16 +513,12 @@
   </footer>
 
   <script>
-    // Mobile nav toggle
     const hamburger = document.getElementById('hamburger');
     const mobileNav = document.getElementById('mobile-nav');
-
     hamburger.addEventListener('click', () => {
       const isOpen = mobileNav.classList.toggle('open');
       hamburger.setAttribute('aria-expanded', String(isOpen));
     });
-
-    // Close mobile nav when a link is clicked
     mobileNav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         mobileNav.classList.remove('open');
