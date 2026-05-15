@@ -1,0 +1,2125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stackly — Tech That Works for Your Business</title>
+  <meta name="description" content="Stackly helps small business owners set up, automate and manage their tech stack — without the enterprise price tag. Courses, plugins and done-for-you services." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    /* =============================================
+       TOKENS
+    ============================================= */
+    :root {
+      --midnight:   #0E1117;
+      --midnight-2: #161C27;
+      --midnight-3: #1E2636;
+      --amber:      #F5A623;
+      --amber-light:#FDD27A;
+      --amber-dark: #C7851A;
+      --cream:      #FDF6EC;
+      --cream-2:    #F5ECD8;
+      --white:      #FFFFFF;
+      --text-main:  #0E1117;
+      --text-muted: #6B7280;
+      --text-light: #9CA3AF;
+      --border:     #E5E7EB;
+      --border-dark:#2A3347;
+
+      --radius-sm:  6px;
+      --radius-md:  12px;
+      --radius-lg:  20px;
+      --radius-xl:  32px;
+
+      --shadow-sm:  0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+      --shadow-md:  0 4px 16px rgba(0,0,0,.10);
+      --shadow-lg:  0 12px 40px rgba(0,0,0,.14);
+
+      --max-w:      1280px;
+      --gutter:     clamp(1.25rem, 5vw, 2.5rem);
+    }
+
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text-main);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font: inherit; }
+
+    /* =============================================
+       UTILITIES
+    ============================================= */
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--amber-dark);
+    }
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 1.5rem;
+      height: 2px;
+      background: var(--amber);
+      border-radius: 1px;
+    }
+
+    /* =============================================
+       BUTTONS
+    ============================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .75rem 1.5rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: .9375rem;
+      transition: all .2s ease;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--amber);
+      color: var(--midnight);
+    }
+    .btn-primary:hover {
+      background: var(--amber-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(245,166,35,.35);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,.3);
+    }
+    .btn-outline:hover {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+    .btn-outline-dark {
+      background: transparent;
+      color: var(--midnight);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline-dark:hover {
+      border-color: var(--amber);
+      color: var(--amber-dark);
+    }
+    .btn-lg {
+      padding: .9375rem 2rem;
+      font-size: 1rem;
+    }
+
+    /* =============================================
+       NAVIGATION
+    ============================================= */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(14,17,23,.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 4rem;
+    }
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: .625rem;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--white);
+      letter-spacing: -.02em;
+    }
+    .nav__logo-mark {
+      width: 2rem;
+      height: 2rem;
+      background: var(--amber);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .875rem;
+      font-weight: 900;
+      color: var(--midnight);
+    }
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .nav__links a {
+      font-size: .875rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.7);
+      transition: color .15s;
+    }
+    .nav__links a:hover { color: var(--white); }
+    .nav__cta { display: flex; align-items: center; gap: .75rem; }
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: .5rem;
+      color: var(--white);
+    }
+    .nav__hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: currentColor;
+      border-radius: 1px;
+      transition: all .3s ease;
+    }
+    .nav__mobile {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--border-dark);
+      padding: 1rem 0;
+    }
+    .nav__mobile.open { display: flex; }
+    .nav__mobile a {
+      display: block;
+      padding: .75rem var(--gutter);
+      font-size: .9375rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.8);
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .nav__mobile a:last-child { border-bottom: none; }
+    .nav__mobile-cta {
+      padding: 1rem var(--gutter);
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+    .nav__mobile-cta .btn { justify-content: center; }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    .hero {
+      background: var(--midnight);
+      color: var(--white);
+      padding-block: clamp(5rem, 12vw, 8rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero__bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(245,166,35,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,166,35,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero__bg-glow {
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse at center, rgba(245,166,35,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero__inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(245,166,35,.12);
+      border: 1px solid rgba(245,166,35,.25);
+      border-radius: 100px;
+      padding: .375rem 1rem;
+      font-size: .8125rem;
+      font-weight: 600;
+      color: var(--amber-light);
+      margin-bottom: 1.5rem;
+    }
+    .hero__badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--amber);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .4; }
+    }
+    .hero__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(2.5rem, 6vw, 4.25rem);
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      margin-bottom: 1.5rem;
+    }
+    .hero__headline em {
+      font-style: italic;
+      color: var(--amber);
+    }
+    .hero__sub {
+      font-size: clamp(1rem, 2vw, 1.1875rem);
+      color: rgba(255,255,255,.65);
+      max-width: 52ch;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .hero__social-proof {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .hero__avatars {
+      display: flex;
+    }
+    .hero__avatar {
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      border: 2px solid var(--midnight);
+      background: var(--midnight-3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .75rem;
+      font-weight: 700;
+      color: var(--amber);
+      margin-left: -.625rem;
+    }
+    .hero__avatars .hero__avatar:first-child { margin-left: 0; }
+    .hero__proof-text {
+      font-size: .875rem;
+      color: rgba(255,255,255,.55);
+    }
+    .hero__proof-text strong { color: var(--white); }
+    .hero__visual {
+      display: none;
+    }
+    .hero__card {
+      background: var(--midnight-2);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      position: relative;
+    }
+    .hero__card-header {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: 1.25rem;
+    }
+    .hero__card-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: var(--radius-sm);
+      background: rgba(245,166,35,.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.125rem;
+    }
+    .hero__card-title { font-size: .9375rem; font-weight: 600; }
+    .hero__card-sub { font-size: .8125rem; color: rgba(255,255,255,.5); }
+    .hero__card-stat {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--amber);
+      margin-bottom: .25rem;
+    }
+    .hero__card-label { font-size: .8125rem; color: rgba(255,255,255,.5); }
+    .hero__card-divider { height: 1px; background: var(--border-dark); margin: 1.25rem 0; }
+    .hero__card-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: .8125rem;
+      color: rgba(255,255,255,.6);
+      margin-bottom: .625rem;
+    }
+    .hero__card-row:last-child { margin-bottom: 0; }
+    .hero__card-dot {
+      width: .5rem;
+      height: .5rem;
+      border-radius: 50%;
+      background: var(--amber);
+      flex-shrink: 0;
+    }
+    .hero__card-row-left { display: flex; align-items: center; gap: .625rem; }
+    .hero__card-badge {
+      background: rgba(34,197,94,.15);
+      color: #4ade80;
+      border-radius: 100px;
+      padding: .125rem .5rem;
+      font-size: .75rem;
+      font-weight: 600;
+    }
+    .hero__floating {
+      position: absolute;
+      top: -1rem;
+      right: -1rem;
+      background: var(--amber);
+      color: var(--midnight);
+      border-radius: var(--radius-md);
+      padding: .75rem 1rem;
+      font-weight: 700;
+      font-size: .875rem;
+      box-shadow: var(--shadow-lg);
+    }
+    .hero__floating span { display: block; font-size: .75rem; font-weight: 500; opacity: .7; }
+
+    /* =============================================
+       TRUST BAR
+    ============================================= */
+    .trust {
+      background: var(--cream);
+      border-bottom: 1px solid var(--cream-2);
+      padding-block: 1.25rem;
+    }
+    .trust__inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem 3rem;
+    }
+    .trust__item {
+      display: flex;
+      align-items: center;
+      gap: .625rem;
+      font-size: .875rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .trust__icon {
+      width: 1.25rem;
+      height: 1.25rem;
+      color: var(--amber-dark);
+      flex-shrink: 0;
+    }
+
+    /* =============================================
+       PROBLEM
+    ============================================= */
+    .problem {
+      padding-block: clamp(4rem, 8vw, 6rem);
+      background: var(--white);
+    }
+    .problem__inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .problem__text .eyebrow { margin-bottom: 1rem; }
+    .problem__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.75rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      margin-bottom: 1.25rem;
+    }
+    .problem__copy {
+      font-size: 1.0625rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+    .problem__pains {
+      display: flex;
+      flex-direction: column;
+      gap: .875rem;
+    }
+    .problem__pain {
+      display: flex;
+      align-items: flex-start;
+      gap: .875rem;
+      padding: 1rem 1.25rem;
+      background: #FEF2F2;
+      border-radius: var(--radius-md);
+      border-left: 3px solid #F87171;
+    }
+    .problem__pain-icon { font-size: 1.125rem; flex-shrink: 0; margin-top: .1rem; }
+    .problem__pain-text { font-size: .9375rem; color: #7F1D1D; line-height: 1.5; }
+    .problem__solution {
+      background: var(--midnight);
+      color: var(--white);
+      border-radius: var(--radius-xl);
+      padding: clamp(2rem, 5vw, 3rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .problem__solution-glow {
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 70%;
+      height: 70%;
+      background: radial-gradient(ellipse, rgba(245,166,35,.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .problem__solution-eyebrow {
+      color: var(--amber);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .problem__solution-eyebrow::before {
+      content: '';
+      width: 1.5rem;
+      height: 2px;
+      background: var(--amber);
+      border-radius: 1px;
+    }
+    .problem__solution-headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      line-height: 1.25;
+      margin-bottom: 1.25rem;
+    }
+    .problem__solution-copy {
+      font-size: .9375rem;
+      color: rgba(255,255,255,.65);
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+    .problem__bridge {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+    .problem__bridge-item {
+      display: flex;
+      align-items: center;
+      gap: .875rem;
+      font-size: .9375rem;
+      color: rgba(255,255,255,.85);
+    }
+    .problem__bridge-check {
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      background: rgba(245,166,35,.2);
+      border: 1.5px solid var(--amber);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--amber);
+      font-size: .75rem;
+    }
+
+    /* =============================================
+       PILLARS
+    ============================================= */
+    .pillars {
+      padding-block: clamp(4rem, 8vw, 7rem);
+      background: var(--cream);
+    }
+    .pillars__header {
+      text-align: center;
+      max-width: 42rem;
+      margin-inline: auto;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+    .pillars__header .eyebrow { justify-content: center; margin-bottom: 1rem; }
+    .pillars__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.75rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      margin-bottom: 1rem;
+    }
+    .pillars__sub {
+      font-size: 1.0625rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .pillars__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .pillar {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: clamp(1.75rem, 4vw, 2.5rem);
+      border: 1px solid var(--border);
+      transition: box-shadow .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .pillar:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+    }
+    .pillar--featured {
+      background: var(--midnight);
+      color: var(--white);
+      border-color: var(--midnight);
+    }
+    .pillar__number {
+      position: absolute;
+      top: 1.75rem;
+      right: 2rem;
+      font-size: 5rem;
+      font-weight: 900;
+      color: var(--cream-2);
+      line-height: 1;
+      user-select: none;
+      pointer-events: none;
+    }
+    .pillar--featured .pillar__number { color: rgba(255,255,255,.06); }
+    .pillar__icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: var(--radius-md);
+      background: rgba(245,166,35,.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .pillar--featured .pillar__icon { background: rgba(245,166,35,.2); }
+    .pillar__badge {
+      display: inline-block;
+      background: var(--amber);
+      color: var(--midnight);
+      border-radius: 100px;
+      padding: .25rem .75rem;
+      font-size: .75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .pillar__title {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.5rem;
+      line-height: 1.2;
+      margin-bottom: .75rem;
+    }
+    .pillar__copy {
+      font-size: .9375rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 1.75rem;
+    }
+    .pillar--featured .pillar__copy { color: rgba(255,255,255,.6); }
+    .pillar__features {
+      display: flex;
+      flex-direction: column;
+      gap: .625rem;
+      margin-bottom: 2rem;
+    }
+    .pillar__feature {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      font-size: .875rem;
+    }
+    .pillar__feature-bullet {
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 50%;
+      background: rgba(245,166,35,.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--amber-dark);
+      font-size: .6rem;
+      margin-top: .15rem;
+    }
+    .pillar--featured .pillar__feature-bullet { background: rgba(245,166,35,.25); color: var(--amber); }
+    .pillar__feature-text { color: var(--text-muted); line-height: 1.5; }
+    .pillar--featured .pillar__feature-text { color: rgba(255,255,255,.7); }
+    .pillar__link {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .9375rem;
+      font-weight: 600;
+      color: var(--amber-dark);
+    }
+    .pillar--featured .pillar__link { color: var(--amber); }
+    .pillar__link svg { transition: transform .2s; }
+    .pillar:hover .pillar__link svg { transform: translateX(4px); }
+
+    /* =============================================
+       WHO IT'S FOR
+    ============================================= */
+    .icp {
+      padding-block: clamp(4rem, 8vw, 7rem);
+      background: var(--white);
+    }
+    .icp__inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .icp__text .eyebrow { margin-bottom: 1rem; }
+    .icp__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.75rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      margin-bottom: 1.25rem;
+    }
+    .icp__copy {
+      font-size: 1.0625rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+    .icp__profiles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .75rem;
+    }
+    .icp__profile {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .875rem 1rem;
+      background: var(--cream);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--cream-2);
+    }
+    .icp__profile-emoji { font-size: 1.375rem; flex-shrink: 0; }
+    .icp__profile-name { font-size: .875rem; font-weight: 600; color: var(--text-main); }
+    .icp__profile-role { font-size: .75rem; color: var(--text-muted); }
+    .icp__quote-block {
+      background: var(--midnight);
+      color: var(--white);
+      border-radius: var(--radius-xl);
+      padding: clamp(2rem, 5vw, 3rem);
+      position: relative;
+    }
+    .icp__quote-mark {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 6rem;
+      line-height: .7;
+      color: var(--amber);
+      opacity: .3;
+      margin-bottom: 1rem;
+      user-select: none;
+    }
+    .icp__quote {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.25rem, 2.5vw, 1.625rem);
+      line-height: 1.45;
+      margin-bottom: 1.5rem;
+    }
+    .icp__quote em { color: var(--amber); font-style: italic; }
+    .icp__pain-list {
+      display: flex;
+      flex-direction: column;
+      gap: .625rem;
+      margin-bottom: 2rem;
+    }
+    .icp__pain-item {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      font-size: .875rem;
+      color: rgba(255,255,255,.65);
+    }
+    .icp__pain-arrow {
+      color: var(--amber);
+      flex-shrink: 0;
+      margin-top: .1rem;
+    }
+    .icp__aspiration {
+      background: rgba(245,166,35,.1);
+      border: 1px solid rgba(245,166,35,.25);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+    }
+    .icp__aspiration-label {
+      font-size: .75rem;
+      font-weight: 700;
+      color: var(--amber);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: .5rem;
+    }
+    .icp__aspiration-text {
+      font-size: .9375rem;
+      color: rgba(255,255,255,.85);
+      line-height: 1.6;
+    }
+
+    /* =============================================
+       SERVICES / PRICING
+    ============================================= */
+    .services {
+      padding-block: clamp(4rem, 8vw, 7rem);
+      background: var(--cream);
+    }
+    .services__header {
+      text-align: center;
+      max-width: 42rem;
+      margin-inline: auto;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+    .services__header .eyebrow { justify-content: center; margin-bottom: 1rem; }
+    .services__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.75rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      margin-bottom: 1rem;
+    }
+    .services__sub {
+      font-size: 1.0625rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .services__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    .service-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: clamp(1.5rem, 4vw, 2rem);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .service-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+    .service-card--highlight {
+      border-color: var(--amber);
+      position: relative;
+    }
+    .service-card__popular {
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--amber);
+      color: var(--midnight);
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+      padding: .25rem 1rem;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      white-space: nowrap;
+    }
+    .service-card__top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .service-card__tier {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--amber-dark);
+      margin-bottom: .375rem;
+    }
+    .service-card__name {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.375rem;
+      line-height: 1.2;
+    }
+    .service-card__price {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .service-card__amount {
+      font-size: 1.625rem;
+      font-weight: 800;
+      color: var(--midnight);
+      line-height: 1;
+    }
+    .service-card__period {
+      font-size: .8125rem;
+      color: var(--text-muted);
+      margin-top: .25rem;
+    }
+    .service-card__desc {
+      font-size: .9375rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .service-card__includes {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+    .service-card__include {
+      display: flex;
+      align-items: flex-start;
+      gap: .625rem;
+      font-size: .875rem;
+      color: var(--text-muted);
+    }
+    .service-card__check {
+      color: var(--amber-dark);
+      flex-shrink: 0;
+      margin-top: .1rem;
+    }
+    .service-card__cta .btn { width: 100%; justify-content: center; }
+
+    /* =============================================
+       HOW IT WORKS
+    ============================================= */
+    .flywheel {
+      padding-block: clamp(4rem, 8vw, 7rem);
+      background: var(--midnight);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .flywheel__glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(ellipse, rgba(245,166,35,.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .flywheel__header {
+      text-align: center;
+      max-width: 42rem;
+      margin-inline: auto;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+      position: relative;
+    }
+    .flywheel__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 1rem;
+    }
+    .flywheel__eyebrow::before {
+      content: '';
+      width: 1.5rem;
+      height: 2px;
+      background: var(--amber);
+      border-radius: 1px;
+    }
+    .flywheel__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.75rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      margin-bottom: 1rem;
+    }
+    .flywheel__sub {
+      font-size: 1.0625rem;
+      color: rgba(255,255,255,.6);
+      line-height: 1.7;
+    }
+    .flywheel__steps {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      position: relative;
+    }
+    .flywheel__step {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+    .flywheel__step-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .flywheel__step-num {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      border: 2px solid var(--border-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--amber);
+      background: var(--midnight-2);
+      flex-shrink: 0;
+    }
+    .flywheel__step-line {
+      width: 2px;
+      flex: 1;
+      min-height: 2rem;
+      background: linear-gradient(to bottom, var(--border-dark), transparent);
+      margin-top: .5rem;
+    }
+    .flywheel__step:last-child .flywheel__step-line { display: none; }
+    .flywheel__step-content { padding-top: .5rem; }
+    .flywheel__step-icon { font-size: 1.25rem; margin-bottom: .5rem; }
+    .flywheel__step-title {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: .375rem;
+    }
+    .flywheel__step-copy {
+      font-size: .875rem;
+      color: rgba(255,255,255,.55);
+      line-height: 1.65;
+    }
+
+    /* =============================================
+       ABOUT / CTA STRIP
+    ============================================= */
+    .about-strip {
+      padding-block: clamp(4rem, 8vw, 7rem);
+      background: var(--white);
+    }
+    .about-strip__inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .about-strip__text .eyebrow { margin-bottom: 1rem; }
+    .about-strip__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.75rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      margin-bottom: 1.25rem;
+    }
+    .about-strip__copy {
+      font-size: 1.0625rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+    .about-strip__skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-bottom: 2rem;
+    }
+    .about-strip__skill {
+      background: var(--cream);
+      border: 1px solid var(--cream-2);
+      border-radius: 100px;
+      padding: .375rem .875rem;
+      font-size: .8125rem;
+      font-weight: 600;
+      color: var(--midnight);
+    }
+    .about-strip__portrait {
+      background: var(--midnight);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .about-strip__portrait-inner {
+      text-align: center;
+      color: var(--white);
+      padding: 2rem;
+    }
+    .about-strip__initials {
+      width: 6rem;
+      height: 6rem;
+      background: var(--amber);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--midnight);
+      margin: 0 auto 1.5rem;
+    }
+    .about-strip__name {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.5rem;
+      margin-bottom: .375rem;
+    }
+    .about-strip__role { font-size: .9375rem; color: rgba(255,255,255,.55); margin-bottom: 1.5rem; }
+    .about-strip__loc {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(245,166,35,.12);
+      border: 1px solid rgba(245,166,35,.25);
+      border-radius: 100px;
+      padding: .375rem 1rem;
+      font-size: .8125rem;
+      color: var(--amber-light);
+      font-weight: 600;
+    }
+
+    /* =============================================
+       FINAL CTA
+    ============================================= */
+    .cta-band {
+      background: var(--amber);
+      padding-block: clamp(3.5rem, 7vw, 5rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(14,17,23,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(14,17,23,.06) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .cta-band__inner {
+      position: relative;
+      text-align: center;
+    }
+    .cta-band__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      color: var(--midnight);
+      margin-bottom: 1rem;
+    }
+    .cta-band__sub {
+      font-size: 1.0625rem;
+      color: rgba(14,17,23,.65);
+      line-height: 1.6;
+      max-width: 42ch;
+      margin-inline: auto;
+      margin-bottom: 2.5rem;
+    }
+    .cta-band__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .btn-dark {
+      background: var(--midnight);
+      color: var(--white);
+    }
+    .btn-dark:hover {
+      background: var(--midnight-2);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(14,17,23,.35);
+    }
+    .btn-ghost-dark {
+      background: transparent;
+      color: var(--midnight);
+      border: 1.5px solid rgba(14,17,23,.3);
+    }
+    .btn-ghost-dark:hover {
+      background: rgba(14,17,23,.08);
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer {
+      background: var(--midnight);
+      color: rgba(255,255,255,.6);
+      padding-block: 3rem 2rem;
+    }
+    .footer__top {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-dark);
+      margin-bottom: 2rem;
+    }
+    .footer__brand .nav__logo { margin-bottom: 1rem; color: var(--white); }
+    .footer__tagline { font-size: .9375rem; line-height: 1.6; max-width: 30ch; }
+    .footer__col-title {
+      font-size: .8125rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      margin-bottom: 1rem;
+    }
+    .footer__links {
+      display: flex;
+      flex-direction: column;
+      gap: .625rem;
+    }
+    .footer__links a {
+      font-size: .9375rem;
+      color: rgba(255,255,255,.55);
+      transition: color .15s;
+    }
+    .footer__links a:hover { color: var(--white); }
+    .footer__bottom {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      align-items: center;
+      text-align: center;
+    }
+    .footer__copy { font-size: .875rem; }
+    .footer__made {
+      font-size: .8125rem;
+      color: rgba(255,255,255,.35);
+    }
+
+    /* =============================================
+       RESPONSIVE — TABLET (≥ 640px)
+    ============================================= */
+    @media (min-width: 640px) {
+      .hero__visual { display: block; }
+      .pillars__grid { grid-template-columns: 1fr 1fr; }
+      .services__grid { grid-template-columns: 1fr 1fr; }
+      .icp__inner { grid-template-columns: 1fr 1fr; }
+      .problem__inner { grid-template-columns: 1fr 1fr; }
+      .about-strip__inner { grid-template-columns: 1fr 1fr; }
+      .flywheel__steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .flywheel__step-line { display: none; }
+      .footer__top { grid-template-columns: 2fr 1fr 1fr; }
+      .footer__bottom { flex-direction: row; justify-content: space-between; text-align: left; }
+    }
+
+    /* =============================================
+       RESPONSIVE — DESKTOP (≥ 1024px)
+    ============================================= */
+    @media (min-width: 1024px) {
+      .nav__hamburger { display: none; }
+      .nav__links { display: flex; }
+      .nav__cta { display: flex; }
+      .nav__mobile { display: none !important; }
+      .hero__inner { grid-template-columns: 1fr 1fr; }
+      .pillars__grid { grid-template-columns: 1fr 1fr 1fr; }
+      .services__grid { grid-template-columns: repeat(4, 1fr); }
+      .flywheel__steps { grid-template-columns: repeat(4, 1fr); }
+      .footer__top { grid-template-columns: 2.5fr 1fr 1fr 1fr; }
+    }
+
+    /* =============================================
+       RESPONSIVE — MOBILE (< 640px) NAV TOGGLE
+    ============================================= */
+    @media (max-width: 639px) {
+      .nav__links { display: none; }
+      .nav__cta { display: none; }
+      .nav__hamburger { display: flex; }
+    }
+
+    /* =============================================
+       WIDE SCREENS (≥ 1440px)
+    ============================================= */
+    @media (min-width: 1440px) {
+      :root { --max-w: 1440px; --gutter: 4rem; }
+      .hero__headline { font-size: 5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =============================================
+       NAVIGATION
+  ============================================= -->
+  <header class="nav" role="banner">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="/" class="nav__logo" aria-label="Stackly home">
+          <div class="nav__logo-mark" aria-hidden="true">S</div>
+          Stackly
+        </a>
+
+        <nav class="nav__links" aria-label="Primary navigation">
+          <a href="#services">Services</a>
+          <a href="#education">Education</a>
+          <a href="#plugins">Plugins</a>
+          <a href="#about">About</a>
+        </nav>
+
+        <div class="nav__cta">
+          <a href="#services" class="btn btn-outline">View Pricing</a>
+          <a href="#contact" class="btn btn-primary">Get Started</a>
+        </div>
+
+        <button class="nav__hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="nav__mobile" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+      <a href="#services">Services</a>
+      <a href="#education">Education</a>
+      <a href="#plugins">Plugins</a>
+      <a href="#about">About</a>
+      <div class="nav__mobile-cta">
+        <a href="#services" class="btn btn-outline-dark">View Pricing</a>
+        <a href="#contact" class="btn btn-primary">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- =============================================
+         HERO
+    ============================================= -->
+    <section class="hero" aria-labelledby="hero-headline">
+      <div class="hero__bg-grid" aria-hidden="true"></div>
+      <div class="hero__bg-glow" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="hero__inner">
+
+          <div class="hero__content">
+            <div class="hero__badge" aria-label="Based in Sydney, Australia">
+              <span class="hero__badge-dot" aria-hidden="true"></span>
+              Sydney, Australia — Serving Small Businesses Nationwide
+            </div>
+
+            <h1 class="hero__headline" id="hero-headline">
+              The tech team<br />
+              your business <em>actually</em><br />
+              can afford.
+            </h1>
+
+            <p class="hero__sub">
+              Stackly helps small business owners set up, automate and manage their tech stack — without the agency price tag. Courses, plugins and done-for-you services, all under one roof.
+            </p>
+
+            <div class="hero__actions">
+              <a href="#services" class="btn btn-primary btn-lg">
+                See What We Offer
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <a href="#education" class="btn btn-outline btn-lg">Browse Free Resources</a>
+            </div>
+
+            <div class="hero__social-proof">
+              <div class="hero__avatars" aria-hidden="true">
+                <div class="hero__avatar">JM</div>
+                <div class="hero__avatar">SR</div>
+                <div class="hero__avatar">AC</div>
+                <div class="hero__avatar">PK</div>
+              </div>
+              <p class="hero__proof-text">
+                Trusted by <strong>small business owners</strong> who are done duct-taping their tech
+              </p>
+            </div>
+          </div>
+
+          <div class="hero__visual" aria-hidden="true">
+            <div class="hero__card">
+              <div class="hero__floating">
+                $4,200 saved<span>vs. agency quote</span>
+              </div>
+              <div class="hero__card-header">
+                <div class="hero__card-icon">⚡</div>
+                <div>
+                  <div class="hero__card-title">Business Automation Suite</div>
+                  <div class="hero__card-sub">Foundation Build — Active</div>
+                </div>
+              </div>
+              <div class="hero__card-stat">3 automations</div>
+              <div class="hero__card-label">running 24/7, zero manual follow-up</div>
+              <div class="hero__card-divider"></div>
+              <div class="hero__card-row">
+                <div class="hero__card-row-left">
+                  <div class="hero__card-dot"></div>
+                  New enquiry → Welcome email
+                </div>
+                <span class="hero__card-badge">Live</span>
+              </div>
+              <div class="hero__card-row">
+                <div class="hero__card-row-left">
+                  <div class="hero__card-dot"></div>
+                  Booking → CRM entry
+                </div>
+                <span class="hero__card-badge">Live</span>
+              </div>
+              <div class="hero__card-row">
+                <div class="hero__card-row-left">
+                  <div class="hero__card-dot"></div>
+                  Payment → Access grant
+                </div>
+                <span class="hero__card-badge">Live</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         TRUST BAR
+    ============================================= -->
+    <div class="trust" role="complementary" aria-label="Key features">
+      <div class="container">
+        <ul class="trust__inner">
+          <li class="trust__item">
+            <svg class="trust__icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 2L12.39 7.26L18 8.18L14 12.08L14.97 17.67L10 15.14L5.03 17.67L6 12.08L2 8.18L7.61 7.26L10 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            Web Dev · Design · Marketing
+          </li>
+          <li class="trust__item">
+            <svg class="trust__icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            No agency middlemen
+          </li>
+          <li class="trust__item">
+            <svg class="trust__icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 18s-7-4.5-7-10a7 7 0 0114 0c0 5.5-7 10-7 10z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="10" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
+            Sydney-based, Australia-wide
+          </li>
+          <li class="trust__item">
+            <svg class="trust__icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="3" y="5" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 8h14M7 3v4M13 3v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            From $299 — no $10k surprises
+          </li>
+          <li class="trust__item">
+            <svg class="trust__icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10c0-3.31 2.69-6 6-6s6 2.69 6 6-2.69 6-6 6-6-2.69-6-6z" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Fast turnaround, ongoing support
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- =============================================
+         PROBLEM / SOLUTION
+    ============================================= -->
+    <section class="problem" aria-labelledby="problem-headline">
+      <div class="container">
+        <div class="problem__inner">
+
+          <div class="problem__text">
+            <span class="eyebrow">The Problem</span>
+            <h2 class="problem__headline" id="problem-headline">
+              Stuck between too expensive and too complex?
+            </h2>
+            <p class="problem__copy">
+              Most small business owners are trapped. Agencies charge $5,000–$30,000 for a basic website and automation setup. DIY tools exist, but they take hours to learn and break constantly.
+            </p>
+            <ul class="problem__pains" aria-label="Common problems">
+              <li class="problem__pain">
+                <span class="problem__pain-icon" aria-hidden="true">🔴</span>
+                <p class="problem__pain-text">A website that doesn't convert visitors into enquiries</p>
+              </li>
+              <li class="problem__pain">
+                <span class="problem__pain-icon" aria-hidden="true">🔴</span>
+                <p class="problem__pain-text">Forms that collect leads but don't connect to anything</p>
+              </li>
+              <li class="problem__pain">
+                <span class="problem__pain-icon" aria-hidden="true">🔴</span>
+                <p class="problem__pain-text">3 different booking plugins cobbled together that keep breaking</p>
+              </li>
+              <li class="problem__pain">
+                <span class="problem__pain-icon" aria-hidden="true">🔴</span>
+                <p class="problem__pain-text">Zero automation — manually chasing everything, every day</p>
+              </li>
+              <li class="problem__pain">
+                <span class="problem__pain-icon" aria-hidden="true">🔴</span>
+                <p class="problem__pain-text">Paying for tools you barely use, with nothing left in the budget</p>
+              </li>
+            </ul>
+          </div>
+
+          <div class="problem__solution">
+            <div class="problem__solution-glow" aria-hidden="true"></div>
+            <p class="problem__solution-eyebrow" aria-hidden="true">The Stackly Way</p>
+            <h3 class="problem__solution-headline">
+              Professional tech infrastructure — without the enterprise price tag.
+            </h3>
+            <p class="problem__solution-copy">
+              You get a developer who can also design and market. That means everything works together, nothing gets lost in translation, and you're not paying three separate agencies for one outcome.
+            </p>
+            <ul class="problem__bridge" aria-label="Stackly advantages">
+              <li class="problem__bridge-item">
+                <div class="problem__bridge-check" aria-hidden="true">✓</div>
+                Design, dev AND marketing under one roof
+              </li>
+              <li class="problem__bridge-item">
+                <div class="problem__bridge-check" aria-hidden="true">✓</div>
+                Learn it yourself OR have it done for you
+              </li>
+              <li class="problem__bridge-item">
+                <div class="problem__bridge-check" aria-hidden="true">✓</div>
+                Automation built in from day one — not bolted on
+              </li>
+              <li class="problem__bridge-item">
+                <div class="problem__bridge-check" aria-hidden="true">✓</div>
+                Transparent, affordable pricing — starting at $299
+              </li>
+              <li class="problem__bridge-item">
+                <div class="problem__bridge-check" aria-hidden="true">✓</div>
+                Ongoing support, not just a one-off handover
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         THREE PILLARS
+    ============================================= -->
+    <section class="pillars" aria-labelledby="pillars-headline" id="education">
+      <div class="container">
+
+        <header class="pillars__header">
+          <span class="eyebrow">How It Works</span>
+          <h2 class="pillars__headline" id="pillars-headline">
+            Three ways to work together
+          </h2>
+          <p class="pillars__sub">
+            Whether you want to learn, grab a ready-made solution, or have it done for you — Stackly has a path that fits where you are right now.
+          </p>
+        </header>
+
+        <div class="pillars__grid" role="list">
+
+          <!-- Pillar 1 — Education -->
+          <article class="pillar" role="listitem" id="education-anchor">
+            <div class="pillar__number" aria-hidden="true">1</div>
+            <div class="pillar__icon" aria-hidden="true">🎓</div>
+            <span class="pillar__badge">Education</span>
+            <h3 class="pillar__title">Learn the whole stack, not just one tool</h3>
+            <p class="pillar__copy">
+              Courses, tutorials and a community that teach you how to set up and run your own tech stack — so you understand what you're paying for and can manage it yourself.
+            </p>
+            <ul class="pillar__features" aria-label="Education features">
+              <li class="pillar__feature">
+                <span class="pillar__feature-bullet" aria-hidden="true">●</span>
+                <span class="pillar__feature-text">WordPress, Elementor Pro, Zapier & Make — all taught together</span>
+              </li>
+              <li class="pillar__feature">
+                <span class="pillar__feature-bullet" aria-hidden="true">●</span>
+                <span class="pillar__feature-text">Free YouTube tutorials + premium course library</span>
+              </li>
+              <li class="pillar__feature">
+                <span class="pillar__feature-bullet" aria-hidden="true">●</span>
+                <span class="pillar__feature-text">Members community with live Q&amp;A and workflow templates</span>
+              </li>
+              <li class="pillar__feature">
+                <span class="pillar__feature-bullet" aria-hidden="true">●</span>
+                <span class="pillar__feature-text">Courses from $67 — community from $39/month</span>
+              </li>
+            </ul>
+            <a href="#contact" class="pillar__link">
+              Browse courses
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </article>
+
+          <!-- Pillar 2 — Plugins (featured) -->
+          <article class="pillar pillar--featured" role="listitem" id="plugins">
+            <div class="pillar__number" aria-hidden="true">2</div>
+            <div class="pillar__icon" aria-hidden="true">🔌</div>
+            <span class="pillar__badge">Plugins &amp; Templates</span>
+            <h3 class="pillar__title">Ready-made solutions for common problems</h3>
+            <p class="pillar__copy">
+              Pre-built WordPress plugins, Elementor templates and Zapier/Make workflow packs — built specifically for small business owners, not developers.
+            </p>
+            <ul class="pillar__features" aria-label="Plugin features">
+              <li class="pillar__feature">
+                <span class="pillar__feature-bullet" aria-hidden="true">●</span>
+                <span class="pillar__feature-text">SimpleBook — lightweight booking plugin, no bloat</span>
+              </li>
+              <li class="pillar__feature">
+                <span class="pillar__feature-bullet" aria-hidden="true">●</span>
+                <span class="pillar__feature-text">FormFlow — connect forms to email, CRM and Slack in one click</span>
+              </li>
+              <li class="pillar__feature">
+                <span class="pillar__feature-bullet" aria-hidden="true">●</span>
+                <span class="pillar__feature-text">Workflow template packs for client onboarding, booking and courses</span>
+              </li>
+              <li class="pillar__feature">
+                <span class="pillar__feature-bullet" aria-hidden="true">●</span>
+                <span class="pillar__feature-text">Freemium plugins — free on WordPress.org, Pro from $39/yr</span>
+              </li>
+            </ul>
+            <a href="#contact" class="pillar__link">
+              Browse plugins
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </article>
+
+          <!-- Pillar 3 — Agency -->
+          <article class="pillar" role="listitem">
+            <div class="pillar__number" aria-hidden="true">3</div>
+            <div class="pillar__icon" aria-hidden="true">🚀</div>
+            <span class="pillar__badge">Done For You</span>
+            <h3 class="pillar__title">Have the whole thing built and running for you</h3>
+            <p class="pillar__copy">
+              Full website builds, automation setups, hosting migrations and ongoing maintenance — the premium tier for businesses that want it handled, not taught.
+            </p>
+            <ul class="pillar__features" aria-label="Done-for-you features">
+              <li class="pillar__feature">
+                <span class="pillar__feature-bullet" aria-hidden="true">●</span>
+                <span class="pillar__feature-text">Tech Stack Audit — 90-min deep dive from $299</span>
+              </li>
+              <li class="pillar__feature">
+                <span class="pillar__feature-bullet" aria-hidden="true">●</span>
+                <span class="pillar__feature-text">Foundation Build — WordPress + automations from $1,500</span>
+              </li>
+              <li class="pillar__feature">
+                <span class="pillar__feature-bullet" aria-hidden="true">●</span>
+                <span class="pillar__feature-text">Full Build — complete site + booking + automation suite</span>
+              </li>
+              <li class="pillar__feature">
+                <span class="pillar__feature-bullet" aria-hidden="true">●</span>
+                <span class="pillar__feature-text">Monthly retainer — ongoing partner from $350/month</span>
+              </li>
+            </ul>
+            <a href="#services" class="pillar__link">
+              View pricing
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         WHO IT'S FOR
+    ============================================= -->
+    <section class="icp" aria-labelledby="icp-headline">
+      <div class="container">
+        <div class="icp__inner">
+
+          <div class="icp__text">
+            <span class="eyebrow">Who It's For</span>
+            <h2 class="icp__headline" id="icp-headline">
+              Built for the "accidental tech owner"
+            </h2>
+            <p class="icp__copy">
+              You started your business because of your skill or passion — not because you wanted to manage websites and automations. We get it. That's exactly who we built this for.
+            </p>
+            <ul class="icp__profiles" aria-label="Business types we serve">
+              <li class="icp__profile">
+                <span class="icp__profile-emoji" aria-hidden="true">🧘</span>
+                <div>
+                  <div class="icp__profile-name">Coaches</div>
+                  <div class="icp__profile-role">Course creators</div>
+                </div>
+              </li>
+              <li class="icp__profile">
+                <span class="icp__profile-emoji" aria-hidden="true">💪</span>
+                <div>
+                  <div class="icp__profile-name">Health &amp; Wellness</div>
+                  <div class="icp__profile-role">Physios, PTs, nutritionists</div>
+                </div>
+              </li>
+              <li class="icp__profile">
+                <span class="icp__profile-emoji" aria-hidden="true">🔧</span>
+                <div>
+                  <div class="icp__profile-name">Tradies</div>
+                  <div class="icp__profile-role">Builders, cleaners, gardeners</div>
+                </div>
+              </li>
+              <li class="icp__profile">
+                <span class="icp__profile-emoji" aria-hidden="true">📊</span>
+                <div>
+                  <div class="icp__profile-name">Consultants</div>
+                  <div class="icp__profile-role">Accountants, photographers</div>
+                </div>
+              </li>
+              <li class="icp__profile">
+                <span class="icp__profile-emoji" aria-hidden="true">☕</span>
+                <div>
+                  <div class="icp__profile-name">Local Retail</div>
+                  <div class="icp__profile-role">Cafés, boutiques, studios</div>
+                </div>
+              </li>
+              <li class="icp__profile">
+                <span class="icp__profile-emoji" aria-hidden="true">💼</span>
+                <div>
+                  <div class="icp__profile-name">Freelancers</div>
+                  <div class="icp__profile-role">Financial planners, creatives</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="icp__quote-block" aria-label="Customer pain points and aspirations">
+            <div class="icp__quote-mark" aria-hidden="true">"</div>
+            <blockquote class="icp__quote">
+              "I just need it to <em>work.</em> I don't have time to figure this out."
+            </blockquote>
+            <ul class="icp__pain-list" aria-label="What they're dealing with">
+              <li class="icp__pain-item">
+                <span class="icp__pain-arrow" aria-hidden="true">→</span>
+                1–10 employees or solo, revenue $50k–$500k/year
+              </li>
+              <li class="icp__pain-item">
+                <span class="icp__pain-arrow" aria-hidden="true">→</span>
+                Tech budget $100–$600/month (often wasted on bad tools)
+              </li>
+              <li class="icp__pain-item">
+                <span class="icp__pain-arrow" aria-hidden="true">→</span>
+                Spending hours on admin that could be automated
+              </li>
+              <li class="icp__pain-item">
+                <span class="icp__pain-arrow" aria-hidden="true">→</span>
+                Can't afford an agency, too busy to DIY properly
+              </li>
+            </ul>
+            <div class="icp__aspiration">
+              <div class="icp__aspiration-label">Their goal</div>
+              <p class="icp__aspiration-text">"I want my business to run without me chasing everything manually."</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         SERVICES / PRICING
+    ============================================= -->
+    <section class="services" aria-labelledby="services-headline" id="services">
+      <div class="container">
+
+        <header class="services__header">
+          <span class="eyebrow">Pricing</span>
+          <h2 class="services__headline" id="services-headline">
+            Transparent pricing.<br />No $10k surprises.
+          </h2>
+          <p class="services__sub">
+            Every tier is designed to deliver real value — whether you're just getting started or ready to hand everything over.
+          </p>
+        </header>
+
+        <div class="services__grid" role="list">
+
+          <!-- Starter -->
+          <article class="service-card" role="listitem" aria-labelledby="tier-starter">
+            <div class="service-card__top">
+              <div>
+                <div class="service-card__tier">Starter</div>
+                <h3 class="service-card__name" id="tier-starter">Tech Stack Audit</h3>
+              </div>
+              <div class="service-card__price">
+                <div class="service-card__amount">$299</div>
+                <div class="service-card__period">one-time</div>
+              </div>
+            </div>
+            <p class="service-card__desc">A 90-minute deep dive into your current tools. Walk away with a written action plan and priority list — no fluff, no sales pitch.</p>
+            <ul class="service-card__includes" aria-label="What's included">
+              <li class="service-card__include">
+                <svg class="service-card__check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                90-min live review session
+              </li>
+              <li class="service-card__include">
+                <svg class="service-card__check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Written recommendations report
+              </li>
+              <li class="service-card__include">
+                <svg class="service-card__check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Priority action list
+              </li>
+              <li class="service-card__include">
+                <svg class="service-card__check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                2-week follow-up email support
+              </li>
+            </ul>
+            <div class="service-card__cta">
+              <a href="#contact" class="btn btn-outline-dark">Book an Audit</a>
+            </div>
+          </article>
+
+          <!-- Growth -->
+          <article class="service-card" role="listitem" aria-labelledby="tier-growth">
+            <div class="service-card__top">
+              <div>
+                <div class="service-card__tier">Growth</div>
+                <h3 class="service-card__name" id="tier-growth">Foundation Build</h3>
+              </div>
+              <div class="service-card__price">
+                <div class="service-card__amount">$1,500</div>
+                <div class="service-card__period">from</div>
+              </div>
+            </div>
+            <p class="service-card__desc">WordPress site + Elementor Pro + 3 automations + connected forms. Everything wired together and ready to convert.</p>
+            <ul class="service-card__includes" aria-label="What's included">
+              <li class="service-card__include">
+                <svg class="service-card__check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                WordPress + Elementor Pro setup
+              </li>
+              <li class="service-card__include">
+                <svg class="service-card__check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                3 automations built and live
+              </li>
+              <li class="service-card__include">
+                <svg class="service-card__check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Form connections to email + CRM
+              </li>
+              <li class="service-card__include">
+                <svg class="service-card__check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Handover + training session
+              </li>
+            </ul>
+            <div class="service-card__cta">
+              <a href="#contact" class="btn btn-outline-dark">Get a Quote</a>
+            </div>
+          </article>
+
+          <!-- Scale (highlighted) -->
+          <article class="service-card service-card--highlight" role="listitem" aria-labelledby="tier-scale">
+            <div class="service-card__popular" aria-label="Most popular">Most Popular</div>
+            <div class="service-card__top">
+              <div>
+                <div class="service-card__tier">Scale</div>
+                <h3 class="service-card__name" id="tier-scale">Full Build</h3>
+              </div>
+              <div class="service-card__price">
+                <div class="service-card__amount">$3,000</div>
+                <div class="service-card__period">from</div>
+              </div>
+            </div>
+            <p class="service-card__desc">Full website + booking system + automation suite + 30-day post-launch support. The complete picture.</p>
+            <ul class="service-card__includes" aria-label="What's included">
+              <li class="service-card__include">
+                <svg class="service-card__check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Everything in Foundation Build
+              </li>
+              <li class="service-card__include">
+                <svg class="service-card__check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Full booking system integration
+              </li>
+              <li class="service-card__include">
+                <svg class="service-card__check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Automation suite (5+ workflows)
+              </li>
+              <li class="service-card__include">
+                <svg class="service-card__check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                30-day post-launch support
+              </li>
+            </ul>
+            <div class="service-card__cta">
+              <a href="#contact" class="btn btn-primary">Get a Quote</a>
+            </div>
+          </article>
+
+          <!-- Retainer -->
+          <article class="service-card" role="listitem" aria-labelledby="tier-retainer">
+            <div class="service-card__top">
+              <div>
+                <div class="service-card__tier">Retainer</div>
+                <h3 class="service-card__name" id="tier-retainer">Monthly Partner</h3>
+              </div>
+              <div class="service-card__price">
+                <div class="service-card__amount">$350</div>
+                <div class="service-card__period">per month</div>
+              </div>
+            </div>
+            <p class="service-card__desc">Ongoing maintenance, updates, new automations and priority support. Your tech partner, on retainer.</p>
+            <ul class="service-card__includes" aria-label="What's included">
+              <li class="service-card__include">
+                <svg class="service-card__check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Monthly maintenance + updates
+              </li>
+              <li class="service-card__include">
+                <svg class="service-card__check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                New automation builds included
+              </li>
+              <li class="service-card__include">
+                <svg class="service-card__check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Priority email + Slack support
+              </li>
+              <li class="service-card__include">
+                <svg class="service-card__check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Cancel anytime, no lock-in
+              </li>
+            </ul>
+            <div class="service-card__cta">
+              <a href="#contact" class="btn btn-outline-dark">Enquire Now</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         HOW IT WORKS / FLYWHEEL
+    ============================================= -->
+    <section class="flywheel" aria-labelledby="flywheel-headline">
+      <div class="flywheel__glow" aria-hidden="true"></div>
+      <div class="container">
+
+        <header class="flywheel__header">
+          <p class="flywheel__eyebrow" aria-hidden="true">The Method</p>
+          <h2 class="flywheel__headline" id="flywheel-headline">
+            One piece of work. Multiple outcomes.
+          </h2>
+          <p class="flywheel__sub">
+            Every problem solved becomes a tutorial. Every tutorial builds an audience. Every audience member is a potential client. The whole system compounds.
+          </p>
+        </header>
+
+        <ol class="flywheel__steps">
+          <li class="flywheel__step">
+            <div class="flywheel__step-left" aria-hidden="true">
+              <div class="flywheel__step-num">1</div>
+              <div class="flywheel__step-line"></div>
+            </div>
+            <div class="flywheel__step-content">
+              <div class="flywheel__step-icon" aria-hidden="true">📹</div>
+              <h3 class="flywheel__step-title">Free content builds trust</h3>
+              <p class="flywheel__step-copy">YouTube tutorials, LinkedIn posts and blog content show small business owners exactly how to solve their problems — before they spend a dollar.</p>
+            </div>
+          </li>
+          <li class="flywheel__step">
+            <div class="flywheel__step-left" aria-hidden="true">
+              <div class="flywheel__step-num">2</div>
+              <div class="flywheel__step-line"></div>
+            </div>
+            <div class="flywheel__step-content">
+              <div class="flywheel__step-icon" aria-hidden="true">🔌</div>
+              <h3 class="flywheel__step-title">Plugins and courses convert</h3>
+              <p class="flywheel__step-copy">Ready-made plugins, workflow templates and courses turn curious viewers into paying customers — without needing a sales call.</p>
+            </div>
+          </li>
+          <li class="flywheel__step">
+            <div class="flywheel__step-left" aria-hidden="true">
+              <div class="flywheel__step-num">3</div>
+              <div class="flywheel__step-line"></div>
+            </div>
+            <div class="flywheel__step-content">
+              <div class="flywheel__step-icon" aria-hidden="true">🤝</div>
+              <h3 class="flywheel__step-title">Warm leads book done-for-you work</h3>
+              <p class="flywheel__step-copy">Clients who already trust the content and have used the tools are warm leads. The sales cycle is shorter, projects run smoother.</p>
+            </div>
+          </li>
+          <li class="flywheel__step">
+            <div class="flywheel__step-left" aria-hidden="true">
+              <div class="flywheel__step-num">4</div>
+              <div class="flywheel__step-line"></div>
+            </div>
+            <div class="flywheel__step-content">
+              <div class="flywheel__step-icon" aria-hidden="true">🔄</div>
+              <h3 class="flywheel__step-title">Case studies feed back into content</h3>
+              <p class="flywheel__step-copy">Client work becomes case studies. Case studies become videos. Videos become new leads. The flywheel keeps turning — you never start from zero again.</p>
+            </div>
+          </li>
+        </ol>
+
+      </div>
+    </section>
+
+    <!-- =============================================
+         ABOUT
+    ============================================= -->
+    <section class="about-strip" aria-labelledby="about-headline" id="about">
+      <div class="container">
+        <div class="about-strip__inner">
+
+          <div class="about-strip__text">
+            <span class="eyebrow">About Stackly</span>
+            <h2 class="about-strip__headline" id="about-headline">
+              Built by Shawn Ferrao — developer, designer and marketer.
+            </h2>
+            <p class="about-strip__copy">
+              Most agencies hand your project to three different people who've never talked to each other. At Stackly, the person who designs it also builds it and knows exactly how to market it. That's a rare combination — and it shows in the results.
+            </p>
+            <p class="about-strip__copy">
+              Based in Sydney and working with small businesses across Australia, Stackly was built to close the gap between what agencies charge and what small businesses can actually afford.
+            </p>
+            <div class="about-strip__skills" aria-label="Skills and specialities">
+              <span class="about-strip__skill">WordPress</span>
+              <span class="about-strip__skill">Elementor Pro</span>
+              <span class="about-strip__skill">Zapier / Make</span>
+              <span class="about-strip__skill">Graphic Design</span>
+              <span class="about-strip__skill">Digital Marketing</span>
+              <span class="about-strip__skill">Fluent CRM</span>
+              <span class="about-strip__skill">WooCommerce</span>
+              <span class="about-strip__skill">Business Automation</span>
+            </div>
+            <a href="#contact" class="btn btn-primary btn-lg">Work With Shawn</a>
+          </div>
+
+          <div class="about-strip__portrait" aria-label="Shawn Ferrao — founder of Stackly">
+            <div class="about-strip__portrait-inner">
+              <div class="about-strip__initials" aria-hidden="true">SF</div>
+              <h3 class="about-strip__name">Shawn Ferrao</h3>
+              <p class="about-strip__role">Founder, Stackly</p>
+              <span class="about-strip__loc">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1.5A4.5 4.5 0 017 10.5C5 10.5 2.5 8 2.5 6a4.5 4.5 0 019 0z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7" cy="6" r="1.5" stroke="currentColor" stroke-width="1.5"/></svg>
+                Sydney, NSW — Australia
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         FINAL CTA
+    ============================================= -->
+    <section class="cta-band" aria-labelledby="cta-headline" id="contact">
+      <div class="container">
+        <div class="cta-band__inner">
+          <h2 class="cta-band__headline" id="cta-headline">
+            Ready to make your tech<br />actually work for you?
+          </h2>
+          <p class="cta-band__sub">
+            Start with a $299 Tech Stack Audit and walk away with a clear action plan — no obligation to go further.
+          </p>
+          <div class="cta-band__actions">
+            <a href="mailto:hello@stackly.com.au" class="btn btn-dark btn-lg">
+              Book a Free Discovery Call
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#education" class="btn btn-ghost-dark btn-lg">Explore Free Resources</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =============================================
+       FOOTER
+  ============================================= -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__top">
+
+        <div class="footer__brand">
+          <a href="/" class="nav__logo" aria-label="Stackly home">
+            <div class="nav__logo-mark" aria-hidden="true">S</div>
+            Stackly
+          </a>
+          <p class="footer__tagline">
+            Tech that works for your business. Built for small business — not enterprise.
+          </p>
+        </div>
+
+        <div>
+          <p class="footer__col-title">Services</p>
+          <ul class="footer__links">
+            <li><a href="#services">Tech Stack Audit</a></li>
+            <li><a href="#services">Foundation Build</a></li>
+            <li><a href="#services">Full Build</a></li>
+            <li><a href="#services">Monthly Retainer</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer__col-title">Learn</p>
+          <ul class="footer__links">
+            <li><a href="#education">Free Tutorials</a></li>
+            <li><a href="#education">Courses</a></li>
+            <li><a href="#education">Community</a></li>
+            <li><a href="#plugins">Plugins</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer__col-title">Company</p>
+          <ul class="footer__links">
+            <li><a href="#about">About Shawn</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#contact">Book a Call</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; 2026 Stackly. ABN pending. Sydney, Australia.</p>
+        <p class="footer__made">Built by Shawn Ferrao</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    // Close mobile nav when a link is clicked
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+
+</body>
+</html>
