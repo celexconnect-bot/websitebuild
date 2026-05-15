@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Build &amp; UX Design — Stackly</title>
+  <meta name="description" content="Stackly builds websites that convert. Combining development, design and marketing thinking so every site performs — from $1,500. Sydney-based, Australia-wide." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    /* =============================================
+       TOKENS
+    ============================================= */
+    :root {
+      --midnight:   #0E1117;
+      --midnight-2: #161C27;
+      --midnight-3: #1E2636;
+      --amber:      #F5A623;
+      --amber-light:#FDD27A;
+      --amber-dark: #C7851A;
+      --cream:      #FDF6EC;
+      --cream-2:    #F5ECD8;
+      --white:      #FFFFFF;
+      --text-main:  #0E1117;
+      --text-muted: #6B7280;
+      --text-light: #9CA3AF;
+      --border:     #E5E7EB;
+      --border-dark:#2A3347;
+
+      --radius-sm:  6px;
+      --radius-md:  12px;
+      --radius-lg:  20px;
+      --radius-xl:  32px;
+
+      --shadow-sm:  0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+      --shadow-md:  0 4px 16px rgba(0,0,0,.10);
+      --shadow-lg:  0 12px 40px rgba(0,0,0,.14);
+
+      --max-w:      1280px;
+      --gutter:     clamp(1.25rem, 5vw, 2.5rem);
+    }
+
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text-main);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font: inherit; }
+
+    /* =============================================
+       UTILITIES
+    ============================================= */
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--amber-dark);
+    }
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 1.5rem;
+      height: 2px;
+      background: var(--amber);
+      border-radius: 1px;
+    }
+    .eyebrow--light {
+      color: var(--amber);
+    }
+    .eyebrow--light::before {
+      background: var(--amber);
+    }
+
+    /* =============================================
+       BUTTONS
+    ============================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .75rem 1.5rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: .9375rem;
+      transition: all .2s ease;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--amber);
+      color: var(--midnight);
+    }
+    .btn-primary:hover {
+      background: var(--amber-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(245,166,35,.35);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,.3);
+    }
+    .btn-outline:hover {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+    .btn-outline-dark {
+      background: transparent;
+      color: var(--midnight);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline-dark:hover {
+      border-color: var(--amber);
+      color: var(--amber-dark);
+    }
+    .btn-dark {
+      background: var(--midnight);
+      color: var(--white);
+    }
+    .btn-dark:hover {
+      background: var(--midnight-2);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(14,17,23,.35);
+    }
+    .btn-ghost-dark {
+      background: transparent;
+      color: var(--midnight);
+      border: 1.5px solid rgba(14,17,23,.3);
+    }
+    .btn-ghost-dark:hover {
+      background: rgba(14,17,23,.08);
+    }
+    .btn-lg {
+      padding: .9375rem 2rem;
+      font-size: 1rem;
+    }
+
+    /* =============================================
+       NAVIGATION
+    ============================================= */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(14,17,23,.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 4rem;
+    }
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: .625rem;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--white);
+      letter-spacing: -.02em;
+    }
+    .nav__logo-mark {
+      width: 2rem;
+      height: 2rem;
+      background: var(--amber);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .875rem;
+      font-weight: 900;
+      color: var(--midnight);
+    }
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .nav__links a {
+      font-size: .875rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.7);
+      transition: color .15s;
+    }
+    .nav__links a:hover { color: var(--white); }
+    .nav__links a.active { color: var(--amber); }
+    .nav__cta { display: flex; align-items: center; gap: .75rem; }
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: .5rem;
+      color: var(--white);
+    }
+    .nav__hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: currentColor;
+      border-radius: 1px;
+      transition: all .3s ease;
+    }
+    .nav__mobile {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--border-dark);
+      padding: 1rem 0;
+    }
+    .nav__mobile.open { display: flex; }
+    .nav__mobile a {
+      display: block;
+      padding: .75rem var(--gutter);
+      font-size: .9375rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.8);
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .nav__mobile a:last-child { border-bottom: none; }
+    .nav__mobile-cta {
+      padding: 1rem var(--gutter);
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+    .nav__mobile-cta .btn { justify-content: center; }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    .hero {
+      background: var(--midnight);
+      color: var(--white);
+      padding-block: clamp(5rem, 12vw, 8rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero__bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(245,166,35,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,166,35,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero__bg-glow {
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse at center, rgba(245,166,35,.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero__bg-glow-2 {
+      position: absolute;
+      bottom: -30%;
+      left: -5%;
+      width: 40%;
+      height: 70%;
+      background: radial-gradient(ellipse at center, rgba(59,130,246,.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero__inner {
+      position: relative;
+      max-width: 52rem;
+    }
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 1.25rem;
+    }
+    .hero__eyebrow::before {
+      content: '';
+      display: block;
+      width: 1.5rem;
+      height: 2px;
+      background: var(--amber);
+      border-radius: 1px;
+    }
+    .hero__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(2.5rem, 6vw, 4.25rem);
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      margin-bottom: 1.5rem;
+    }
+    .hero__headline em {
+      font-style: italic;
+      color: var(--amber);
+    }
+    .hero__sub {
+      font-size: clamp(1rem, 2vw, 1.1875rem);
+      color: rgba(255,255,255,.65);
+      max-width: 52ch;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .hero__trust {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      align-items: center;
+    }
+    .hero__trust-label {
+      font-size: .8125rem;
+      color: rgba(255,255,255,.4);
+      font-weight: 500;
+      margin-right: .25rem;
+    }
+    .hero__trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 100px;
+      padding: .3125rem .875rem;
+      font-size: .8125rem;
+      font-weight: 600;
+      color: rgba(255,255,255,.75);
+    }
+    .hero__trust-badge::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--amber);
+      flex-shrink: 0;
+    }
+
+    /* =============================================
+       WHAT WE BUILD
+    ============================================= */
+    .what-we-build {
+      background: var(--cream);
+      padding-block: clamp(4rem, 8vw, 7rem);
+    }
+    .what-we-build__header {
+      text-align: center;
+      max-width: 42rem;
+      margin-inline: auto;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+    .what-we-build__header .eyebrow { justify-content: center; margin-bottom: 1rem; }
+    .what-we-build__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.75rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      margin-bottom: 1rem;
+    }
+    .what-we-build__sub {
+      font-size: 1.0625rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .build-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .build-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: clamp(1.75rem, 4vw, 2.5rem);
+      transition: box-shadow .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .build-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+    }
+    .build-card__icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: var(--radius-md);
+      background: rgba(245,166,35,.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .build-card__title {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.375rem;
+      line-height: 1.2;
+      margin-bottom: .625rem;
+    }
+    .build-card__desc {
+      font-size: .9375rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .build-card__items {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      margin-bottom: 1.75rem;
+    }
+    .build-card__item {
+      display: flex;
+      align-items: center;
+      gap: .625rem;
+      font-size: .875rem;
+      color: var(--text-muted);
+    }
+    .build-card__item::before {
+      content: '';
+      width: .375rem;
+      height: .375rem;
+      border-radius: 50%;
+      background: var(--amber);
+      flex-shrink: 0;
+    }
+    .build-card__price {
+      display: inline-flex;
+      align-items: baseline;
+      gap: .375rem;
+      background: rgba(245,166,35,.1);
+      border: 1px solid rgba(245,166,35,.25);
+      border-radius: var(--radius-sm);
+      padding: .5rem 1rem;
+    }
+    .build-card__price-from {
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--amber-dark);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .build-card__price-amount {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--midnight);
+    }
+
+    /* =============================================
+       PROCESS
+    ============================================= */
+    .process {
+      background: var(--midnight);
+      color: var(--white);
+      padding-block: clamp(4rem, 8vw, 7rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .process__glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%;
+      height: 70%;
+      background: radial-gradient(ellipse, rgba(245,166,35,.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .process__header {
+      text-align: center;
+      max-width: 42rem;
+      margin-inline: auto;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+      position: relative;
+    }
+    .process__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 1rem;
+    }
+    .process__eyebrow::before {
+      content: '';
+      width: 1.5rem;
+      height: 2px;
+      background: var(--amber);
+      border-radius: 1px;
+    }
+    .process__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.75rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      margin-bottom: 1rem;
+    }
+    .process__sub {
+      font-size: 1.0625rem;
+      color: rgba(255,255,255,.6);
+      line-height: 1.7;
+    }
+    /* Horizontal scrollable timeline */
+    .process__timeline-wrap {
+      position: relative;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 1rem;
+      /* hide scrollbar visually but keep functionality */
+      scrollbar-width: none;
+    }
+    .process__timeline-wrap::-webkit-scrollbar { display: none; }
+    .process__timeline {
+      display: flex;
+      gap: 0;
+      min-width: max-content;
+      position: relative;
+      padding-top: .5rem;
+    }
+    .process__step {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 15rem;
+      flex-shrink: 0;
+      padding: 0 1.5rem 0 0;
+    }
+    .process__step:last-child { padding-right: 0; }
+    /* connector line */
+    .process__step::after {
+      content: '';
+      position: absolute;
+      top: 1.375rem;
+      left: 3.875rem;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--border-dark), transparent);
+    }
+    .process__step:last-child::after { display: none; }
+    .process__step-top {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .process__step-num {
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 50%;
+      background: var(--midnight-3);
+      border: 2px solid var(--border-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: .875rem;
+      color: var(--amber);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .process__step-label {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+    .process__step-title {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: .5rem;
+      color: var(--white);
+    }
+    .process__step-desc {
+      font-size: .875rem;
+      color: rgba(255,255,255,.55);
+      line-height: 1.65;
+    }
+
+    /* =============================================
+       PORTFOLIO / CASE STUDIES
+    ============================================= */
+    .portfolio {
+      background: var(--white);
+      padding-block: clamp(4rem, 8vw, 7rem);
+    }
+    .portfolio__header {
+      text-align: center;
+      max-width: 42rem;
+      margin-inline: auto;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+    .portfolio__header .eyebrow { justify-content: center; margin-bottom: 1rem; }
+    .portfolio__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.75rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      margin-bottom: 1rem;
+    }
+    .portfolio__sub {
+      font-size: 1.0625rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .case-studies {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .case-card {
+      background: var(--midnight-2);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      color: var(--white);
+      position: relative;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .case-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    }
+    .case-card__accent-bar {
+      height: 4px;
+      width: 100%;
+    }
+    .case-card__body {
+      padding: clamp(1.75rem, 4vw, 2.5rem);
+    }
+    .case-card__type {
+      display: inline-flex;
+      align-items: center;
+      gap: .375rem;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      padding: .3125rem .875rem;
+      border-radius: 100px;
+      border: 1px solid;
+    }
+    .case-card__name {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      line-height: 1.15;
+      margin-bottom: .375rem;
+    }
+    .case-card__subtitle {
+      font-size: .9375rem;
+      color: rgba(255,255,255,.5);
+      margin-bottom: 1.5rem;
+    }
+    .case-card__challenge {
+      font-size: .9375rem;
+      color: rgba(255,255,255,.65);
+      line-height: 1.7;
+      margin-bottom: 1.75rem;
+      padding-left: 1rem;
+      border-left: 2px solid rgba(255,255,255,.15);
+    }
+    .case-card__result {
+      font-size: .9375rem;
+      color: rgba(255,255,255,.75);
+      line-height: 1.7;
+      margin-bottom: 1.75rem;
+    }
+    .case-card__metrics {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+    .case-card__metric {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius-md);
+      padding: .875rem 1rem;
+    }
+    .case-card__metric-icon {
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: .1rem;
+    }
+    .case-card__metric-text {
+      font-size: .9375rem;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.4;
+    }
+    /* Amber accent (Bricksworks) */
+    .case-card--amber .case-card__accent-bar { background: linear-gradient(90deg, var(--amber), var(--amber-light)); }
+    .case-card--amber .case-card__type { color: var(--amber); border-color: rgba(245,166,35,.3); background: rgba(245,166,35,.08); }
+    .case-card--amber .case-card__metric-icon { color: var(--amber); }
+    /* Blue accent (Jomablue) */
+    .case-card--blue .case-card__accent-bar { background: linear-gradient(90deg, #3B82F6, #93C5FD); }
+    .case-card--blue .case-card__type { color: #60A5FA; border-color: rgba(59,130,246,.3); background: rgba(59,130,246,.08); }
+    .case-card--blue .case-card__metric-icon { color: #60A5FA; }
+    /* Silver accent (Porsche) */
+    .case-card--silver .case-card__accent-bar { background: linear-gradient(90deg, #6B7280, #D1D5DB); }
+    .case-card--silver .case-card__type { color: #D1D5DB; border-color: rgba(209,213,219,.25); background: rgba(209,213,219,.06); }
+    .case-card--silver .case-card__metric-icon { color: #D1D5DB; }
+
+    /* =============================================
+       WHAT'S INCLUDED
+    ============================================= */
+    .included {
+      background: var(--cream);
+      padding-block: clamp(4rem, 8vw, 7rem);
+    }
+    .included__header {
+      text-align: center;
+      max-width: 42rem;
+      margin-inline: auto;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+    .included__header .eyebrow { justify-content: center; margin-bottom: 1rem; }
+    .included__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.75rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      margin-bottom: 1rem;
+    }
+    .included__sub {
+      font-size: 1.0625rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .included__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+    .included__col {
+      padding: clamp(2rem, 4vw, 3rem);
+    }
+    .included__col:first-child {
+      border-bottom: 1px solid var(--border);
+    }
+    .included__col-title {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--amber-dark);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .included__col-title::before {
+      content: '';
+      width: 1.25rem;
+      height: 2px;
+      background: var(--amber);
+      border-radius: 1px;
+    }
+    .included__list {
+      display: flex;
+      flex-direction: column;
+      gap: .875rem;
+    }
+    .included__item {
+      display: flex;
+      align-items: flex-start;
+      gap: .875rem;
+    }
+    .included__check {
+      width: 1.375rem;
+      height: 1.375rem;
+      border-radius: 50%;
+      background: rgba(245,166,35,.12);
+      border: 1.5px solid rgba(245,166,35,.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--amber-dark);
+      font-size: .6875rem;
+      font-weight: 800;
+      margin-top: .1rem;
+    }
+    .included__item-text {
+      font-size: .9375rem;
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+    .included__item-text strong {
+      display: block;
+      font-weight: 600;
+      font-size: .9375rem;
+      margin-bottom: .125rem;
+    }
+    .included__item-text span {
+      font-size: .8125rem;
+      color: var(--text-muted);
+    }
+
+    /* =============================================
+       DIFFERENTIATORS
+    ============================================= */
+    .diff-strip {
+      background: var(--midnight);
+      color: var(--white);
+      padding-block: clamp(3rem, 6vw, 4.5rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .diff-strip::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(245,166,35,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,166,35,.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+    .diff-strip__inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .diff-item {
+      display: flex;
+      flex-direction: column;
+      gap: .375rem;
+    }
+    .diff-item__stat {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      color: var(--amber);
+      line-height: 1;
+      margin-bottom: .25rem;
+    }
+    .diff-item__label {
+      font-weight: 700;
+      font-size: .9375rem;
+      color: var(--white);
+    }
+    .diff-item__sub {
+      font-size: .8125rem;
+      color: rgba(255,255,255,.45);
+      line-height: 1.4;
+    }
+
+    /* =============================================
+       TESTIMONIAL
+    ============================================= */
+    .testimonial {
+      background: var(--white);
+      padding-block: clamp(4rem, 8vw, 6rem);
+    }
+    .testimonial__inner {
+      max-width: 52rem;
+      margin-inline: auto;
+    }
+    .testimonial__card {
+      background: var(--midnight);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-xl);
+      padding: clamp(2rem, 5vw, 3.5rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .testimonial__card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--amber), var(--amber-light), transparent);
+    }
+    .testimonial__glow {
+      position: absolute;
+      top: -40%;
+      right: -20%;
+      width: 50%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(245,166,35,.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .testimonial__quote-mark {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 6rem;
+      line-height: .7;
+      color: var(--amber);
+      opacity: .25;
+      margin-bottom: 1.25rem;
+      user-select: none;
+      position: relative;
+    }
+    .testimonial__quote {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.25rem, 2.5vw, 1.625rem);
+      line-height: 1.5;
+      color: var(--white);
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .testimonial__author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+    }
+    .testimonial__avatar {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background: rgba(245,166,35,.2);
+      border: 2px solid rgba(245,166,35,.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--amber);
+      flex-shrink: 0;
+    }
+    .testimonial__name {
+      font-weight: 700;
+      font-size: .9375rem;
+      color: var(--white);
+    }
+    .testimonial__role {
+      font-size: .8125rem;
+      color: rgba(255,255,255,.5);
+    }
+    .testimonial__stars {
+      display: flex;
+      gap: .25rem;
+      margin-top: .5rem;
+    }
+    .testimonial__star {
+      color: var(--amber);
+      font-size: .875rem;
+    }
+
+    /* =============================================
+       FINAL CTA
+    ============================================= */
+    .cta-band {
+      background: var(--amber);
+      padding-block: clamp(3.5rem, 7vw, 5rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(14,17,23,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(14,17,23,.06) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .cta-band__inner {
+      position: relative;
+      text-align: center;
+    }
+    .cta-band__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(14,17,23,.55);
+      margin-bottom: 1rem;
+    }
+    .cta-band__eyebrow::before {
+      content: '';
+      width: 1.25rem;
+      height: 2px;
+      background: rgba(14,17,23,.4);
+      border-radius: 1px;
+    }
+    .cta-band__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      color: var(--midnight);
+      margin-bottom: 1rem;
+    }
+    .cta-band__sub {
+      font-size: 1.0625rem;
+      color: rgba(14,17,23,.65);
+      line-height: 1.6;
+      max-width: 42ch;
+      margin-inline: auto;
+      margin-bottom: 2.5rem;
+    }
+    .cta-band__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer {
+      background: var(--midnight);
+      color: rgba(255,255,255,.6);
+      padding-block: 3rem 2rem;
+    }
+    .footer__top {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-dark);
+      margin-bottom: 2rem;
+    }
+    .footer__brand .nav__logo { margin-bottom: 1rem; color: var(--white); }
+    .footer__tagline { font-size: .9375rem; line-height: 1.6; max-width: 30ch; }
+    .footer__col-title {
+      font-size: .8125rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      margin-bottom: 1rem;
+    }
+    .footer__links {
+      display: flex;
+      flex-direction: column;
+      gap: .625rem;
+    }
+    .footer__links a {
+      font-size: .9375rem;
+      color: rgba(255,255,255,.55);
+      transition: color .15s;
+    }
+    .footer__links a:hover { color: var(--white); }
+    .footer__bottom {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      align-items: center;
+      text-align: center;
+    }
+    .footer__copy { font-size: .875rem; }
+    .footer__made {
+      font-size: .8125rem;
+      color: rgba(255,255,255,.35);
+    }
+
+    /* =============================================
+       RESPONSIVE — TABLET (≥ 640px)
+    ============================================= */
+    @media (min-width: 640px) {
+      .build-cards { grid-template-columns: 1fr 1fr; }
+      .case-studies { grid-template-columns: 1fr 1fr; }
+      .case-studies .case-card:last-child { grid-column: 1 / -1; max-width: 50%; }
+      .included__grid { grid-template-columns: 1fr 1fr; }
+      .included__col:first-child { border-bottom: none; border-right: 1px solid var(--border); }
+      .diff-strip__inner { grid-template-columns: repeat(4, 1fr); }
+      .footer__top { grid-template-columns: 2fr 1fr 1fr; }
+      .footer__bottom { flex-direction: row; justify-content: space-between; text-align: left; }
+    }
+
+    /* =============================================
+       RESPONSIVE — DESKTOP (≥ 1024px)
+    ============================================= */
+    @media (min-width: 1024px) {
+      .nav__hamburger { display: none; }
+      .nav__links { display: flex; }
+      .nav__cta { display: flex; }
+      .nav__mobile { display: none !important; }
+      .build-cards { grid-template-columns: repeat(3, 1fr); }
+      .case-studies { grid-template-columns: repeat(3, 1fr); }
+      .case-studies .case-card:last-child { grid-column: auto; max-width: 100%; }
+      .footer__top { grid-template-columns: 2.5fr 1fr 1fr 1fr; }
+    }
+
+    /* =============================================
+       RESPONSIVE — MOBILE (< 640px) NAV TOGGLE
+    ============================================= */
+    @media (max-width: 639px) {
+      .nav__links { display: none; }
+      .nav__cta { display: none; }
+      .nav__hamburger { display: flex; }
+    }
+
+    /* =============================================
+       WIDE SCREENS (≥ 1440px)
+    ============================================= */
+    @media (min-width: 1440px) {
+      :root { --max-w: 1440px; --gutter: 4rem; }
+      .hero__headline { font-size: 5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =============================================
+       NAVIGATION
+  ============================================= -->
+  <header class="nav" role="banner">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="/" class="nav__logo" aria-label="Stackly home">
+          <div class="nav__logo-mark" aria-hidden="true">S</div>
+          Stackly
+        </a>
+
+        <nav class="nav__links" aria-label="Primary navigation">
+          <a href="/services" class="active">Services</a>
+          <a href="/education">Education</a>
+          <a href="/plugins">Plugins</a>
+          <a href="/about">About</a>
+        </nav>
+
+        <div class="nav__cta">
+          <a href="#what-included" class="btn btn-outline">What's Included</a>
+          <a href="#contact" class="btn btn-primary">Start a Project</a>
+        </div>
+
+        <button class="nav__hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="nav__mobile" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+      <a href="/services">Services</a>
+      <a href="/education">Education</a>
+      <a href="/plugins">Plugins</a>
+      <a href="/about">About</a>
+      <div class="nav__mobile-cta">
+        <a href="#what-included" class="btn btn-outline-dark">What's Included</a>
+        <a href="#contact" class="btn btn-primary">Start a Project</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- =============================================
+         HERO
+    ============================================= -->
+    <section class="hero" aria-labelledby="hero-headline">
+      <div class="hero__bg-grid" aria-hidden="true"></div>
+      <div class="hero__bg-glow" aria-hidden="true"></div>
+      <div class="hero__bg-glow-2" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="hero__inner">
+          <p class="hero__eyebrow">Website Build &amp; UX Design</p>
+
+          <h1 class="hero__headline" id="hero-headline">
+            Websites that convert.<br />
+            Experiences people <em>remember.</em>
+          </h1>
+
+          <p class="hero__sub">
+            Most websites look fine and do nothing. Stackly combines development, design and marketing thinking so every build is built to perform — not just to exist. You get one person who thinks about all three at once.
+          </p>
+
+          <div class="hero__actions">
+            <a href="#contact" class="btn btn-primary btn-lg">
+              Start a Project
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#portfolio" class="btn btn-outline btn-lg">View Our Work</a>
+          </div>
+
+          <div class="hero__trust" aria-label="Trust badges">
+            <span class="hero__trust-label">Trusted tools &amp; approach:</span>
+            <span class="hero__trust-badge">WordPress Expert</span>
+            <span class="hero__trust-badge">Elementor Pro</span>
+            <span class="hero__trust-badge">UX-led Design</span>
+            <span class="hero__trust-badge">Sydney-based</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         WHAT WE BUILD
+    ============================================= -->
+    <section class="what-we-build" aria-labelledby="build-headline" id="what-we-build">
+      <div class="container">
+
+        <header class="what-we-build__header">
+          <span class="eyebrow">What We Build</span>
+          <h2 class="what-we-build__headline" id="build-headline">
+            The right site for the right goal
+          </h2>
+          <p class="what-we-build__sub">
+            Not all websites are the same. We specialise in three types — each built with a clear objective, the right tools, and conversion in mind from the first wireframe.
+          </p>
+        </header>
+
+        <div class="build-cards" role="list">
+
+          <!-- Marketing Websites -->
+          <article class="build-card" role="listitem" aria-labelledby="build-marketing">
+            <div class="build-card__icon" aria-hidden="true">📣</div>
+            <h3 class="build-card__title" id="build-marketing">Marketing Websites</h3>
+            <p class="build-card__desc">
+              Built for lead generation. Service businesses, local operators and consultants who need a site that earns its keep — capturing enquiries, building trust, and ranking on Google.
+            </p>
+            <ul class="build-card__items" aria-label="What's included">
+              <li class="build-card__item">Lead gen pages &amp; quote request forms</li>
+              <li class="build-card__item">Service business layouts that convert</li>
+              <li class="build-card__item">Dedicated landing pages for campaigns</li>
+              <li class="build-card__item">On-page SEO baked in from day one</li>
+              <li class="build-card__item">CRM &amp; automation-ready from launch</li>
+            </ul>
+            <div class="build-card__price" aria-label="Starting price">
+              <span class="build-card__price-from">From</span>
+              <span class="build-card__price-amount">$1,500</span>
+            </div>
+          </article>
+
+          <!-- E-commerce -->
+          <article class="build-card" role="listitem" aria-labelledby="build-ecom">
+            <div class="build-card__icon" aria-hidden="true">🛒</div>
+            <h3 class="build-card__title" id="build-ecom">E-commerce Stores</h3>
+            <p class="build-card__desc">
+              WooCommerce builds that don't just look the part — they make buying easy. Product catalogues, checkout optimisation and post-purchase automations included.
+            </p>
+            <ul class="build-card__items" aria-label="What's included">
+              <li class="build-card__item">WooCommerce setup &amp; configuration</li>
+              <li class="build-card__item">Product catalogue &amp; category design</li>
+              <li class="build-card__item">Checkout flow optimisation</li>
+              <li class="build-card__item">Payment gateway &amp; tax configuration</li>
+              <li class="build-card__item">Post-purchase automation &amp; receipts</li>
+            </ul>
+            <div class="build-card__price" aria-label="Starting price">
+              <span class="build-card__price-from">From</span>
+              <span class="build-card__price-amount">$2,500</span>
+            </div>
+          </article>
+
+          <!-- Course & Membership -->
+          <article class="build-card" role="listitem" aria-labelledby="build-course">
+            <div class="build-card__icon" aria-hidden="true">🎓</div>
+            <h3 class="build-card__title" id="build-course">Course &amp; Membership Sites</h3>
+            <p class="build-card__desc">
+              Built for creators, coaches and educators who want to own their platform — no Teachable fees, no locked-in ecosystem. LMS, gated content and membership fully on your domain.
+            </p>
+            <ul class="build-card__items" aria-label="What's included">
+              <li class="build-card__item">LMS setup (LearnDash or Tutor LMS)</li>
+              <li class="build-card__item">Gated content &amp; membership access</li>
+              <li class="build-card__item">Teachable / Kajabi alternative builds</li>
+              <li class="build-card__item">Enrolment &amp; payment flow automation</li>
+              <li class="build-card__item">Student progress tracking &amp; dashboards</li>
+            </ul>
+            <div class="build-card__price" aria-label="Starting price">
+              <span class="build-card__price-from">From</span>
+              <span class="build-card__price-amount">$2,800</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         PROCESS
+    ============================================= -->
+    <section class="process" aria-labelledby="process-headline" id="process">
+      <div class="process__glow" aria-hidden="true"></div>
+      <div class="container">
+
+        <header class="process__header">
+          <p class="process__eyebrow">How a Project Runs</p>
+          <h2 class="process__headline" id="process-headline">
+            No surprises. No radio silence.
+          </h2>
+          <p class="process__sub">
+            Every project follows a clear five-step process — so you always know what's happening, what's next and when you'll launch. Scroll to see the full timeline.
+          </p>
+        </header>
+
+        <div class="process__timeline-wrap" role="region" aria-label="Project process timeline">
+          <ol class="process__timeline">
+
+            <li class="process__step">
+              <div class="process__step-top">
+                <div class="process__step-num" aria-hidden="true">1</div>
+                <span class="process__step-label">Discovery</span>
+              </div>
+              <h3 class="process__step-title">Discovery</h3>
+              <p class="process__step-desc">We dig into your business goals, current site issues, competitors and what success actually looks like for you — before a pixel is touched.</p>
+            </li>
+
+            <li class="process__step">
+              <div class="process__step-top">
+                <div class="process__step-num" aria-hidden="true">2</div>
+                <span class="process__step-label">Strategy</span>
+              </div>
+              <h3 class="process__step-title">Strategy</h3>
+              <p class="process__step-desc">Sitemap, page structure, user flows and conversion strategy are mapped out so every page has a purpose — not just content to fill space.</p>
+            </li>
+
+            <li class="process__step">
+              <div class="process__step-top">
+                <div class="process__step-num" aria-hidden="true">3</div>
+                <span class="process__step-label">Design</span>
+              </div>
+              <h3 class="process__step-title">Design</h3>
+              <p class="process__step-desc">Wireframes and UX mapping first, then high-fidelity designs. You review and approve before a single line of code is written.</p>
+            </li>
+
+            <li class="process__step">
+              <div class="process__step-top">
+                <div class="process__step-num" aria-hidden="true">4</div>
+                <span class="process__step-label">Build</span>
+              </div>
+              <h3 class="process__step-title">Build</h3>
+              <p class="process__step-desc">WordPress + Elementor Pro development with page speed, mobile-first responsiveness, form connections and all integrations wired up and tested.</p>
+            </li>
+
+            <li class="process__step">
+              <div class="process__step-top">
+                <div class="process__step-num" aria-hidden="true">5</div>
+                <span class="process__step-label">Launch &amp; Support</span>
+              </div>
+              <h3 class="process__step-title">Launch &amp; Support</h3>
+              <p class="process__step-desc">Go-live with a full pre-launch checklist, 30-day post-launch support and a video walkthrough handover so you can manage your own site with confidence.</p>
+            </li>
+
+          </ol>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =============================================
+         PORTFOLIO / CASE STUDIES
+    ============================================= -->
+    <section class="portfolio" aria-labelledby="portfolio-headline" id="portfolio">
+      <div class="container">
+
+        <header class="portfolio__header">
+          <span class="eyebrow">Case Studies</span>
+          <h2 class="portfolio__headline" id="portfolio-headline">
+            Work we're proud of
+          </h2>
+          <p class="portfolio__sub">
+            Real projects. Real results. Every site below was built by Shawn — designed, developed and launched with measurable outcomes.
+          </p>
+        </header>
+
+        <div class="case-studies" role="list">
+
+          <!-- Bricksworks -->
+          <article class="case-card case-card--amber" role="listitem" aria-labelledby="case-bricksworks">
+            <div class="case-card__accent-bar" aria-hidden="true"></div>
+            <div class="case-card__body">
+              <div class="case-card__type">Marketing Website · Lead Capture</div>
+              <h3 class="case-card__name" id="case-bricksworks">Bricksworks</h3>
+              <p class="case-card__subtitle">Construction &amp; Building Company</p>
+
+              <p class="case-card__challenge">
+                Outdated website with no lead generation strategy — losing jobs to competitors online. Quote requests went to a generic email and were frequently missed.
+              </p>
+
+              <p class="case-card__result">
+                New WordPress + Elementor Pro site with a structured quote request system, CRM integration and instant Slack alerts — turning the website into an active lead channel.
+              </p>
+
+              <ul class="case-card__metrics" aria-label="Project results">
+                <li class="case-card__metric">
+                  <span class="case-card__metric-icon" aria-hidden="true">📈</span>
+                  <span class="case-card__metric-text">+340% organic enquiries in 90 days post-launch</span>
+                </li>
+                <li class="case-card__metric">
+                  <span class="case-card__metric-icon" aria-hidden="true">⚡</span>
+                  <span class="case-card__metric-text">Quote form connected to CRM + instant Slack alert on every submission</span>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Jomablue -->
+          <article class="case-card case-card--blue" role="listitem" aria-labelledby="case-jomablue">
+            <div class="case-card__accent-bar" aria-hidden="true"></div>
+            <div class="case-card__body">
+              <div class="case-card__type">Product UX · Landing Pages</div>
+              <h3 class="case-card__name" id="case-jomablue">Jomablue</h3>
+              <p class="case-card__subtitle">Event Technology Platform · SaaS</p>
+
+              <p class="case-card__challenge">
+                Complex event tech product with confusing onboarding UX — visitors couldn't understand the value proposition, and trial sign-ups were underperforming against traffic.
+              </p>
+
+              <p class="case-card__result">
+                Redesigned landing pages, simplified user flows and a clearer value proposition. Messaging restructured around outcomes, not features. Onboarding friction removed at key drop-off points.
+              </p>
+
+              <ul class="case-card__metrics" aria-label="Project results">
+                <li class="case-card__metric">
+                  <span class="case-card__metric-icon" aria-hidden="true">🚀</span>
+                  <span class="case-card__metric-text">+28% trial sign-up rate following redesign</span>
+                </li>
+                <li class="case-card__metric">
+                  <span class="case-card__metric-icon" aria-hidden="true">📉</span>
+                  <span class="case-card__metric-text">Reduced onboarding drop-off by 40% through simplified UX flows</span>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Porsche -->
+          <article class="case-card case-card--silver" role="listitem" aria-labelledby="case-porsche">
+            <div class="case-card__accent-bar" aria-hidden="true"></div>
+            <div class="case-card__body">
+              <div class="case-card__type">Event Microsite · UX Design</div>
+              <h3 class="case-card__name" id="case-porsche">Porsche</h3>
+              <p class="case-card__subtitle">Luxury Automotive · Vehicle Launch Event</p>
+
+              <p class="case-card__challenge">
+                Needed a premium digital experience to match the brand standard for a high-profile vehicle launch event — with registration, seating preference and a seamless mobile experience.
+              </p>
+
+              <p class="case-card__result">
+                Custom event microsite with an integrated booking and registration system, premium visual design and mobile-first build — praised internally for meeting the brand's exacting standards.
+              </p>
+
+              <ul class="case-card__metrics" aria-label="Project results">
+                <li class="case-card__metric">
+                  <span class="case-card__metric-icon" aria-hidden="true">🏆</span>
+                  <span class="case-card__metric-text">800+ registrations completed within 48 hours of launch</span>
+                </li>
+                <li class="case-card__metric">
+                  <span class="case-card__metric-icon" aria-hidden="true">✓</span>
+                  <span class="case-card__metric-text">Praised internally for matching Porsche brand standards — no revisions required</span>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         WHAT'S INCLUDED
+    ============================================= -->
+    <section class="included" aria-labelledby="included-headline" id="what-included">
+      <div class="container">
+
+        <header class="included__header">
+          <span class="eyebrow">What's Included</span>
+          <h2 class="included__headline" id="included-headline">
+            Everything needed to launch — and nothing left out
+          </h2>
+          <p class="included__sub">
+            Every project includes the full stack. No surprise add-ons, no "that's extra" moments at the end.
+          </p>
+        </header>
+
+        <div class="included__grid" role="list">
+
+          <div class="included__col" role="listitem">
+            <p class="included__col-title">Foundation &amp; Design</p>
+            <ul class="included__list">
+              <li class="included__item">
+                <span class="included__check" aria-hidden="true">✓</span>
+                <div class="included__item-text">
+                  <strong>Discovery Workshop</strong>
+                  <span>Goals, audience, competitors and success metrics mapped upfront</span>
+                </div>
+              </li>
+              <li class="included__item">
+                <span class="included__check" aria-hidden="true">✓</span>
+                <div class="included__item-text">
+                  <strong>Wireframes &amp; UX Mapping</strong>
+                  <span>Page structure and user flows reviewed before design begins</span>
+                </div>
+              </li>
+              <li class="included__item">
+                <span class="included__check" aria-hidden="true">✓</span>
+                <div class="included__item-text">
+                  <strong>Mobile-First Responsive Design</strong>
+                  <span>Built and tested across mobile, tablet and desktop</span>
+                </div>
+              </li>
+              <li class="included__item">
+                <span class="included__check" aria-hidden="true">✓</span>
+                <div class="included__item-text">
+                  <strong>WordPress + Elementor Pro Build</strong>
+                  <span>Clean, maintainable build you can manage yourself</span>
+                </div>
+              </li>
+              <li class="included__item">
+                <span class="included__check" aria-hidden="true">✓</span>
+                <div class="included__item-text">
+                  <strong>Page Speed Optimisation</strong>
+                  <span>Caching, image compression, Core Web Vitals reviewed</span>
+                </div>
+              </li>
+              <li class="included__item">
+                <span class="included__check" aria-hidden="true">✓</span>
+                <div class="included__item-text">
+                  <strong>On-Page SEO Setup</strong>
+                  <span>Meta titles, descriptions, schema, XML sitemap and robots.txt</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="included__col" role="listitem">
+            <p class="included__col-title">Integration &amp; Handover</p>
+            <ul class="included__list">
+              <li class="included__item">
+                <span class="included__check" aria-hidden="true">✓</span>
+                <div class="included__item-text">
+                  <strong>Form Connections &amp; Automation</strong>
+                  <span>Forms wired to email, CRM and Slack — no missed leads</span>
+                </div>
+              </li>
+              <li class="included__item">
+                <span class="included__check" aria-hidden="true">✓</span>
+                <div class="included__item-text">
+                  <strong>Booking System Integration</strong>
+                  <span>Calendar, payment and confirmation flow connected end-to-end</span>
+                </div>
+              </li>
+              <li class="included__item">
+                <span class="included__check" aria-hidden="true">✓</span>
+                <div class="included__item-text">
+                  <strong>Google Analytics Setup</strong>
+                  <span>GA4 configured with goal tracking and event monitoring</span>
+                </div>
+              </li>
+              <li class="included__item">
+                <span class="included__check" aria-hidden="true">✓</span>
+                <div class="included__item-text">
+                  <strong>30-Day Post-Launch Support</strong>
+                  <span>Priority fixes, tweaks and questions answered after go-live</span>
+                </div>
+              </li>
+              <li class="included__item">
+                <span class="included__check" aria-hidden="true">✓</span>
+                <div class="included__item-text">
+                  <strong>Video Walkthrough Handover</strong>
+                  <span>A recorded tour of your site so you can manage it confidently</span>
+                </div>
+              </li>
+              <li class="included__item">
+                <span class="included__check" aria-hidden="true">✓</span>
+                <div class="included__item-text">
+                  <strong>Ongoing Retainer Option</strong>
+                  <span>Stay on as a monthly partner for updates, maintenance and new builds</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         DIFFERENTIATORS STRIP
+    ============================================= -->
+    <section class="diff-strip" aria-labelledby="diff-headline">
+      <div class="container">
+        <h2 class="sr-only" id="diff-headline">Why Stackly over an agency</h2>
+        <div class="diff-strip__inner" role="list">
+
+          <div class="diff-item" role="listitem">
+            <div class="diff-item__stat" aria-hidden="true">3-in-1</div>
+            <div class="diff-item__label">Skill Set</div>
+            <div class="diff-item__sub">Design + Development + Marketing — one person, one project, no translation errors</div>
+          </div>
+
+          <div class="diff-item" role="listitem">
+            <div class="diff-item__stat" aria-hidden="true">Direct</div>
+            <div class="diff-item__label">No Agency Markup</div>
+            <div class="diff-item__sub">You work with Shawn — not a junior account manager passing briefs around</div>
+          </div>
+
+          <div class="diff-item" role="listitem">
+            <div class="diff-item__stat" aria-hidden="true">$1.5k–$6k</div>
+            <div class="diff-item__label">Project Range</div>
+            <div class="diff-item__sub">Compared to $10k–$30k for the same scope at a Sydney web agency</div>
+          </div>
+
+          <div class="diff-item" role="listitem">
+            <div class="diff-item__stat" aria-hidden="true">Sydney</div>
+            <div class="diff-item__label">Based &amp; Available</div>
+            <div class="diff-item__sub">Sydney HQ, available nationwide — video calls, real-time Slack, same timezone</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         TESTIMONIAL
+    ============================================= -->
+    <section class="testimonial" aria-labelledby="testimonial-headline">
+      <div class="container">
+        <h2 class="sr-only" id="testimonial-headline">Client testimonial</h2>
+        <div class="testimonial__inner">
+          <div class="testimonial__card">
+            <div class="testimonial__glow" aria-hidden="true"></div>
+            <div class="testimonial__quote-mark" aria-hidden="true">"</div>
+            <blockquote class="testimonial__quote">
+              "Shawn built our entire booking and course system from scratch. It just works. No agency could have done it for this price."
+            </blockquote>
+            <div class="testimonial__author">
+              <div class="testimonial__avatar" aria-hidden="true">CM</div>
+              <div>
+                <div class="testimonial__name">Claire M.</div>
+                <div class="testimonial__role">Course Creator</div>
+                <div class="testimonial__stars" aria-label="5 out of 5 stars">
+                  <span class="testimonial__star" aria-hidden="true">★</span>
+                  <span class="testimonial__star" aria-hidden="true">★</span>
+                  <span class="testimonial__star" aria-hidden="true">★</span>
+                  <span class="testimonial__star" aria-hidden="true">★</span>
+                  <span class="testimonial__star" aria-hidden="true">★</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         FINAL CTA
+    ============================================= -->
+    <section class="cta-band" aria-labelledby="cta-headline" id="contact">
+      <div class="container">
+        <div class="cta-band__inner">
+          <p class="cta-band__eyebrow">Ready to start?</p>
+          <h2 class="cta-band__headline" id="cta-headline">
+            Ready to build something<br />worth showing off?
+          </h2>
+          <p class="cta-band__sub">
+            Book a free discovery call and let's scope your project. Or start with a Tech Stack Audit if you're not sure what you need yet.
+          </p>
+          <div class="cta-band__actions">
+            <a href="mailto:hello@stackly.com.au" class="btn btn-dark btn-lg">
+              Book a Discovery Call
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="/tech-stack-audit" class="btn btn-ghost-dark btn-lg">View Tech Stack Audit</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =============================================
+       FOOTER
+  ============================================= -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__top">
+
+        <div class="footer__brand">
+          <a href="/" class="nav__logo" aria-label="Stackly home">
+            <div class="nav__logo-mark" aria-hidden="true">S</div>
+            Stackly
+          </a>
+          <p class="footer__tagline">
+            Tech that works for your business. Built for small business — not enterprise.
+          </p>
+        </div>
+
+        <div>
+          <p class="footer__col-title">Services</p>
+          <ul class="footer__links">
+            <li><a href="/web-design">Website Build &amp; UX Design</a></li>
+            <li><a href="/tech-stack-audit">Tech Stack Audit</a></li>
+            <li><a href="/automation">Automation Setup</a></li>
+            <li><a href="/retainer">Monthly Retainer</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer__col-title">Learn</p>
+          <ul class="footer__links">
+            <li><a href="/education">Free Tutorials</a></li>
+            <li><a href="/education">Courses</a></li>
+            <li><a href="/education">Community</a></li>
+            <li><a href="/plugins">Plugins</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer__col-title">Company</p>
+          <ul class="footer__links">
+            <li><a href="/about">About Shawn</a></li>
+            <li><a href="mailto:hello@stackly.com.au">Contact</a></li>
+            <li><a href="/contact">Book a Call</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; 2026 Stackly. ABN pending. Sydney, Australia.</p>
+        <p class="footer__made">Built by Shawn Ferrao</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    // Close mobile nav when a link is clicked
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+
+</body>
+</html>

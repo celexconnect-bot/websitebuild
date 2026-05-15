@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FormFlow — Connect WordPress Forms to Everything. In One Click.</title>
+  <meta name="description" content="FormFlow connects your WordPress forms to email marketing, CRM and Slack in one click. No coding required. Free forever — Pro from $49/yr. By Stackly." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    /* =============================================
+       TOKENS
+    ============================================= */
+    :root {
+      --midnight:   #0E1117;
+      --midnight-2: #161C27;
+      --midnight-3: #1E2636;
+      --amber:      #F5A623;
+      --amber-light:#FDD27A;
+      --amber-dark: #C7851A;
+      --cream:      #FDF6EC;
+      --cream-2:    #F5ECD8;
+      --white:      #FFFFFF;
+      --text-main:  #0E1117;
+      --text-muted: #6B7280;
+      --text-light: #9CA3AF;
+      --border:     #E5E7EB;
+      --border-dark:#2A3347;
+
+      --radius-sm:  6px;
+      --radius-md:  12px;
+      --radius-lg:  20px;
+      --radius-xl:  32px;
+
+      --shadow-sm:  0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+      --shadow-md:  0 4px 16px rgba(0,0,0,.10);
+      --shadow-lg:  0 12px 40px rgba(0,0,0,.14);
+
+      --max-w:      1280px;
+      --gutter:     clamp(1.25rem, 5vw, 2.5rem);
+    }
+
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text-main);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font: inherit; }
+
+    /* =============================================
+       UTILITIES
+    ============================================= */
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--amber-dark);
+    }
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 1.5rem;
+      height: 2px;
+      background: var(--amber);
+      border-radius: 1px;
+    }
+
+    /* =============================================
+       BUTTONS
+    ============================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .75rem 1.5rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: .9375rem;
+      transition: all .2s ease;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--amber);
+      color: var(--midnight);
+    }
+    .btn-primary:hover {
+      background: var(--amber-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(245,166,35,.35);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,.3);
+    }
+    .btn-outline:hover {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+    .btn-outline-dark {
+      background: transparent;
+      color: var(--midnight);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline-dark:hover {
+      border-color: var(--amber);
+      color: var(--amber-dark);
+    }
+    .btn-lg {
+      padding: .9375rem 2rem;
+      font-size: 1rem;
+    }
+    .btn-dark {
+      background: var(--midnight);
+      color: var(--white);
+    }
+    .btn-dark:hover {
+      background: var(--midnight-2);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(14,17,23,.35);
+    }
+    .btn-ghost-dark {
+      background: transparent;
+      color: var(--midnight);
+      border: 1.5px solid rgba(14,17,23,.3);
+    }
+    .btn-ghost-dark:hover {
+      background: rgba(14,17,23,.08);
+    }
+
+    /* =============================================
+       NAVIGATION
+    ============================================= */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(14,17,23,.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 4rem;
+    }
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: .625rem;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--white);
+      letter-spacing: -.02em;
+    }
+    .nav__logo-mark {
+      width: 2rem;
+      height: 2rem;
+      background: var(--amber);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .875rem;
+      font-weight: 900;
+      color: var(--midnight);
+    }
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .nav__links a {
+      font-size: .875rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.7);
+      transition: color .15s;
+    }
+    .nav__links a:hover { color: var(--white); }
+    .nav__cta { display: flex; align-items: center; gap: .75rem; }
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: .5rem;
+      color: var(--white);
+    }
+    .nav__hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: currentColor;
+      border-radius: 1px;
+      transition: all .3s ease;
+    }
+    .nav__mobile {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--border-dark);
+      padding: 1rem 0;
+    }
+    .nav__mobile.open { display: flex; }
+    .nav__mobile a {
+      display: block;
+      padding: .75rem var(--gutter);
+      font-size: .9375rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.8);
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .nav__mobile a:last-child { border-bottom: none; }
+    .nav__mobile-cta {
+      padding: 1rem var(--gutter);
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+    .nav__mobile-cta .btn { justify-content: center; }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    .hero {
+      background: var(--midnight);
+      color: var(--white);
+      padding-block: clamp(5rem, 12vw, 8rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero__bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(245,166,35,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,166,35,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero__bg-glow {
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse at center, rgba(245,166,35,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero__inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(245,166,35,.12);
+      border: 1px solid rgba(245,166,35,.25);
+      border-radius: 100px;
+      padding: .375rem 1rem;
+      font-size: .8125rem;
+      font-weight: 600;
+      color: var(--amber-light);
+      margin-bottom: 1.5rem;
+    }
+    .hero__badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--amber);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .4; }
+    }
+    .hero__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(2.5rem, 6vw, 4.25rem);
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      margin-bottom: 1.5rem;
+    }
+    .hero__headline em {
+      font-style: italic;
+      color: var(--amber);
+    }
+    .hero__sub {
+      font-size: clamp(1rem, 2vw, 1.1875rem);
+      color: rgba(255,255,255,.65);
+      max-width: 52ch;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .hero__social-proof {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
+    .hero__stars {
+      display: flex;
+      align-items: center;
+      gap: .25rem;
+      color: var(--amber);
+      font-size: 1rem;
+    }
+    .hero__proof-text {
+      font-size: .875rem;
+      color: rgba(255,255,255,.55);
+    }
+    .hero__proof-text strong { color: var(--white); }
+    .hero__visual {
+      display: none;
+    }
+    /* Hero visual card */
+    .hero__card {
+      background: var(--midnight-2);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      position: relative;
+    }
+    .hero__card-header {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: 1.25rem;
+    }
+    .hero__card-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: var(--radius-sm);
+      background: rgba(245,166,35,.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.125rem;
+    }
+    .hero__card-title { font-size: .9375rem; font-weight: 600; color: var(--white); }
+    .hero__card-sub { font-size: .8125rem; color: rgba(255,255,255,.5); }
+    .hero__card-divider { height: 1px; background: var(--border-dark); margin: 1.25rem 0; }
+    .hero__card-label {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      margin-bottom: .75rem;
+    }
+    .hero__card-flow {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+    .hero__card-row {
+      display: flex;
+      align-items: center;
+      gap: .625rem;
+      font-size: .8125rem;
+      color: rgba(255,255,255,.75);
+      background: var(--midnight-3);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-sm);
+      padding: .625rem .875rem;
+    }
+    .hero__card-row-icon {
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .hero__card-arrow {
+      margin-inline: .125rem;
+      color: rgba(255,255,255,.3);
+    }
+    .hero__card-badge {
+      margin-left: auto;
+      background: rgba(34,197,94,.15);
+      color: #4ade80;
+      border-radius: 100px;
+      padding: .125rem .5rem;
+      font-size: .75rem;
+      font-weight: 600;
+    }
+    .hero__floating {
+      position: absolute;
+      top: -1rem;
+      right: -1rem;
+      background: var(--amber);
+      color: var(--midnight);
+      border-radius: var(--radius-md);
+      padding: .75rem 1rem;
+      font-weight: 700;
+      font-size: .875rem;
+      box-shadow: var(--shadow-lg);
+      line-height: 1.3;
+    }
+    .hero__floating span { display: block; font-size: .75rem; font-weight: 500; opacity: .7; }
+
+    /* =============================================
+       PROBLEM / BENEFIT SPLIT
+    ============================================= */
+    .split {
+      padding-block: clamp(4rem, 8vw, 6rem);
+      background: var(--white);
+    }
+    .split__header {
+      text-align: center;
+      max-width: 42rem;
+      margin-inline: auto;
+      margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+    }
+    .split__header .eyebrow { justify-content: center; margin-bottom: 1rem; }
+    .split__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.75rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+    }
+    .split__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .split__col {
+      border-radius: var(--radius-xl);
+      padding: clamp(1.75rem, 4vw, 2.5rem);
+    }
+    .split__col--bad {
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+    }
+    .split__col--good {
+      background: var(--midnight);
+      color: var(--white);
+    }
+    .split__col-heading {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.375rem;
+      line-height: 1.25;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .625rem;
+    }
+    .split__col--bad .split__col-heading { color: #991B1B; }
+    .split__col--good .split__col-heading { color: var(--white); }
+    .split__items {
+      display: flex;
+      flex-direction: column;
+      gap: .875rem;
+    }
+    .split__item {
+      display: flex;
+      align-items: flex-start;
+      gap: .875rem;
+      padding: .875rem 1.125rem;
+      border-radius: var(--radius-md);
+    }
+    .split__col--bad .split__item {
+      background: rgba(254,202,202,.45);
+      border: 1px solid #FECACA;
+    }
+    .split__col--good .split__item {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.1);
+    }
+    .split__item-icon { font-size: 1rem; flex-shrink: 0; margin-top: .125rem; }
+    .split__item-text { font-size: .9375rem; line-height: 1.5; }
+    .split__col--bad .split__item-text { color: #7F1D1D; }
+    .split__col--good .split__item-text { color: rgba(255,255,255,.85); }
+
+    /* =============================================
+       FEATURES GRID
+    ============================================= */
+    .features {
+      padding-block: clamp(4rem, 8vw, 7rem);
+      background: var(--cream);
+    }
+    .features__header {
+      text-align: center;
+      max-width: 42rem;
+      margin-inline: auto;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+    .features__header .eyebrow { justify-content: center; margin-bottom: 1rem; }
+    .features__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.75rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      margin-bottom: 1rem;
+    }
+    .features__sub {
+      font-size: 1.0625rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .features__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    .feature-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: clamp(1.5rem, 4vw, 2rem);
+      transition: box-shadow .2s, transform .2s;
+    }
+    .feature-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+    }
+    .feature-card__icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: var(--radius-md);
+      background: rgba(245,166,35,.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.375rem;
+      margin-bottom: 1.25rem;
+    }
+    .feature-card__title {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.25rem;
+      line-height: 1.25;
+      margin-bottom: .625rem;
+    }
+    .feature-card__copy {
+      font-size: .9375rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+    .feature-card__detail {
+      margin-top: .875rem;
+      font-size: .8125rem;
+      color: var(--amber-dark);
+      font-weight: 600;
+    }
+
+    /* =============================================
+       INTEGRATIONS
+    ============================================= */
+    .integrations {
+      padding-block: clamp(4rem, 8vw, 6rem);
+      background: var(--white);
+    }
+    .integrations__header {
+      text-align: center;
+      max-width: 42rem;
+      margin-inline: auto;
+      margin-bottom: clamp(2rem, 4vw, 3rem);
+    }
+    .integrations__header .eyebrow { justify-content: center; margin-bottom: 1rem; }
+    .integrations__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.75rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      margin-bottom: 1rem;
+    }
+    .integrations__sub {
+      font-size: 1.0625rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .integrations__pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      justify-content: center;
+      max-width: 52rem;
+      margin-inline: auto;
+    }
+    .integration-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .625rem 1.125rem;
+      border-radius: 100px;
+      font-size: .9375rem;
+      font-weight: 600;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      color: var(--text-main);
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .integration-pill:hover {
+      border-color: var(--amber);
+      box-shadow: 0 0 0 3px rgba(245,166,35,.12);
+    }
+    .integration-pill__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--amber);
+      flex-shrink: 0;
+    }
+    .integration-pill--form .integration-pill__dot { background: #6366F1; }
+    .integration-pill--crm .integration-pill__dot { background: #10B981; }
+    .integration-pill--notify .integration-pill__dot { background: #F59E0B; }
+    .integration-pill--auto .integration-pill__dot { background: #EF4444; }
+    .integrations__legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem 1.5rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    .integrations__legend-item {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .8125rem;
+      color: var(--text-muted);
+    }
+    .integrations__legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* =============================================
+       PRICING
+    ============================================= */
+    .pricing {
+      padding-block: clamp(4rem, 8vw, 7rem);
+      background: var(--cream);
+    }
+    .pricing__header {
+      text-align: center;
+      max-width: 42rem;
+      margin-inline: auto;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+    .pricing__header .eyebrow { justify-content: center; margin-bottom: 1rem; }
+    .pricing__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.75rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      margin-bottom: 1rem;
+    }
+    .pricing__sub {
+      font-size: 1.0625rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .pricing__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      max-width: 52rem;
+      margin-inline: auto;
+    }
+    .pricing-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: clamp(1.75rem, 4vw, 2.5rem);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      position: relative;
+      transition: box-shadow .2s;
+    }
+    .pricing-card:hover { box-shadow: var(--shadow-lg); }
+    .pricing-card--pro {
+      border-color: var(--amber);
+      background: var(--midnight);
+      color: var(--white);
+    }
+    .pricing-card__badge {
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--amber);
+      color: var(--midnight);
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+      padding: .25rem 1.25rem;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      white-space: nowrap;
+    }
+    .pricing-card__top { display: flex; flex-direction: column; gap: .5rem; }
+    .pricing-card__tier {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--amber-dark);
+    }
+    .pricing-card--pro .pricing-card__tier { color: var(--amber-light); }
+    .pricing-card__name {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.625rem;
+      line-height: 1.2;
+    }
+    .pricing-card__price-row {
+      display: flex;
+      align-items: baseline;
+      gap: .375rem;
+      margin-top: .25rem;
+    }
+    .pricing-card__amount {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .pricing-card--pro .pricing-card__amount { color: var(--amber); }
+    .pricing-card__period {
+      font-size: .9375rem;
+      color: var(--text-muted);
+    }
+    .pricing-card--pro .pricing-card__period { color: rgba(255,255,255,.5); }
+    .pricing-card__desc {
+      font-size: .9375rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .pricing-card--pro .pricing-card__desc { color: rgba(255,255,255,.6); }
+    .pricing-card__includes {
+      display: flex;
+      flex-direction: column;
+      gap: .625rem;
+    }
+    .pricing-card__include {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      font-size: .9375rem;
+    }
+    .pricing-card__check {
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 50%;
+      background: rgba(245,166,35,.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--amber-dark);
+      font-size: .65rem;
+      margin-top: .1rem;
+    }
+    .pricing-card--pro .pricing-card__check {
+      background: rgba(245,166,35,.2);
+      color: var(--amber);
+    }
+    .pricing-card__include-text { color: var(--text-muted); line-height: 1.5; }
+    .pricing-card--pro .pricing-card__include-text { color: rgba(255,255,255,.8); }
+    .pricing-card__cta .btn { width: 100%; justify-content: center; }
+
+    /* =============================================
+       CASE STUDY
+    ============================================= */
+    .case-study {
+      padding-block: clamp(4rem, 8vw, 6rem);
+      background: var(--white);
+    }
+    .case-study__card {
+      background: var(--midnight);
+      color: var(--white);
+      border-radius: var(--radius-xl);
+      padding: clamp(2rem, 5vw, 3.5rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .case-study__glow {
+      position: absolute;
+      bottom: -30%;
+      right: -10%;
+      width: 50%;
+      height: 70%;
+      background: radial-gradient(ellipse, rgba(245,166,35,.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .case-study__inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .case-study__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 1rem;
+    }
+    .case-study__eyebrow::before {
+      content: '';
+      width: 1.5rem;
+      height: 2px;
+      background: var(--amber);
+      border-radius: 1px;
+    }
+    .case-study__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.5rem, 3vw, 2.125rem);
+      line-height: 1.25;
+      margin-bottom: 1.25rem;
+    }
+    .case-study__copy {
+      font-size: 1rem;
+      color: rgba(255,255,255,.65);
+      line-height: 1.75;
+    }
+    .case-study__metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    .case-study__metric {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.25rem;
+      text-align: center;
+    }
+    .case-study__metric-value {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 2.25rem;
+      color: var(--amber);
+      line-height: 1;
+      margin-bottom: .5rem;
+    }
+    .case-study__metric-label {
+      font-size: .875rem;
+      color: rgba(255,255,255,.55);
+      line-height: 1.4;
+    }
+
+    /* =============================================
+       FAQ
+    ============================================= */
+    .faq {
+      padding-block: clamp(4rem, 8vw, 7rem);
+      background: var(--cream);
+    }
+    .faq__header {
+      text-align: center;
+      max-width: 42rem;
+      margin-inline: auto;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+    .faq__header .eyebrow { justify-content: center; margin-bottom: 1rem; }
+    .faq__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.75rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+    }
+    .faq__list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 52rem;
+      margin-inline: auto;
+    }
+    .faq__item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 2rem;
+    }
+    .faq__question {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.1875rem;
+      line-height: 1.3;
+      color: var(--text-main);
+      margin-bottom: .875rem;
+      display: flex;
+      align-items: flex-start;
+      gap: .875rem;
+    }
+    .faq__question-icon {
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 50%;
+      background: rgba(245,166,35,.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--amber-dark);
+      font-size: .75rem;
+      font-weight: 800;
+      margin-top: .075rem;
+    }
+    .faq__answer {
+      font-size: .9375rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      padding-left: 2.625rem;
+    }
+    .faq__answer a {
+      color: var(--amber-dark);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* =============================================
+       FINAL CTA
+    ============================================= */
+    .cta-band {
+      background: var(--amber);
+      padding-block: clamp(3.5rem, 7vw, 5rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(14,17,23,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(14,17,23,.06) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .cta-band__inner {
+      position: relative;
+      text-align: center;
+    }
+    .cta-band__pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(14,17,23,.12);
+      border-radius: 100px;
+      padding: .375rem 1rem;
+      font-size: .8125rem;
+      font-weight: 700;
+      color: var(--midnight);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .cta-band__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      color: var(--midnight);
+      margin-bottom: 1rem;
+    }
+    .cta-band__sub {
+      font-size: 1.0625rem;
+      color: rgba(14,17,23,.65);
+      line-height: 1.6;
+      max-width: 44ch;
+      margin-inline: auto;
+      margin-bottom: 2.5rem;
+    }
+    .cta-band__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer {
+      background: var(--midnight);
+      color: rgba(255,255,255,.6);
+      padding-block: 3rem 2rem;
+    }
+    .footer__top {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-dark);
+      margin-bottom: 2rem;
+    }
+    .footer__brand .nav__logo { margin-bottom: 1rem; color: var(--white); }
+    .footer__tagline { font-size: .9375rem; line-height: 1.6; max-width: 30ch; }
+    .footer__col-title {
+      font-size: .8125rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      margin-bottom: 1rem;
+    }
+    .footer__links {
+      display: flex;
+      flex-direction: column;
+      gap: .625rem;
+    }
+    .footer__links a {
+      font-size: .9375rem;
+      color: rgba(255,255,255,.55);
+      transition: color .15s;
+    }
+    .footer__links a:hover { color: var(--white); }
+    .footer__bottom {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      align-items: center;
+      text-align: center;
+    }
+    .footer__copy { font-size: .875rem; }
+    .footer__made {
+      font-size: .8125rem;
+      color: rgba(255,255,255,.35);
+    }
+
+    /* =============================================
+       RESPONSIVE — TABLET (>= 640px)
+    ============================================= */
+    @media (min-width: 640px) {
+      .hero__visual { display: block; }
+      .split__grid { grid-template-columns: 1fr 1fr; }
+      .features__grid { grid-template-columns: 1fr 1fr; }
+      .pricing__grid { grid-template-columns: 1fr 1fr; }
+      .case-study__inner { grid-template-columns: 1fr 1fr; align-items: center; }
+      .footer__top { grid-template-columns: 2fr 1fr 1fr; }
+      .footer__bottom { flex-direction: row; justify-content: space-between; text-align: left; }
+    }
+
+    /* =============================================
+       RESPONSIVE — DESKTOP (>= 1024px)
+    ============================================= */
+    @media (min-width: 1024px) {
+      .nav__hamburger { display: none; }
+      .nav__links { display: flex; }
+      .nav__cta { display: flex; }
+      .nav__mobile { display: none !important; }
+      .hero__inner { grid-template-columns: 1fr 1fr; }
+      .features__grid { grid-template-columns: 1fr 1fr 1fr; }
+      .footer__top { grid-template-columns: 2.5fr 1fr 1fr 1fr; }
+    }
+
+    /* =============================================
+       RESPONSIVE — MOBILE (< 640px) NAV TOGGLE
+    ============================================= */
+    @media (max-width: 639px) {
+      .nav__links { display: none; }
+      .nav__cta { display: none; }
+      .nav__hamburger { display: flex; }
+    }
+
+    /* =============================================
+       WIDE SCREENS (>= 1440px)
+    ============================================= */
+    @media (min-width: 1440px) {
+      :root { --max-w: 1440px; --gutter: 4rem; }
+      .hero__headline { font-size: 5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =============================================
+       NAVIGATION
+  ============================================= -->
+  <header class="nav" role="banner">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="/" class="nav__logo" aria-label="Stackly home">
+          <div class="nav__logo-mark" aria-hidden="true">S</div>
+          Stackly
+        </a>
+
+        <nav class="nav__links" aria-label="Primary navigation">
+          <a href="/index.html#services">Services</a>
+          <a href="/index.html#education">Education</a>
+          <a href="/index.html#plugins">Plugins</a>
+          <a href="/index.html#about">About</a>
+        </nav>
+
+        <div class="nav__cta">
+          <a href="#pricing" class="btn btn-outline">View Pricing</a>
+          <a href="#cta" class="btn btn-primary">Get FormFlow</a>
+        </div>
+
+        <button class="nav__hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="nav__mobile" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+      <a href="/index.html#services">Services</a>
+      <a href="/index.html#education">Education</a>
+      <a href="/index.html#plugins">Plugins</a>
+      <a href="/index.html#about">About</a>
+      <div class="nav__mobile-cta">
+        <a href="#pricing" class="btn btn-outline-dark">View Pricing</a>
+        <a href="#cta" class="btn btn-primary">Get FormFlow</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- =============================================
+         HERO
+    ============================================= -->
+    <section class="hero" aria-labelledby="hero-headline">
+      <div class="hero__bg-grid" aria-hidden="true"></div>
+      <div class="hero__bg-glow" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="hero__inner">
+
+          <div class="hero__content">
+            <div class="hero__badge" aria-label="WordPress Plugin by Stackly">
+              <span class="hero__badge-dot" aria-hidden="true"></span>
+              WordPress Plugin
+            </div>
+
+            <h1 class="hero__headline" id="hero-headline">
+              Connect your forms<br />
+              to <em>everything.</em><br />
+              In one click.
+            </h1>
+
+            <p class="hero__sub">
+              FormFlow is the no-code form connection plugin for small business owners. Hook your WordPress forms up to your email list, CRM and Slack — without touching a single line of code.
+            </p>
+
+            <div class="hero__actions">
+              <a href="https://wordpress.org/plugins/formflow/" class="btn btn-primary btn-lg">
+                Download Free
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v7M5 7l3 3 3-3M3 12h10" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <a href="#pricing" class="btn btn-outline btn-lg">Get Pro — $49/yr</a>
+            </div>
+
+            <div class="hero__social-proof" aria-label="Plugin ratings and install count">
+              <div class="hero__stars" aria-label="4.8 stars">
+                ★★★★★
+              </div>
+              <p class="hero__proof-text">
+                <strong>4.8★ on WordPress.org</strong> &nbsp;·&nbsp; 500+ active installs
+              </p>
+            </div>
+          </div>
+
+          <div class="hero__visual" aria-hidden="true">
+            <div class="hero__card">
+              <div class="hero__floating">
+                Connected!<span>in under 60 seconds</span>
+              </div>
+              <div class="hero__card-header">
+                <div class="hero__card-icon">🔗</div>
+                <div>
+                  <div class="hero__card-title">FormFlow — Connection Active</div>
+                  <div class="hero__card-sub">Contact Form 7 → 3 destinations</div>
+                </div>
+              </div>
+              <div class="hero__card-divider"></div>
+              <div class="hero__card-label">Form submission triggers</div>
+              <div class="hero__card-flow">
+                <div class="hero__card-row">
+                  <span class="hero__card-row-icon">📧</span>
+                  <span>Add to Mailchimp list</span>
+                  <span class="hero__card-badge">Live</span>
+                </div>
+                <div class="hero__card-row">
+                  <span class="hero__card-row-icon">📋</span>
+                  <span>Create FluentCRM contact</span>
+                  <span class="hero__card-badge">Live</span>
+                </div>
+                <div class="hero__card-row">
+                  <span class="hero__card-row-icon">💬</span>
+                  <span>Notify #leads in Slack</span>
+                  <span class="hero__card-badge">Live</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         PROBLEM / BENEFIT SPLIT
+    ============================================= -->
+    <section class="split" aria-labelledby="split-headline">
+      <div class="container">
+
+        <header class="split__header">
+          <span class="eyebrow">The Difference</span>
+          <h2 class="split__headline" id="split-headline">
+            Your forms are collecting leads.<br />
+            Are they going anywhere?
+          </h2>
+        </header>
+
+        <div class="split__grid" role="list">
+
+          <div class="split__col split__col--bad" role="listitem" aria-label="Without FormFlow — pain points">
+            <h3 class="split__col-heading">
+              <span aria-hidden="true">✗</span> Without FormFlow
+            </h3>
+            <ul class="split__items">
+              <li class="split__item">
+                <span class="split__item-icon" aria-hidden="true">🔴</span>
+                <p class="split__item-text">Form submissions go nowhere — just an email notification you'll forget about</p>
+              </li>
+              <li class="split__item">
+                <span class="split__item-icon" aria-hidden="true">🔴</span>
+                <p class="split__item-text">Manual data entry — copying lead details into your CRM one by one</p>
+              </li>
+              <li class="split__item">
+                <span class="split__item-icon" aria-hidden="true">🔴</span>
+                <p class="split__item-text">Leads fall through the cracks while you're busy running your business</p>
+              </li>
+              <li class="split__item">
+                <span class="split__item-icon" aria-hidden="true">🔴</span>
+                <p class="split__item-text">Disconnected tools that don't talk to each other — Zapier hacks stacked on Zapier hacks</p>
+              </li>
+            </ul>
+          </div>
+
+          <div class="split__col split__col--good" role="listitem" aria-label="With FormFlow — benefits">
+            <h3 class="split__col-heading">
+              <span aria-hidden="true">✓</span> With FormFlow
+            </h3>
+            <ul class="split__items">
+              <li class="split__item">
+                <span class="split__item-icon" aria-hidden="true">✅</span>
+                <p class="split__item-text">Instant email delivery — every lead is added to your list the moment they submit</p>
+              </li>
+              <li class="split__item">
+                <span class="split__item-icon" aria-hidden="true">✅</span>
+                <p class="split__item-text">Auto CRM entries — new contact records created in your CRM automatically</p>
+              </li>
+              <li class="split__item">
+                <span class="split__item-icon" aria-hidden="true">✅</span>
+                <p class="split__item-text">Slack notifications — your team is alerted the second a new lead comes in</p>
+              </li>
+              <li class="split__item">
+                <span class="split__item-icon" aria-hidden="true">✅</span>
+                <p class="split__item-text">Everything connected — one plugin, one place to manage, zero manual work</p>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         FEATURES GRID
+    ============================================= -->
+    <section class="features" aria-labelledby="features-headline">
+      <div class="container">
+
+        <header class="features__header">
+          <span class="eyebrow">Features</span>
+          <h2 class="features__headline" id="features-headline">
+            Everything your forms need to actually do something
+          </h2>
+          <p class="features__sub">
+            FormFlow is purpose-built for small business owners who want powerful form integrations without the developer price tag.
+          </p>
+        </header>
+
+        <div class="features__grid" role="list">
+
+          <article class="feature-card" role="listitem">
+            <div class="feature-card__icon" aria-hidden="true">🔗</div>
+            <h3 class="feature-card__title">One-Click Connections</h3>
+            <p class="feature-card__copy">Connect your form to Mailchimp, ConvertKit or FluentCRM in a single click. No API docs. No copy-pasting keys into the wrong fields.</p>
+            <p class="feature-card__detail">Works with Mailchimp · ConvertKit · FluentCRM</p>
+          </article>
+
+          <article class="feature-card" role="listitem">
+            <div class="feature-card__icon" aria-hidden="true">💬</div>
+            <h3 class="feature-card__title">Slack Notifications</h3>
+            <p class="feature-card__copy">Get an instant Slack message the moment a new lead submits your form. Choose the channel, customise the message, and never miss a hot lead again.</p>
+            <p class="feature-card__detail">Configurable per-form · Custom message templates</p>
+          </article>
+
+          <article class="feature-card" role="listitem">
+            <div class="feature-card__icon" aria-hidden="true">📋</div>
+            <h3 class="feature-card__title">CRM Auto-Entry</h3>
+            <p class="feature-card__copy">Every new form submission automatically creates a contact record in your CRM. No copy-paste, no forgotten leads, no manual effort.</p>
+            <p class="feature-card__detail">FluentCRM · ActiveCampaign · More coming soon</p>
+          </article>
+
+          <article class="feature-card" role="listitem">
+            <div class="feature-card__icon" aria-hidden="true">⚡</div>
+            <h3 class="feature-card__title">Zapier &amp; Make Ready</h3>
+            <p class="feature-card__copy">FormFlow fires a webhook on every submission so you can trigger any automation in Zapier or Make — opening up thousands of additional integrations instantly.</p>
+            <p class="feature-card__detail">Webhook output · Works with any Zapier/Make scenario</p>
+          </article>
+
+          <article class="feature-card" role="listitem">
+            <div class="feature-card__icon" aria-hidden="true">🔌</div>
+            <h3 class="feature-card__title">Works with Any Form Plugin</h3>
+            <p class="feature-card__copy">Already using WPForms, Gravity Forms, Fluent Forms or Contact Form 7? FormFlow drops in alongside whatever you've got — no switching required.</p>
+            <p class="feature-card__detail">WPForms · Gravity Forms · Fluent Forms · CF7</p>
+          </article>
+
+          <article class="feature-card" role="listitem">
+            <div class="feature-card__icon" aria-hidden="true">🏎️</div>
+            <h3 class="feature-card__title">Lightweight &amp; Fast</h3>
+            <p class="feature-card__copy">Under 50kb total. No jQuery dependency. No bloated settings panels. FormFlow loads fast and stays out of the way — your site speed doesn't take the hit.</p>
+            <p class="feature-card__detail">Under 50kb · No jQuery · No bloat</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         INTEGRATIONS
+    ============================================= -->
+    <section class="integrations" aria-labelledby="integrations-headline">
+      <div class="container">
+
+        <header class="integrations__header">
+          <span class="eyebrow">Integrations</span>
+          <h2 class="integrations__headline" id="integrations-headline">
+            Works with the tools you already use
+          </h2>
+          <p class="integrations__sub">
+            FormFlow connects your forms to the platforms your business already runs on — no switching, no migration needed.
+          </p>
+        </header>
+
+        <div class="integrations__pills" role="list" aria-label="Supported integrations">
+          <span class="integration-pill integration-pill--form" role="listitem">
+            <span class="integration-pill__dot" aria-hidden="true"></span>WPForms
+          </span>
+          <span class="integration-pill integration-pill--form" role="listitem">
+            <span class="integration-pill__dot" aria-hidden="true"></span>Gravity Forms
+          </span>
+          <span class="integration-pill integration-pill--form" role="listitem">
+            <span class="integration-pill__dot" aria-hidden="true"></span>Fluent Forms
+          </span>
+          <span class="integration-pill integration-pill--form" role="listitem">
+            <span class="integration-pill__dot" aria-hidden="true"></span>Contact Form 7
+          </span>
+          <span class="integration-pill integration-pill--crm" role="listitem">
+            <span class="integration-pill__dot" aria-hidden="true"></span>Mailchimp
+          </span>
+          <span class="integration-pill integration-pill--crm" role="listitem">
+            <span class="integration-pill__dot" aria-hidden="true"></span>ConvertKit
+          </span>
+          <span class="integration-pill integration-pill--crm" role="listitem">
+            <span class="integration-pill__dot" aria-hidden="true"></span>FluentCRM
+          </span>
+          <span class="integration-pill integration-pill--crm" role="listitem">
+            <span class="integration-pill__dot" aria-hidden="true"></span>ActiveCampaign
+          </span>
+          <span class="integration-pill integration-pill--notify" role="listitem">
+            <span class="integration-pill__dot" aria-hidden="true"></span>Slack
+          </span>
+          <span class="integration-pill integration-pill--auto" role="listitem">
+            <span class="integration-pill__dot" aria-hidden="true"></span>Zapier
+          </span>
+          <span class="integration-pill integration-pill--auto" role="listitem">
+            <span class="integration-pill__dot" aria-hidden="true"></span>Make
+          </span>
+          <span class="integration-pill integration-pill--auto" role="listitem">
+            <span class="integration-pill__dot" aria-hidden="true"></span>Notion
+          </span>
+        </div>
+
+        <div class="integrations__legend" aria-label="Integration category legend">
+          <div class="integrations__legend-item">
+            <div class="integrations__legend-dot" style="background:#6366F1;" aria-hidden="true"></div>
+            Form plugins
+          </div>
+          <div class="integrations__legend-item">
+            <div class="integrations__legend-dot" style="background:#10B981;" aria-hidden="true"></div>
+            Email marketing &amp; CRM
+          </div>
+          <div class="integrations__legend-item">
+            <div class="integrations__legend-dot" style="background:#F59E0B;" aria-hidden="true"></div>
+            Notifications
+          </div>
+          <div class="integrations__legend-item">
+            <div class="integrations__legend-dot" style="background:#EF4444;" aria-hidden="true"></div>
+            Automation platforms
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =============================================
+         PRICING
+    ============================================= -->
+    <section class="pricing" aria-labelledby="pricing-headline" id="pricing">
+      <div class="container">
+
+        <header class="pricing__header">
+          <span class="eyebrow">Pricing</span>
+          <h2 class="pricing__headline" id="pricing-headline">
+            Free forever. Pro when you're ready.
+          </h2>
+          <p class="pricing__sub">
+            Start with the free version on WordPress.org. Upgrade to Pro when you need unlimited forms and all integrations — for less than a cup of coffee a week.
+          </p>
+        </header>
+
+        <div class="pricing__grid" role="list">
+
+          <!-- Free -->
+          <article class="pricing-card" role="listitem" aria-labelledby="plan-free">
+            <div class="pricing-card__top">
+              <p class="pricing-card__tier">Free</p>
+              <h3 class="pricing-card__name" id="plan-free">FormFlow Free</h3>
+              <div class="pricing-card__price-row">
+                <span class="pricing-card__amount">$0</span>
+                <span class="pricing-card__period">forever</span>
+              </div>
+            </div>
+            <p class="pricing-card__desc">Get started on WordPress.org. Ideal for simple sites that need one form connected to one destination.</p>
+            <ul class="pricing-card__includes" aria-label="Free plan includes">
+              <li class="pricing-card__include">
+                <span class="pricing-card__check" aria-hidden="true">✓</span>
+                <span class="pricing-card__include-text">1 form connection</span>
+              </li>
+              <li class="pricing-card__include">
+                <span class="pricing-card__check" aria-hidden="true">✓</span>
+                <span class="pricing-card__include-text">Basic email marketing connections (Mailchimp)</span>
+              </li>
+              <li class="pricing-card__include">
+                <span class="pricing-card__check" aria-hidden="true">✓</span>
+                <span class="pricing-card__include-text">Available on WordPress.org</span>
+              </li>
+              <li class="pricing-card__include">
+                <span class="pricing-card__check" aria-hidden="true">✓</span>
+                <span class="pricing-card__include-text">Community support via WordPress.org forums</span>
+              </li>
+            </ul>
+            <div class="pricing-card__cta">
+              <a href="https://wordpress.org/plugins/formflow/" class="btn btn-outline-dark btn-lg">
+                Download Free
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v7M5 7l3 3 3-3M3 12h10" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Pro -->
+          <article class="pricing-card pricing-card--pro" role="listitem" aria-labelledby="plan-pro">
+            <div class="pricing-card__badge" aria-label="Best value plan">Best Value</div>
+            <div class="pricing-card__top">
+              <p class="pricing-card__tier">Pro</p>
+              <h3 class="pricing-card__name" id="plan-pro">FormFlow Pro</h3>
+              <div class="pricing-card__price-row">
+                <span class="pricing-card__amount">$49</span>
+                <span class="pricing-card__period">/yr</span>
+              </div>
+            </div>
+            <p class="pricing-card__desc">Unlock unlimited forms, every integration, and priority support. Everything you need to automate your lead flow completely.</p>
+            <ul class="pricing-card__includes" aria-label="Pro plan includes">
+              <li class="pricing-card__include">
+                <span class="pricing-card__check" aria-hidden="true">✓</span>
+                <span class="pricing-card__include-text">Unlimited form connections</span>
+              </li>
+              <li class="pricing-card__include">
+                <span class="pricing-card__check" aria-hidden="true">✓</span>
+                <span class="pricing-card__include-text">All integrations — CRM, Slack, Zapier, Make, Notion</span>
+              </li>
+              <li class="pricing-card__include">
+                <span class="pricing-card__check" aria-hidden="true">✓</span>
+                <span class="pricing-card__include-text">Workflow triggers &amp; conditional logic routing</span>
+              </li>
+              <li class="pricing-card__include">
+                <span class="pricing-card__check" aria-hidden="true">✓</span>
+                <span class="pricing-card__include-text">Priority email support from Shawn</span>
+              </li>
+              <li class="pricing-card__include">
+                <span class="pricing-card__check" aria-hidden="true">✓</span>
+                <span class="pricing-card__include-text">Annual plugin updates included</span>
+              </li>
+            </ul>
+            <div class="pricing-card__cta">
+              <a href="#cta" class="btn btn-primary btn-lg">
+                Get Pro — $49/yr
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         CASE STUDY
+    ============================================= -->
+    <section class="case-study" aria-labelledby="case-study-headline">
+      <div class="container">
+        <div class="case-study__card">
+          <div class="case-study__glow" aria-hidden="true"></div>
+          <div class="case-study__inner">
+
+            <div>
+              <p class="case-study__eyebrow">Case Study</p>
+              <h2 class="case-study__headline" id="case-study-headline">
+                How Jomablue automated their event lead capture using FormFlow
+              </h2>
+              <p class="case-study__copy">
+                Jomablue runs live events and was manually exporting attendee enquiry data into their CRM at the end of each event day — a process that took hours and introduced errors. After installing FormFlow Pro, every form submission at their registration desk was routed directly into their CRM and piped to their ops team on Slack in real time. Zero manual data entry, zero missed leads, and their team could act on hot prospects while the event was still running.
+              </p>
+            </div>
+
+            <div class="case-study__metrics" aria-label="Results from Jomablue using FormFlow">
+              <div class="case-study__metric">
+                <div class="case-study__metric-value">3 hrs</div>
+                <div class="case-study__metric-label">saved per event day on data entry</div>
+              </div>
+              <div class="case-study__metric">
+                <div class="case-study__metric-value">100%</div>
+                <div class="case-study__metric-label">of leads captured directly to CRM</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         FAQ
+    ============================================= -->
+    <section class="faq" aria-labelledby="faq-headline">
+      <div class="container">
+
+        <header class="faq__header">
+          <span class="eyebrow">FAQ</span>
+          <h2 class="faq__headline" id="faq-headline">
+            Common questions
+          </h2>
+        </header>
+
+        <div class="faq__list" role="list">
+
+          <div class="faq__item" role="listitem">
+            <h3 class="faq__question">
+              <span class="faq__question-icon" aria-hidden="true">Q</span>
+              Does it work with my form plugin?
+            </h3>
+            <p class="faq__answer">
+              FormFlow is compatible with the four most popular WordPress form plugins: WPForms, Gravity Forms, Fluent Forms, and Contact Form 7. If you're using one of those, you're good to go. Support for additional form plugins is on the roadmap — <a href="mailto:hello@stackly.com.au">reach out</a> if yours isn't listed and we'll let you know when it's coming.
+            </p>
+          </div>
+
+          <div class="faq__item" role="listitem">
+            <h3 class="faq__question">
+              <span class="faq__question-icon" aria-hidden="true">Q</span>
+              Do I need coding skills?
+            </h3>
+            <p class="faq__answer">
+              None at all. FormFlow was specifically designed for non-technical business owners. Install it from the WordPress.org plugin directory, connect your form to a destination using a simple dropdown menu, and you're done. No API keys to hunt down, no webhooks to configure by hand, no developer required.
+            </p>
+          </div>
+
+          <div class="faq__item" role="listitem">
+            <h3 class="faq__question">
+              <span class="faq__question-icon" aria-hidden="true">Q</span>
+              What CRMs does it connect to?
+            </h3>
+            <p class="faq__answer">
+              FormFlow Pro currently connects directly to FluentCRM and ActiveCampaign, with Mailchimp and ConvertKit handled as email marketing integrations. For any CRM that isn't natively supported yet — including HubSpot, Salesforce, Zoho or others — FormFlow's Zapier and Make webhook output lets you connect to virtually any platform. More native CRM integrations are being added with each Pro update.
+            </p>
+          </div>
+
+          <div class="faq__item" role="listitem">
+            <h3 class="faq__question">
+              <span class="faq__question-icon" aria-hidden="true">Q</span>
+              What happens after my Pro licence expires?
+            </h3>
+            <p class="faq__answer">
+              Your site and all existing connections keep working exactly as they are — FormFlow never stops functioning when a licence expires. You'll lose access to updates and priority support until you renew, but nothing breaks. Renewing is $49/yr and keeps you on the latest version with all new integrations included.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+         FINAL CTA
+    ============================================= -->
+    <section class="cta-band" aria-labelledby="cta-headline" id="cta">
+      <div class="container">
+        <div class="cta-band__inner">
+          <div class="cta-band__pill" aria-hidden="true">Free Forever</div>
+          <h2 class="cta-band__headline" id="cta-headline">
+            Start connecting your forms<br />today — free forever.
+          </h2>
+          <p class="cta-band__sub">
+            Download FormFlow from WordPress.org and get your first form connected in under five minutes. No credit card required.
+          </p>
+          <div class="cta-band__actions">
+            <a href="https://wordpress.org/plugins/formflow/" class="btn btn-dark btn-lg">
+              Download Free on WordPress.org
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v7M5 7l3 3 3-3M3 12h10" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#pricing" class="btn btn-ghost-dark btn-lg">View Pro Features</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =============================================
+       FOOTER
+  ============================================= -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__top">
+
+        <div class="footer__brand">
+          <a href="/" class="nav__logo" aria-label="Stackly home">
+            <div class="nav__logo-mark" aria-hidden="true">S</div>
+            Stackly
+          </a>
+          <p class="footer__tagline">
+            Tech that works for your business. Built for small business — not enterprise.
+          </p>
+        </div>
+
+        <div>
+          <p class="footer__col-title">FormFlow</p>
+          <ul class="footer__links">
+            <li><a href="#pricing">Free vs Pro</a></li>
+            <li><a href="https://wordpress.org/plugins/formflow/">Download Free</a></li>
+            <li><a href="#cta">Get Pro — $49/yr</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer__col-title">Stackly</p>
+          <ul class="footer__links">
+            <li><a href="/index.html#services">Services</a></li>
+            <li><a href="/index.html#education">Education</a></li>
+            <li><a href="/index.html#plugins">All Plugins</a></li>
+            <li><a href="/index.html#about">About Shawn</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer__col-title">Support</p>
+          <ul class="footer__links">
+            <li><a href="https://wordpress.org/support/plugin/formflow/">Support Forum</a></li>
+            <li><a href="mailto:hello@stackly.com.au">Email Support</a></li>
+            <li><a href="/index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; 2026 Stackly. ABN pending. Sydney, Australia.</p>
+        <p class="footer__made">FormFlow by Shawn Ferrao</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    // Close mobile nav when a link is clicked
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+
+</body>
+</html>
