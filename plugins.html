@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plugins & Workflows — Coming Soon | Stackly</title>
+  <meta name="description" content="Stackly plugins and workflow templates for small businesses — lightweight WordPress plugins and automation packs. Coming soon." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --midnight:   #0E1117;
+      --midnight-2: #161C27;
+      --midnight-3: #1E2636;
+      --amber:      #F5A623;
+      --amber-light:#FDD27A;
+      --amber-dark: #C7851A;
+      --cream:      #FDF6EC;
+      --cream-2:    #F5ECD8;
+      --white:      #FFFFFF;
+      --text-main:  #0E1117;
+      --text-muted: #6B7280;
+      --border:     #E5E7EB;
+      --border-dark:#2A3347;
+      --radius-sm:  6px;
+      --radius-md:  12px;
+      --radius-lg:  20px;
+      --radius-xl:  32px;
+      --shadow-sm:  0 1px 3px rgba(0,0,0,.08);
+      --shadow-md:  0 4px 16px rgba(0,0,0,.10);
+      --shadow-lg:  0 12px 40px rgba(0,0,0,.14);
+      --max-w:      1280px;
+      --gutter:     clamp(1.25rem, 5vw, 2.5rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text-main);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font: inherit; }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--amber-dark);
+    }
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 1.5rem;
+      height: 2px;
+      background: var(--amber);
+      border-radius: 1px;
+    }
+
+    /* ---- BUTTONS ---- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .75rem 1.5rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: .9375rem;
+      transition: all .2s ease;
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--amber); color: var(--midnight); }
+    .btn-primary:hover { background: var(--amber-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(245,166,35,.35); }
+    .btn-outline { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,.3); }
+    .btn-outline:hover { border-color: var(--amber); color: var(--amber); }
+    .btn-outline-dark { background: transparent; color: var(--midnight); border: 1.5px solid var(--border); }
+    .btn-outline-dark:hover { border-color: var(--amber); color: var(--amber-dark); }
+
+    /* ---- NAV ---- */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(14,17,23,.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 4rem;
+    }
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: .625rem;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--white);
+      letter-spacing: -.02em;
+    }
+    .nav__logo-mark {
+      width: 2rem;
+      height: 2rem;
+      background: var(--amber);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .875rem;
+      font-weight: 900;
+      color: var(--midnight);
+    }
+    .nav__links { display: flex; align-items: center; gap: 2rem; }
+    .nav__links a {
+      font-size: .875rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.7);
+      transition: color .15s;
+    }
+    .nav__links a:hover { color: var(--white); }
+    .nav__links a.active { color: var(--amber); }
+    .nav__cta { display: flex; align-items: center; gap: .75rem; }
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: .5rem;
+      color: var(--white);
+    }
+    .nav__hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: currentColor;
+      border-radius: 1px;
+      transition: all .3s ease;
+    }
+    .nav__mobile {
+      display: none;
+      flex-direction: column;
+      border-top: 1px solid var(--border-dark);
+      padding: 1rem 0;
+    }
+    .nav__mobile.open { display: flex; }
+    .nav__mobile a {
+      display: block;
+      padding: .75rem var(--gutter);
+      font-size: .9375rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.8);
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .nav__mobile a:last-child { border-bottom: none; }
+    .nav__mobile-cta {
+      padding: 1rem var(--gutter);
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+    .nav__mobile-cta .btn { justify-content: center; }
+
+    /* ---- HERO ---- */
+    .hero {
+      background: var(--midnight);
+      color: var(--white);
+      padding-block: clamp(4.5rem, 10vw, 7rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero__bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(245,166,35,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,166,35,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero__glow {
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 70%;
+      background: radial-gradient(ellipse, rgba(245,166,35,.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero__inner {
+      position: relative;
+      text-align: center;
+      max-width: 760px;
+      margin-inline: auto;
+    }
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .625rem;
+      background: rgba(245,166,35,.12);
+      border: 1px solid rgba(245,166,35,.3);
+      border-radius: 100px;
+      padding: .5rem 1.25rem;
+      font-size: .8125rem;
+      font-weight: 700;
+      color: var(--amber-light);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+    .hero__badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--amber);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .5; transform: scale(.85); }
+    }
+    .hero__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      margin-bottom: 1.5rem;
+    }
+    .hero__headline em { font-style: italic; color: var(--amber); }
+    .hero__sub {
+      font-size: clamp(1rem, 2vw, 1.125rem);
+      color: rgba(255,255,255,.6);
+      line-height: 1.75;
+      max-width: 54ch;
+      margin-inline: auto;
+      margin-bottom: 2.5rem;
+    }
+    .hero__tabs {
+      display: inline-flex;
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      padding: .25rem;
+      gap: .25rem;
+    }
+    .hero__tab {
+      padding: .625rem 1.25rem;
+      border-radius: var(--radius-sm);
+      font-size: .875rem;
+      font-weight: 600;
+      color: rgba(255,255,255,.5);
+      cursor: pointer;
+      transition: all .2s;
+      border: none;
+      background: none;
+      font-family: inherit;
+    }
+    .hero__tab.active {
+      background: var(--amber);
+      color: var(--midnight);
+    }
+    .hero__tab:not(.active):hover { color: var(--white); }
+
+    /* ---- SECTION SHARED ---- */
+    .section {
+      padding-block: clamp(4rem, 8vw, 6rem);
+    }
+    .section--cream { background: var(--cream); }
+    .section--dark { background: var(--midnight); color: var(--white); }
+    .section__header {
+      text-align: center;
+      max-width: 44rem;
+      margin-inline: auto;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+    .section__header .eyebrow { justify-content: center; margin-bottom: 1rem; }
+    .section__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.75rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      margin-bottom: 1rem;
+    }
+    .section__sub {
+      font-size: 1.0625rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .section--dark .section__sub { color: rgba(255,255,255,.55); }
+
+    /* ---- PLUGIN CARDS ---- */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .plugin-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: clamp(1.75rem, 4vw, 2.25rem);
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .plugin-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+    .plugin-card__soon {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: var(--midnight);
+      color: var(--amber);
+      border-radius: 100px;
+      padding: .25rem .875rem;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .plugin-card__accent {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    }
+    .plugin-card__icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .plugin-card__type {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: .5rem;
+    }
+    .plugin-card__name {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.5rem;
+      line-height: 1.2;
+      margin-bottom: .75rem;
+    }
+    .plugin-card__desc {
+      font-size: .9375rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .plugin-card__features {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      margin-bottom: 1.75rem;
+      padding-bottom: 1.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .plugin-card__feature {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      font-size: .875rem;
+      color: var(--text-muted);
+    }
+    .plugin-card__bullet {
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: .6rem;
+      margin-top: .1rem;
+    }
+    .plugin-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .plugin-card__model {
+      font-size: .8125rem;
+      color: var(--text-light);
+    }
+    .plugin-card__model strong { color: var(--text-muted); }
+    .plugin-card__notify {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--amber-dark);
+      transition: gap .2s;
+    }
+    .plugin-card__notify:hover { gap: .75rem; }
+
+    /* colour variants */
+    .plugin-card--amber .plugin-card__accent { background: var(--amber); }
+    .plugin-card--amber .plugin-card__icon { background: rgba(245,166,35,.12); }
+    .plugin-card--amber .plugin-card__type { color: var(--amber-dark); }
+    .plugin-card--amber .plugin-card__bullet { background: rgba(245,166,35,.15); color: var(--amber-dark); }
+
+    .plugin-card--blue .plugin-card__accent { background: #3B82F6; }
+    .plugin-card--blue .plugin-card__icon { background: rgba(59,130,246,.1); }
+    .plugin-card--blue .plugin-card__type { color: #2563EB; }
+    .plugin-card--blue .plugin-card__bullet { background: rgba(59,130,246,.12); color: #2563EB; }
+
+    .plugin-card--green .plugin-card__accent { background: #10B981; }
+    .plugin-card--green .plugin-card__icon { background: rgba(16,185,129,.1); }
+    .plugin-card--green .plugin-card__type { color: #059669; }
+    .plugin-card--green .plugin-card__bullet { background: rgba(16,185,129,.12); color: #059669; }
+
+    /* ---- WORKFLOW CARDS ---- */
+    .workflow-card {
+      background: var(--midnight-2);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-xl);
+      padding: clamp(1.5rem, 3vw, 2rem);
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .workflow-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.3); transform: translateY(-3px); }
+    .workflow-card__soon {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: rgba(245,166,35,.15);
+      color: var(--amber);
+      border-radius: 100px;
+      padding: .25rem .75rem;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .workflow-card__icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: var(--radius-md);
+      background: rgba(245,166,35,.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .workflow-card__name {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--white);
+      margin-bottom: .5rem;
+    }
+    .workflow-card__desc {
+      font-size: .875rem;
+      color: rgba(255,255,255,.5);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+    }
+    .workflow-card__steps {
+      display: flex;
+      flex-direction: column;
+      gap: .375rem;
+      margin-bottom: 1.25rem;
+    }
+    .workflow-card__step {
+      display: flex;
+      align-items: center;
+      gap: .625rem;
+      font-size: .8125rem;
+      color: rgba(255,255,255,.5);
+    }
+    .workflow-card__step-num {
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 50%;
+      background: rgba(245,166,35,.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .625rem;
+      font-weight: 700;
+      color: var(--amber);
+      flex-shrink: 0;
+    }
+    .workflow-card__price {
+      font-size: .8125rem;
+      color: rgba(255,255,255,.35);
+    }
+    .workflow-card__price strong { color: rgba(255,255,255,.6); }
+
+    /* ---- WAITLIST SECTION ---- */
+    .waitlist {
+      padding-block: clamp(4rem, 8vw, 6rem);
+      background: var(--amber);
+      position: relative;
+      overflow: hidden;
+    }
+    .waitlist::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(14,17,23,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(14,17,23,.06) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .waitlist__inner {
+      position: relative;
+      max-width: 580px;
+      margin-inline: auto;
+      text-align: center;
+    }
+    .waitlist__headline {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.875rem, 4vw, 2.75rem);
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      color: var(--midnight);
+      margin-bottom: 1rem;
+    }
+    .waitlist__sub {
+      font-size: 1.0625rem;
+      color: rgba(14,17,23,.65);
+      line-height: 1.65;
+      margin-bottom: 2rem;
+    }
+    .waitlist__form {
+      display: flex;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
+    .waitlist__input {
+      flex: 1;
+      min-width: 0;
+      padding: .875rem 1.25rem;
+      background: rgba(14,17,23,.08);
+      border: 1.5px solid rgba(14,17,23,.2);
+      border-radius: var(--radius-sm);
+      color: var(--midnight);
+      font: inherit;
+      font-size: .9375rem;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .waitlist__input::placeholder { color: rgba(14,17,23,.4); }
+    .waitlist__input:focus { border-color: var(--midnight); }
+    .waitlist__submit {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .875rem 1.75rem;
+      background: var(--midnight);
+      color: var(--white);
+      border-radius: var(--radius-sm);
+      font: inherit;
+      font-weight: 700;
+      font-size: .9375rem;
+      cursor: pointer;
+      border: none;
+      transition: all .2s;
+      white-space: nowrap;
+    }
+    .waitlist__submit:hover { background: var(--midnight-2); transform: translateY(-1px); }
+    .waitlist__note {
+      font-size: .8125rem;
+      color: rgba(14,17,23,.45);
+      margin-top: .875rem;
+    }
+
+    /* ---- FOOTER ---- */
+    .footer {
+      background: var(--midnight);
+      color: rgba(255,255,255,.6);
+      padding-block: 3rem 2rem;
+    }
+    .footer__top {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-dark);
+      margin-bottom: 2rem;
+    }
+    .footer__brand .nav__logo { margin-bottom: 1rem; color: var(--white); }
+    .footer__tagline { font-size: .9375rem; line-height: 1.6; max-width: 30ch; }
+    .footer__col-title {
+      font-size: .8125rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      margin-bottom: 1rem;
+    }
+    .footer__links { display: flex; flex-direction: column; gap: .625rem; }
+    .footer__links a {
+      font-size: .9375rem;
+      color: rgba(255,255,255,.55);
+      transition: color .15s;
+    }
+    .footer__links a:hover { color: var(--white); }
+    .footer__bottom {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      align-items: center;
+      text-align: center;
+    }
+    .footer__copy { font-size: .875rem; }
+    .footer__made { font-size: .8125rem; color: rgba(255,255,255,.35); }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 639px) {
+      .nav__links { display: none; }
+      .nav__cta { display: none; }
+      .nav__hamburger { display: flex; }
+    }
+    @media (min-width: 640px) {
+      .cards-grid { grid-template-columns: 1fr 1fr; }
+      .footer__top { grid-template-columns: 2fr 1fr 1fr; }
+      .footer__bottom { flex-direction: row; justify-content: space-between; text-align: left; }
+      .waitlist__form { flex-wrap: nowrap; }
+    }
+    @media (min-width: 1024px) {
+      .nav__hamburger { display: none; }
+      .nav__mobile { display: none !important; }
+      .cards-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer__top { grid-template-columns: 2.5fr 1fr 1fr 1fr; }
+    }
+    @media (min-width: 1440px) {
+      :root { --max-w: 1440px; --gutter: 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav" role="banner">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo" aria-label="Stackly home">
+          <div class="nav__logo-mark" aria-hidden="true">S</div>
+          Stackly
+        </a>
+        <nav class="nav__links" aria-label="Primary navigation">
+          <a href="index.html#services">Services</a>
+          <a href="https://shawnferrao.com/web-development/">Web Dev</a>
+          <a href="plugins.html" class="active" aria-current="page">Plugins</a>
+          <a href="index.html#about">About</a>
+        </nav>
+        <div class="nav__cta">
+          <a href="index.html#services" class="btn btn-outline">View Pricing</a>
+          <a href="index.html#contact" class="btn btn-primary">Get Started</a>
+        </div>
+        <button class="nav__hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav" id="hamburger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav__mobile" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+      <a href="index.html#services">Services</a>
+      <a href="https://shawnferrao.com/web-development/">Web Dev</a>
+      <a href="plugins.html">Plugins</a>
+      <a href="index.html#about">About</a>
+      <div class="nav__mobile-cta">
+        <a href="index.html#services" class="btn btn-outline-dark">View Pricing</a>
+        <a href="index.html#contact" class="btn btn-primary">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-headline">
+      <div class="hero__bg-grid" aria-hidden="true"></div>
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="hero__inner">
+          <div class="hero__badge">
+            <span class="hero__badge-dot" aria-hidden="true"></span>
+            Plugins &amp; Workflows — Coming Soon
+          </div>
+          <h1 class="hero__headline" id="hero-headline">
+            Ready-made tools that make<br />your business <em>run itself.</em>
+          </h1>
+          <p class="hero__sub">
+            Lightweight WordPress plugins and automation workflow packs built specifically for small businesses — not developers. Install, connect, and go.
+          </p>
+          <div class="hero__tabs" role="tablist" aria-label="Browse by type">
+            <button class="hero__tab active" role="tab" aria-selected="true" data-target="plugins-section">Plugins</button>
+            <button class="hero__tab" role="tab" aria-selected="false" data-target="workflows-section">Workflows</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLUGINS -->
+    <section class="section section--cream" id="plugins-section" aria-labelledby="plugins-headline">
+      <div class="container">
+        <header class="section__header">
+          <span class="eyebrow">WordPress Plugins</span>
+          <h2 class="section__headline" id="plugins-headline">
+            Lightweight plugins. Zero bloat.<br />Built for small business owners.
+          </h2>
+          <p class="section__sub">
+            Every plugin solves one real problem, installs in minutes, and works with the tools you already use — no developer needed.
+          </p>
+        </header>
+
+        <div class="cards-grid" role="list">
+
+          <!-- Plugin 1: Abstract Submission Portal -->
+          <article class="plugin-card plugin-card--amber" role="listitem" aria-labelledby="plugin-abstract">
+            <div class="plugin-card__accent" aria-hidden="true"></div>
+            <div class="plugin-card__soon" aria-label="Coming soon">Coming Soon</div>
+            <div class="plugin-card__icon" aria-hidden="true">📋</div>
+            <p class="plugin-card__type">Submission Portal</p>
+            <h3 class="plugin-card__name" id="plugin-abstract">Abstract Submission Portal</h3>
+            <p class="plugin-card__desc">
+              A clean, self-hosted portal for collecting abstract and paper submissions — ideal for conferences, events and academic programmes. No third-party platform fees.
+            </p>
+            <ul class="plugin-card__features" aria-label="Key features">
+              <li class="plugin-card__feature">
+                <span class="plugin-card__bullet" aria-hidden="true">●</span>
+                Customisable submission form fields and categories
+              </li>
+              <li class="plugin-card__feature">
+                <span class="plugin-card__bullet" aria-hidden="true">●</span>
+                Reviewer assignment and status tracking dashboard
+              </li>
+              <li class="plugin-card__feature">
+                <span class="plugin-card__bullet" aria-hidden="true">●</span>
+                Auto-confirmation emails to submitters
+              </li>
+              <li class="plugin-card__feature">
+                <span class="plugin-card__bullet" aria-hidden="true">●</span>
+                Export submissions to CSV or connect to Zapier
+              </li>
+              <li class="plugin-card__feature">
+                <span class="plugin-card__bullet" aria-hidden="true">●</span>
+                Deadline controls and submission window settings
+              </li>
+            </ul>
+            <div class="plugin-card__footer">
+              <p class="plugin-card__model">Freemium · <strong>Pro from $79/yr</strong></p>
+              <a href="#notify" class="plugin-card__notify">
+                Notify me
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Plugin 2: Form CRM Automation -->
+          <article class="plugin-card plugin-card--blue" role="listitem" aria-labelledby="plugin-formcrm">
+            <div class="plugin-card__accent" aria-hidden="true"></div>
+            <div class="plugin-card__soon" aria-label="Coming soon">Coming Soon</div>
+            <div class="plugin-card__icon" aria-hidden="true">⚡</div>
+            <p class="plugin-card__type">CRM Automation</p>
+            <h3 class="plugin-card__name" id="plugin-formcrm">FormFlow — Lightweight CRM Automation</h3>
+            <p class="plugin-card__desc">
+              Connect any WordPress form to your CRM, email list and Slack in one click. No code, no complex setup — just fill in the fields and your automation runs.
+            </p>
+            <ul class="plugin-card__features" aria-label="Key features">
+              <li class="plugin-card__feature">
+                <span class="plugin-card__bullet" aria-hidden="true">●</span>
+                Works with WPForms, Gravity Forms, Fluent Forms &amp; CF7
+              </li>
+              <li class="plugin-card__feature">
+                <span class="plugin-card__bullet" aria-hidden="true">●</span>
+                Auto-create CRM contacts on form submission
+              </li>
+              <li class="plugin-card__feature">
+                <span class="plugin-card__bullet" aria-hidden="true">●</span>
+                Slack and email notifications for new leads
+              </li>
+              <li class="plugin-card__feature">
+                <span class="plugin-card__bullet" aria-hidden="true">●</span>
+                Connects to FluentCRM, Mailchimp, ConvertKit &amp; ActiveCampaign
+              </li>
+              <li class="plugin-card__feature">
+                <span class="plugin-card__bullet" aria-hidden="true">●</span>
+                Trigger Zapier or Make workflows from any form
+              </li>
+            </ul>
+            <div class="plugin-card__footer">
+              <p class="plugin-card__model">Freemium · <strong>Pro from $49/yr</strong></p>
+              <a href="#notify" class="plugin-card__notify">
+                Notify me
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Plugin 3: Blog System -->
+          <article class="plugin-card plugin-card--green" role="listitem" aria-labelledby="plugin-blog">
+            <div class="plugin-card__accent" aria-hidden="true"></div>
+            <div class="plugin-card__soon" aria-label="Coming soon">Coming Soon</div>
+            <div class="plugin-card__icon" aria-hidden="true">✍️</div>
+            <p class="plugin-card__type">Content System</p>
+            <h3 class="plugin-card__name" id="plugin-blog">Blog Lite — WordPress Content System</h3>
+            <p class="plugin-card__desc">
+              A stripped-back blogging system for small business WordPress sites. Fast, clean and SEO-ready — without the complexity of full editorial plugins.
+            </p>
+            <ul class="plugin-card__features" aria-label="Key features">
+              <li class="plugin-card__feature">
+                <span class="plugin-card__bullet" aria-hidden="true">●</span>
+                Lightweight post templates optimised for page speed
+              </li>
+              <li class="plugin-card__feature">
+                <span class="plugin-card__bullet" aria-hidden="true">●</span>
+                Built-in schema markup for Google rich results
+              </li>
+              <li class="plugin-card__feature">
+                <span class="plugin-card__bullet" aria-hidden="true">●</span>
+                Auto-share to social media on publish
+              </li>
+              <li class="plugin-card__feature">
+                <span class="plugin-card__bullet" aria-hidden="true">●</span>
+                Related posts, reading time, and author box included
+              </li>
+              <li class="plugin-card__feature">
+                <span class="plugin-card__bullet" aria-hidden="true">●</span>
+                Email subscriber notify on new post (no extra plugin)
+              </li>
+            </ul>
+            <div class="plugin-card__footer">
+              <p class="plugin-card__model">Freemium · <strong>Pro from $39/yr</strong></p>
+              <a href="#notify" class="plugin-card__notify">
+                Notify me
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKFLOWS -->
+    <section class="section section--dark" id="workflows-section" aria-labelledby="workflows-headline">
+      <div class="container">
+        <header class="section__header">
+          <span class="eyebrow" style="color:var(--amber);">Workflow Templates</span>
+          <h2 class="section__headline" id="workflows-headline">
+            Pre-built automations.<br />Drop in and switch on.
+          </h2>
+          <p class="section__sub">
+            Zapier and Make workflow packs built around the most common small business scenarios. Buy once, import in minutes, save hours every week.
+          </p>
+        </header>
+
+        <div class="cards-grid" role="list">
+
+          <article class="workflow-card" role="listitem" aria-labelledby="wf-onboard">
+            <div class="workflow-card__soon" aria-label="Coming soon">Coming Soon</div>
+            <div class="workflow-card__icon" aria-hidden="true">🤝</div>
+            <h3 class="workflow-card__name" id="wf-onboard">Client Onboarding Starter</h3>
+            <p class="workflow-card__desc">New enquiry to welcome email to CRM — fully automated the moment someone fills in your form.</p>
+            <ol class="workflow-card__steps" aria-label="Workflow steps">
+              <li class="workflow-card__step"><span class="workflow-card__step-num" aria-hidden="true">1</span> New form submission received</li>
+              <li class="workflow-card__step"><span class="workflow-card__step-num" aria-hidden="true">2</span> Welcome email sent automatically</li>
+              <li class="workflow-card__step"><span class="workflow-card__step-num" aria-hidden="true">3</span> Contact created in CRM</li>
+            </ol>
+            <p class="workflow-card__price">3 workflows · <strong>$27</strong></p>
+          </article>
+
+          <article class="workflow-card" role="listitem" aria-labelledby="wf-booking">
+            <div class="workflow-card__soon" aria-label="Coming soon">Coming Soon</div>
+            <div class="workflow-card__icon" aria-hidden="true">📅</div>
+            <h3 class="workflow-card__name" id="wf-booking">Booking Automation Pack</h3>
+            <p class="workflow-card__desc">Confirmation, reminder, follow-up and review request — every touchpoint after a booking handled without lifting a finger.</p>
+            <ol class="workflow-card__steps" aria-label="Workflow steps">
+              <li class="workflow-card__step"><span class="workflow-card__step-num" aria-hidden="true">1</span> Booking confirmed → confirmation email</li>
+              <li class="workflow-card__step"><span class="workflow-card__step-num" aria-hidden="true">2</span> 24hr reminder sent automatically</li>
+              <li class="workflow-card__step"><span class="workflow-card__step-num" aria-hidden="true">3</span> Post-visit review request triggered</li>
+            </ol>
+            <p class="workflow-card__price">5 workflows · <strong>$47</strong></p>
+          </article>
+
+          <article class="workflow-card" role="listitem" aria-labelledby="wf-course">
+            <div class="workflow-card__soon" aria-label="Coming soon">Coming Soon</div>
+            <div class="workflow-card__icon" aria-hidden="true">🎓</div>
+            <h3 class="workflow-card__name" id="wf-course">Course Creator Workflows</h3>
+            <p class="workflow-card__desc">Enrolment, payment confirmation, course access and completion certificate — the full student journey on autopilot.</p>
+            <ol class="workflow-card__steps" aria-label="Workflow steps">
+              <li class="workflow-card__step"><span class="workflow-card__step-num" aria-hidden="true">1</span> Payment received → access granted</li>
+              <li class="workflow-card__step"><span class="workflow-card__step-num" aria-hidden="true">2</span> Welcome + orientation email sequence</li>
+              <li class="workflow-card__step"><span class="workflow-card__step-num" aria-hidden="true">3</span> Completion → certificate delivered</li>
+            </ol>
+            <p class="workflow-card__price">4 workflows · <strong>$67</strong></p>
+          </article>
+
+          <article class="workflow-card" role="listitem" aria-labelledby="wf-abstract">
+            <div class="workflow-card__soon" aria-label="Coming soon">Coming Soon</div>
+            <div class="workflow-card__icon" aria-hidden="true">📋</div>
+            <h3 class="workflow-card__name" id="wf-abstract">Abstract Submission Workflows</h3>
+            <p class="workflow-card__desc">Pairs with the Abstract Submission Portal plugin — auto-notify reviewers, track status changes and send decisions to submitters.</p>
+            <ol class="workflow-card__steps" aria-label="Workflow steps">
+              <li class="workflow-card__step"><span class="workflow-card__step-num" aria-hidden="true">1</span> Submission received → reviewer notified</li>
+              <li class="workflow-card__step"><span class="workflow-card__step-num" aria-hidden="true">2</span> Review completed → status updated</li>
+              <li class="workflow-card__step"><span class="workflow-card__step-num" aria-hidden="true">3</span> Decision email sent to submitter</li>
+            </ol>
+            <p class="workflow-card__price">3 workflows · <strong>$37</strong></p>
+          </article>
+
+          <article class="workflow-card" role="listitem" aria-labelledby="wf-lead">
+            <div class="workflow-card__soon" aria-label="Coming soon">Coming Soon</div>
+            <div class="workflow-card__icon" aria-hidden="true">🎯</div>
+            <h3 class="workflow-card__name" id="wf-lead">Lead Nurture Sequence</h3>
+            <p class="workflow-card__desc">Capture a lead, tag them by interest, and drip a 5-email nurture sequence — all triggered from a single form submission.</p>
+            <ol class="workflow-card__steps" aria-label="Workflow steps">
+              <li class="workflow-card__step"><span class="workflow-card__step-num" aria-hidden="true">1</span> Lead captured → tagged by source</li>
+              <li class="workflow-card__step"><span class="workflow-card__step-num" aria-hidden="true">2</span> 5-email nurture sequence begins</li>
+              <li class="workflow-card__step"><span class="workflow-card__step-num" aria-hidden="true">3</span> Hot leads flagged in CRM automatically</li>
+            </ol>
+            <p class="workflow-card__price">4 workflows · <strong>$47</strong></p>
+          </article>
+
+          <article class="workflow-card" role="listitem" aria-labelledby="wf-smb">
+            <div class="workflow-card__soon" aria-label="Coming soon">Coming Soon</div>
+            <div class="workflow-card__icon" aria-hidden="true">🚀</div>
+            <h3 class="workflow-card__name" id="wf-smb">Complete Small Business Pack</h3>
+            <p class="workflow-card__desc">All of the above and more — 15 workflows covering every common small business automation scenario in one bundle.</p>
+            <ol class="workflow-card__steps" aria-label="Workflow steps">
+              <li class="workflow-card__step"><span class="workflow-card__step-num" aria-hidden="true">1</span> All onboarding, booking &amp; lead workflows</li>
+              <li class="workflow-card__step"><span class="workflow-card__step-num" aria-hidden="true">2</span> Internal Slack alerts and CRM updates</li>
+              <li class="workflow-card__step"><span class="workflow-card__step-num" aria-hidden="true">3</span> Review, referral &amp; reactivation flows</li>
+            </ol>
+            <p class="workflow-card__price">15 workflows · <strong>$147</strong> <span style="color:rgba(255,255,255,.3);">— best value</span></p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- WAITLIST -->
+    <section class="waitlist" aria-labelledby="waitlist-headline" id="notify">
+      <div class="container">
+        <div class="waitlist__inner">
+          <h2 class="waitlist__headline" id="waitlist-headline">
+            Be first when these drop.
+          </h2>
+          <p class="waitlist__sub">
+            Join the waitlist and get early access plus a launch discount on any plugin or workflow pack.
+          </p>
+          <form class="waitlist__form" action="mailto:hello@stackly.com.au" method="GET" aria-label="Plugin waitlist signup">
+            <input
+              class="waitlist__input"
+              type="email"
+              name="subject"
+              placeholder="your@email.com"
+              required
+              aria-label="Email address"
+            />
+            <button type="submit" class="waitlist__submit">
+              Join Waitlist
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </form>
+          <p class="waitlist__note">No spam. Unsubscribe any time.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="index.html" class="nav__logo" aria-label="Stackly home">
+            <div class="nav__logo-mark" aria-hidden="true">S</div>
+            Stackly
+          </a>
+          <p class="footer__tagline">Tech that works for your business. Built for small business — not enterprise.</p>
+        </div>
+        <div>
+          <p class="footer__col-title">Services</p>
+          <ul class="footer__links">
+            <li><a href="index.html#services">Tech Stack Audit</a></li>
+            <li><a href="index.html#services">Foundation Build</a></li>
+            <li><a href="index.html#services">Full Build</a></li>
+            <li><a href="index.html#services">Monthly Retainer</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__col-title">Products</p>
+          <ul class="footer__links">
+            <li><a href="plugins.html#plugins-section">Plugins</a></li>
+            <li><a href="plugins.html#workflows-section">Workflows</a></li>
+            <li><a href="courses.html">Courses</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__col-title">Company</p>
+          <ul class="footer__links">
+            <li><a href="index.html#about">About Shawn</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="index.html#contact">Book a Call</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; 2026 Stackly. ABN pending. Sydney, Australia.</p>
+        <p class="footer__made">Built by Shawn Ferrao</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+    });
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Tab scroll
+    document.querySelectorAll('.hero__tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.hero__tab').forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        const target = document.getElementById(tab.dataset.target);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+
+</body>
+</html>
