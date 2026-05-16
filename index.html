@@ -1355,6 +1355,187 @@
       transition: opacity .3s;
     }
 
+    /* ── Animated hero blobs ─────────────────────────── */
+    .hero__blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+      will-change: transform;
+    }
+    .hero__blob--1 {
+      width: clamp(300px, 45vw, 560px);
+      height: clamp(300px, 45vw, 560px);
+      background: rgba(245,166,35,.18);
+      top: -30%;
+      left: -10%;
+      animation: blob1 16s ease-in-out infinite;
+    }
+    .hero__blob--2 {
+      width: clamp(200px, 30vw, 400px);
+      height: clamp(200px, 30vw, 400px);
+      background: rgba(139,92,246,.14);
+      bottom: -20%;
+      right: -5%;
+      animation: blob2 20s ease-in-out infinite;
+    }
+    .hero__blob--3 {
+      width: clamp(150px, 20vw, 280px);
+      height: clamp(150px, 20vw, 280px);
+      background: rgba(245,166,35,.1);
+      top: 40%;
+      right: 30%;
+      animation: blob3 13s ease-in-out infinite;
+    }
+    @keyframes blob1 {
+      0%,100% { transform: translate(0,0) scale(1); }
+      33%      { transform: translate(50px,60px) scale(1.08); }
+      66%      { transform: translate(-20px,30px) scale(.95); }
+    }
+    @keyframes blob2 {
+      0%,100% { transform: translate(0,0) scale(1); }
+      33%      { transform: translate(-60px,-40px) scale(1.12); }
+      66%      { transform: translate(20px,-60px) scale(.92); }
+    }
+    @keyframes blob3 {
+      0%,100% { transform: scale(1); }
+      50%      { transform: scale(1.3); }
+    }
+
+    /* ── Shimmer gradient on headline em ─────────────── */
+    .hero__headline em {
+      background: linear-gradient(90deg, #F5A623 0%, #FDD27A 35%, #F5A623 55%, #C7851A 100%);
+      background-size: 250% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-style: italic;
+      animation: shimmerText 3.5s linear infinite;
+    }
+    @keyframes shimmerText {
+      to { background-position: 250% center; }
+    }
+
+    /* ── Cycling text ────────────────────────────────── */
+    .hero__cycling {
+      display: flex;
+      align-items: center;
+      gap: .625rem;
+      font-size: .9375rem;
+      color: rgba(255,255,255,.45);
+      font-weight: 500;
+      height: 1.5em;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+    .hero__cycling-words {
+      position: relative;
+      height: 1.5em;
+      overflow: hidden;
+      min-width: 18ch;
+    }
+    .hero__cycling-word {
+      position: absolute;
+      inset: 0;
+      color: var(--amber);
+      font-weight: 700;
+      opacity: 0;
+      transform: translateY(110%);
+      transition: opacity .45s ease, transform .45s cubic-bezier(.22,1,.36,1);
+      white-space: nowrap;
+    }
+    .hero__cycling-word.active  { opacity: 1; transform: translateY(0); }
+    .hero__cycling-word.exit    { opacity: 0; transform: translateY(-110%); }
+
+    /* ── Marquee strip ───────────────────────────────── */
+    .marquee-strip {
+      background: var(--midnight-2);
+      border-top: 1px solid var(--border-dark);
+      border-bottom: 1px solid var(--border-dark);
+      padding-block: 1rem;
+      overflow: hidden;
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marqueeScroll 32s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .marquee-group {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      padding-inline: 1.75rem;
+      font-size: .8125rem;
+      font-weight: 600;
+      color: rgba(255,255,255,.35);
+      white-space: nowrap;
+      border-right: 1px solid var(--border-dark);
+      transition: color .2s;
+      cursor: default;
+    }
+    .marquee-item:hover { color: var(--amber); }
+    .marquee-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--amber);
+      opacity: .5;
+      flex-shrink: 0;
+    }
+    @keyframes marqueeScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── 3D card tilt ────────────────────────────────── */
+    .tilt-card {
+      transform-style: preserve-3d;
+      transition: transform .15s ease, box-shadow .3s ease;
+      will-change: transform;
+    }
+    .tilt-card:hover {
+      box-shadow: 0 24px 64px rgba(0,0,0,.22), 0 0 0 1px rgba(245,166,35,.12);
+    }
+
+    /* ── Pulsing CTA ─────────────────────────────────── */
+    .btn-pulse {
+      position: relative;
+      z-index: 0;
+    }
+    .btn-pulse::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: calc(var(--radius-sm) + 4px);
+      background: var(--amber);
+      opacity: 0;
+      z-index: -1;
+      animation: btnPulse 2.8s ease-in-out infinite;
+    }
+    @keyframes btnPulse {
+      0%,100% { opacity: 0; transform: scale(1); }
+      50%      { opacity: .25; transform: scale(1.07); }
+    }
+
+    /* ── Cursor spotlight on dark sections ───────────── */
+    .spotlight {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,166,35,.05) 0%, transparent 68%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      transition: left .08s linear, top .08s linear;
+    }
+
     /* --- Trust bar slide in --- */
     .trust__inner li {
       opacity: 0;
@@ -1420,7 +1601,10 @@
     ============================================= -->
     <section class="hero" aria-labelledby="hero-headline">
       <div class="hero__bg-grid" aria-hidden="true"></div>
-      <div class="hero__bg-glow" aria-hidden="true"></div>
+      <div class="hero__blob hero__blob--1" aria-hidden="true"></div>
+      <div class="hero__blob hero__blob--2" aria-hidden="true"></div>
+      <div class="hero__blob hero__blob--3" aria-hidden="true"></div>
+      <div class="spotlight" id="hero-spotlight" aria-hidden="true"></div>
 
       <div class="container">
         <div class="hero__inner">
@@ -1437,12 +1621,22 @@
               can afford.
             </h1>
 
+            <div class="hero__cycling" aria-live="polite" aria-label="Specialising in web development, automation and digital design">
+              Specialising in →
+              <span class="hero__cycling-words">
+                <span class="hero__cycling-word active">Web Development</span>
+                <span class="hero__cycling-word">Automation</span>
+                <span class="hero__cycling-word">Digital Marketing</span>
+                <span class="hero__cycling-word">Graphic Design</span>
+              </span>
+            </div>
+
             <p class="hero__sub">
               Stackly helps small business owners set up, automate and manage their tech stack — without the agency price tag. Courses, plugins and done-for-you services, all under one roof.
             </p>
 
             <div class="hero__actions">
-              <a href="#services" class="btn btn-primary btn-lg">
+              <a href="#services" class="btn btn-primary btn-lg btn-pulse">
                 See What We Offer
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </a>
@@ -1508,6 +1702,45 @@
     <!-- =============================================
          TRUST BAR
     ============================================= -->
+    <!-- MARQUEE -->
+    <div class="marquee-strip" aria-label="Technology stack" role="complementary">
+      <div class="marquee-track" aria-hidden="true">
+        <div class="marquee-group">
+          <span class="marquee-item"><span class="marquee-dot"></span>WordPress</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Elementor Pro</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Zapier</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Make</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Salesforce CRM</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Mailchimp</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Google Ads</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>SEO / GEO</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>WooCommerce</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>FluentCRM</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Adobe XD</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Google Analytics</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Graphic Design</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Event Tech</span>
+        </div>
+        <!-- duplicate for seamless loop -->
+        <div class="marquee-group" aria-hidden="true">
+          <span class="marquee-item"><span class="marquee-dot"></span>WordPress</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Elementor Pro</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Zapier</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Make</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Salesforce CRM</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Mailchimp</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Google Ads</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>SEO / GEO</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>WooCommerce</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>FluentCRM</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Adobe XD</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Google Analytics</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Graphic Design</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Event Tech</span>
+        </div>
+      </div>
+    </div>
+
     <div class="trust reveal" role="complementary" aria-label="Key features">
       <div class="container">
         <ul class="trust__inner">
@@ -1630,7 +1863,7 @@
         <div class="pillars__grid stagger" role="list">
 
           <!-- Pillar 1 — Education -->
-          <article class="pillar" role="listitem" id="education-anchor">
+          <article class="pillar tilt-card" role="listitem" id="education-anchor">
             <div class="pillar__number" aria-hidden="true">1</div>
             <div class="pillar__icon" aria-hidden="true">🎓</div>
             <span class="pillar__badge">Education</span>
@@ -1663,7 +1896,7 @@
           </article>
 
           <!-- Pillar 2 — Plugins (featured) -->
-          <article class="pillar pillar--featured glow-card" role="listitem" id="plugins">
+          <article class="pillar pillar--featured glow-card tilt-card" role="listitem" id="plugins">
             <div class="pillar__number" aria-hidden="true">2</div>
             <div class="pillar__icon" aria-hidden="true">🔌</div>
             <span class="pillar__badge">Plugins &amp; Templates</span>
@@ -1696,7 +1929,7 @@
           </article>
 
           <!-- Pillar 3 — Agency -->
-          <article class="pillar" role="listitem">
+          <article class="pillar tilt-card" role="listitem">
             <div class="pillar__number" aria-hidden="true">3</div>
             <div class="pillar__icon" aria-hidden="true">🚀</div>
             <span class="pillar__badge">Done For You</span>
@@ -1845,7 +2078,7 @@
         <div class="services__grid stagger" role="list">
 
           <!-- Starter -->
-          <article class="service-card" role="listitem" aria-labelledby="tier-starter">
+          <article class="service-card tilt-card" role="listitem" aria-labelledby="tier-starter">
             <div class="service-card__top">
               <div>
                 <div class="service-card__tier">Starter</div>
@@ -1881,7 +2114,7 @@
           </article>
 
           <!-- Growth -->
-          <article class="service-card" role="listitem" aria-labelledby="tier-growth">
+          <article class="service-card tilt-card" role="listitem" aria-labelledby="tier-growth">
             <div class="service-card__top">
               <div>
                 <div class="service-card__tier">Growth</div>
@@ -1917,7 +2150,7 @@
           </article>
 
           <!-- Scale (highlighted) -->
-          <article class="service-card service-card--highlight glow-card" role="listitem" aria-labelledby="tier-scale">
+          <article class="service-card service-card--highlight glow-card tilt-card" role="listitem" aria-labelledby="tier-scale">
             <div class="service-card__popular" aria-label="Most popular">Most Popular</div>
             <div class="service-card__top">
               <div>
@@ -1954,7 +2187,7 @@
           </article>
 
           <!-- Retainer -->
-          <article class="service-card" role="listitem" aria-labelledby="tier-retainer">
+          <article class="service-card tilt-card" role="listitem" aria-labelledby="tier-retainer">
             <div class="service-card__top">
               <div>
                 <div class="service-card__tier">Retainer</div>
@@ -2275,6 +2508,48 @@
         ? 'rgba(245,166,35,.15)'
         : 'var(--border-dark)';
     }, { passive: true });
+
+    // ── Cycling text ──────────────────────────────────────
+    const cyclingWords = document.querySelectorAll('.hero__cycling-word');
+    let currentWord = 0;
+    if (cyclingWords.length) {
+      setInterval(() => {
+        cyclingWords[currentWord].classList.remove('active');
+        cyclingWords[currentWord].classList.add('exit');
+        const prev = currentWord;
+        currentWord = (currentWord + 1) % cyclingWords.length;
+        cyclingWords[currentWord].classList.add('active');
+        setTimeout(() => cyclingWords[prev].classList.remove('exit'), 450);
+      }, 2500);
+    }
+
+    // ── 3D card tilt ──────────────────────────────────────
+    document.querySelectorAll('.tilt-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `perspective(800px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) scale(1.02)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+
+    // ── Cursor spotlight on hero ──────────────────────────
+    const spotlight = document.getElementById('hero-spotlight');
+    const heroSection = document.querySelector('.hero');
+    if (spotlight && heroSection) {
+      heroSection.addEventListener('mousemove', e => {
+        const r = heroSection.getBoundingClientRect();
+        spotlight.style.left = (e.clientX - r.left) + 'px';
+        spotlight.style.top = (e.clientY - r.top) + 'px';
+        spotlight.style.opacity = '1';
+      });
+      heroSection.addEventListener('mouseleave', () => {
+        spotlight.style.opacity = '0';
+      });
+    }
   </script>
 
 </body>
