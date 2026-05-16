@@ -1341,21 +1341,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* --- Mouse-tracking glow on cards --- */
-    .glow-card { position: relative; overflow: hidden; }
-    .glow-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(400px circle at var(--mx,50%) var(--my,50%), rgba(245,166,35,.1), transparent 60%);
-      opacity: 0;
-      transition: opacity .4s;
-      pointer-events: none;
-      z-index: 0;
-      border-radius: inherit;
-    }
-    .glow-card:hover::before { opacity: 1; }
-    .glow-card > * { position: relative; z-index: 1; }
 
     /* --- Trust bar slide in --- */
     .trust__inner li {
@@ -1665,7 +1650,7 @@
           </article>
 
           <!-- Pillar 2 — Plugins (featured) -->
-          <article class="pillar pillar--featured glow-card" role="listitem" id="plugins">
+          <article class="pillar pillar--featured" role="listitem" id="plugins">
             <div class="pillar__number" aria-hidden="true">2</div>
             <div class="pillar__icon" aria-hidden="true">🔌</div>
             <span class="pillar__badge">Plugins &amp; Templates</span>
@@ -1919,7 +1904,7 @@
           </article>
 
           <!-- Scale (highlighted) -->
-          <article class="service-card service-card--highlight glow-card" role="listitem" aria-labelledby="tier-scale">
+          <article class="service-card service-card--highlight" role="listitem" aria-labelledby="tier-scale">
             <div class="service-card__popular" aria-label="Most popular">Most Popular</div>
             <div class="service-card__top">
               <div>
@@ -2231,16 +2216,6 @@
       trustObserver.observe(trustEl);
     }
 
-    // ── Mouse-tracking glow on cards ────────────────────
-    document.querySelectorAll('.glow-card').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        card.style.setProperty('--mx', `${x}%`);
-        card.style.setProperty('--my', `${y}%`);
-      });
-    });
 
     // ── Number counter (fires when stat enters view) ─────
     function animateCount(el, target, duration = 1600) {
