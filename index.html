@@ -1342,6 +1342,19 @@
     }
 
 
+    /* --- Mouse-tracking glow on cards --- */
+    .glow-card { position: relative; }
+    .glow-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(500px circle at var(--mx, -999px) var(--my, -999px), rgba(245,166,35,.13), transparent 55%);
+      pointer-events: none;
+      z-index: 0;
+      border-radius: inherit;
+      transition: opacity .3s;
+    }
+
     /* --- Trust bar slide in --- */
     .trust__inner li {
       opacity: 0;
@@ -1650,7 +1663,7 @@
           </article>
 
           <!-- Pillar 2 — Plugins (featured) -->
-          <article class="pillar pillar--featured" role="listitem" id="plugins">
+          <article class="pillar pillar--featured glow-card" role="listitem" id="plugins">
             <div class="pillar__number" aria-hidden="true">2</div>
             <div class="pillar__icon" aria-hidden="true">🔌</div>
             <span class="pillar__badge">Plugins &amp; Templates</span>
@@ -1904,7 +1917,7 @@
           </article>
 
           <!-- Scale (highlighted) -->
-          <article class="service-card service-card--highlight" role="listitem" aria-labelledby="tier-scale">
+          <article class="service-card service-card--highlight glow-card" role="listitem" aria-labelledby="tier-scale">
             <div class="service-card__popular" aria-label="Most popular">Most Popular</div>
             <div class="service-card__top">
               <div>
@@ -2240,6 +2253,19 @@
         }
       }, { threshold: 0.5 });
       counterObserver.observe(el);
+    });
+
+    // ── Mouse-tracking glow on cards ────────────────────
+    document.querySelectorAll('.glow-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.setProperty('--mx', '-999px');
+        card.style.setProperty('--my', '-999px');
+      });
     });
 
     // ── Smooth nav background on scroll ─────────────────
