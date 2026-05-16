@@ -1281,6 +1281,93 @@
       :root { --max-w: 1440px; --gutter: 4rem; }
       .hero__headline { font-size: 5rem; }
     }
+
+    /* =============================================
+       ANIMATIONS
+    ============================================= */
+
+    /* --- Fade up (scroll reveal) --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .65s cubic-bezier(.22,1,.36,1), transform .65s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- Stagger children --- */
+    .stagger > * {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .55s cubic-bezier(.22,1,.36,1), transform .55s cubic-bezier(.22,1,.36,1);
+    }
+    .stagger.visible > *:nth-child(1) { transition-delay: .05s; }
+    .stagger.visible > *:nth-child(2) { transition-delay: .15s; }
+    .stagger.visible > *:nth-child(3) { transition-delay: .25s; }
+    .stagger.visible > *:nth-child(4) { transition-delay: .35s; }
+    .stagger.visible > *:nth-child(5) { transition-delay: .45s; }
+    .stagger.visible > * { opacity: 1; transform: translateY(0); }
+
+    /* --- Fade left / right --- */
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-36px);
+      transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(36px);
+      transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal-left.visible, .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* --- Hero stagger (fires immediately) --- */
+    .hero-stagger > * {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: heroFadeUp .7s cubic-bezier(.22,1,.36,1) forwards;
+    }
+    .hero-stagger > *:nth-child(1) { animation-delay: .1s; }
+    .hero-stagger > *:nth-child(2) { animation-delay: .22s; }
+    .hero-stagger > *:nth-child(3) { animation-delay: .34s; }
+    .hero-stagger > *:nth-child(4) { animation-delay: .46s; }
+    .hero-stagger > *:nth-child(5) { animation-delay: .58s; }
+    @keyframes heroFadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- Mouse-tracking glow on cards --- */
+    .glow-card { position: relative; overflow: hidden; }
+    .glow-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(400px circle at var(--mx,50%) var(--my,50%), rgba(245,166,35,.1), transparent 60%);
+      opacity: 0;
+      transition: opacity .4s;
+      pointer-events: none;
+      z-index: 0;
+      border-radius: inherit;
+    }
+    .glow-card:hover::before { opacity: 1; }
+    .glow-card > * { position: relative; z-index: 1; }
+
+    /* --- Trust bar slide in --- */
+    .trust__inner li {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity .4s ease, transform .4s ease;
+    }
+    .trust--visible .trust__inner li:nth-child(1) { opacity:1; transform:none; transition-delay:.05s; }
+    .trust--visible .trust__inner li:nth-child(2) { opacity:1; transform:none; transition-delay:.12s; }
+    .trust--visible .trust__inner li:nth-child(3) { opacity:1; transform:none; transition-delay:.19s; }
+    .trust--visible .trust__inner li:nth-child(4) { opacity:1; transform:none; transition-delay:.26s; }
+    .trust--visible .trust__inner li:nth-child(5) { opacity:1; transform:none; transition-delay:.33s; }
   </style>
 </head>
 <body>
@@ -1340,7 +1427,7 @@
       <div class="container">
         <div class="hero__inner">
 
-          <div class="hero__content">
+          <div class="hero__content hero-stagger">
             <div class="hero__badge" aria-label="Based in Sydney, Australia">
               <span class="hero__badge-dot" aria-hidden="true"></span>
               Sydney, Australia — Serving Small Businesses Nationwide
@@ -1423,7 +1510,7 @@
     <!-- =============================================
          TRUST BAR
     ============================================= -->
-    <div class="trust" role="complementary" aria-label="Key features">
+    <div class="trust reveal" role="complementary" aria-label="Key features">
       <div class="container">
         <ul class="trust__inner">
           <li class="trust__item">
@@ -1457,7 +1544,7 @@
       <div class="container">
         <div class="problem__inner">
 
-          <div class="problem__text">
+          <div class="problem__text reveal-left">
             <span class="eyebrow">The Problem</span>
             <h2 class="problem__headline" id="problem-headline">
               Stuck between too expensive and too complex?
@@ -1489,7 +1576,7 @@
             </ul>
           </div>
 
-          <div class="problem__solution">
+          <div class="problem__solution reveal-right">
             <div class="problem__solution-glow" aria-hidden="true"></div>
             <p class="problem__solution-eyebrow" aria-hidden="true">The Stackly Way</p>
             <h3 class="problem__solution-headline">
@@ -1532,7 +1619,7 @@
     <section class="pillars" aria-labelledby="pillars-headline" id="education">
       <div class="container">
 
-        <header class="pillars__header">
+        <header class="pillars__header reveal">
           <span class="eyebrow">How It Works</span>
           <h2 class="pillars__headline" id="pillars-headline">
             Three ways to work together
@@ -1542,7 +1629,7 @@
           </p>
         </header>
 
-        <div class="pillars__grid" role="list">
+        <div class="pillars__grid stagger" role="list">
 
           <!-- Pillar 1 — Education -->
           <article class="pillar" role="listitem" id="education-anchor">
@@ -1578,7 +1665,7 @@
           </article>
 
           <!-- Pillar 2 — Plugins (featured) -->
-          <article class="pillar pillar--featured" role="listitem" id="plugins">
+          <article class="pillar pillar--featured glow-card" role="listitem" id="plugins">
             <div class="pillar__number" aria-hidden="true">2</div>
             <div class="pillar__icon" aria-hidden="true">🔌</div>
             <span class="pillar__badge">Plugins &amp; Templates</span>
@@ -1654,7 +1741,7 @@
       <div class="container">
         <div class="icp__inner">
 
-          <div class="icp__text">
+          <div class="icp__text reveal-left">
             <span class="eyebrow">Who It's For</span>
             <h2 class="icp__headline" id="icp-headline">
               Built for the "accidental tech owner"
@@ -1708,7 +1795,7 @@
             </ul>
           </div>
 
-          <div class="icp__quote-block" aria-label="Customer pain points and aspirations">
+          <div class="icp__quote-block reveal-right" aria-label="Customer pain points and aspirations">
             <div class="icp__quote-mark" aria-hidden="true">"</div>
             <blockquote class="icp__quote">
               "I just need it to <em>work.</em> I don't have time to figure this out."
@@ -1747,7 +1834,7 @@
     <section class="services" aria-labelledby="services-headline" id="services">
       <div class="container">
 
-        <header class="services__header">
+        <header class="services__header reveal">
           <span class="eyebrow">Pricing</span>
           <h2 class="services__headline" id="services-headline">
             Transparent pricing.<br />No $10k surprises.
@@ -1757,7 +1844,7 @@
           </p>
         </header>
 
-        <div class="services__grid" role="list">
+        <div class="services__grid stagger" role="list">
 
           <!-- Starter -->
           <article class="service-card" role="listitem" aria-labelledby="tier-starter">
@@ -1832,7 +1919,7 @@
           </article>
 
           <!-- Scale (highlighted) -->
-          <article class="service-card service-card--highlight" role="listitem" aria-labelledby="tier-scale">
+          <article class="service-card service-card--highlight glow-card" role="listitem" aria-labelledby="tier-scale">
             <div class="service-card__popular" aria-label="Most popular">Most Popular</div>
             <div class="service-card__top">
               <div>
@@ -1915,7 +2002,7 @@
       <div class="flywheel__glow" aria-hidden="true"></div>
       <div class="container">
 
-        <header class="flywheel__header">
+        <header class="flywheel__header reveal">
           <p class="flywheel__eyebrow" aria-hidden="true">The Method</p>
           <h2 class="flywheel__headline" id="flywheel-headline">
             One piece of work. Multiple outcomes.
@@ -1925,7 +2012,7 @@
           </p>
         </header>
 
-        <ol class="flywheel__steps">
+        <ol class="flywheel__steps stagger">
           <li class="flywheel__step">
             <div class="flywheel__step-left" aria-hidden="true">
               <div class="flywheel__step-num">1</div>
@@ -1982,7 +2069,7 @@
       <div class="container">
         <div class="about-strip__inner">
 
-          <div class="about-strip__text">
+          <div class="about-strip__text reveal-left">
             <span class="eyebrow">About Stackly</span>
             <h2 class="about-strip__headline" id="about-headline">
               Built by Shawn Ferrao — developer, designer and marketer.
@@ -2006,7 +2093,7 @@
             <a href="#contact" class="btn btn-primary btn-lg">Work With Shawn</a>
           </div>
 
-          <div class="about-strip__portrait" aria-label="Shawn Ferrao — founder of Stackly">
+          <div class="about-strip__portrait reveal-right" aria-label="Shawn Ferrao — founder of Stackly">
             <div class="about-strip__portrait-inner">
               <div class="about-strip__initials" aria-hidden="true">SF</div>
               <h3 class="about-strip__name">Shawn Ferrao</h3>
@@ -2103,22 +2190,90 @@
   </footer>
 
   <script>
-    // Mobile nav toggle
+    // ── Mobile nav ──────────────────────────────────────
     const hamburger = document.getElementById('hamburger');
     const mobileNav = document.getElementById('mobile-nav');
-
     hamburger.addEventListener('click', () => {
       const isOpen = mobileNav.classList.toggle('open');
       hamburger.setAttribute('aria-expanded', String(isOpen));
     });
-
-    // Close mobile nav when a link is clicked
     mobileNav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         mobileNav.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
       });
     });
+
+    // ── Scroll reveal (IntersectionObserver) ────────────
+    const revealClasses = ['.reveal', '.reveal-left', '.reveal-right', '.stagger'];
+    const revealEls = document.querySelectorAll(revealClasses.join(','));
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // ── Trust bar reveal ─────────────────────────────────
+    const trustEl = document.querySelector('.trust');
+    if (trustEl) {
+      const trustObserver = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          trustEl.classList.add('trust--visible');
+          trustObserver.disconnect();
+        }
+      }, { threshold: 0.2 });
+      trustObserver.observe(trustEl);
+    }
+
+    // ── Mouse-tracking glow on cards ────────────────────
+    document.querySelectorAll('.glow-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty('--mx', `${x}%`);
+        card.style.setProperty('--my', `${y}%`);
+      });
+    });
+
+    // ── Number counter (fires when stat enters view) ─────
+    function animateCount(el, target, duration = 1600) {
+      const start = performance.now();
+      const update = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(ease * target) + (el.dataset.suffix || '');
+        if (progress < 1) requestAnimationFrame(update);
+      };
+      requestAnimationFrame(update);
+    }
+
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const target = parseInt(el.dataset.count, 10);
+      el.dataset.suffix = el.textContent.replace(/[0-9]/g, '').trim();
+      el.textContent = '0' + el.dataset.suffix;
+      const counterObserver = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          animateCount(el, target);
+          counterObserver.disconnect();
+        }
+      }, { threshold: 0.5 });
+      counterObserver.observe(el);
+    });
+
+    // ── Smooth nav background on scroll ─────────────────
+    const nav = document.querySelector('.nav');
+    window.addEventListener('scroll', () => {
+      nav.style.borderBottomColor = window.scrollY > 10
+        ? 'rgba(245,166,35,.15)'
+        : 'var(--border-dark)';
+    }, { passive: true });
   </script>
 
 </body>
